@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="BotonReutilizable">
+        <attr name="tipoBoton" format="enum">
+            <enum name="bordeado" value="0"/>
+            <enum name="relleno" value="1"/>
+        </attr>
+        <attr name="colorBase" format="color"/>
+    </declare-styleable>
+</resources>

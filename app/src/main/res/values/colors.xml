@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="transparent">#00000000</color>
+
+    <color name="text_5">#E4E4E4</color>
+    <color name="text_10">#C7C7C7</color>
+    <color name="text_25">#878787</color>
+    <color name="text_65">#4F4F4F</color>
+    <color name="text_85">#363636</color>
+
+    <color name="danger">#EF4444</color>
+    <color name="danger_5">#FFF5F5</color>
+
+    <color name="info">#3B82F6</color>
+    <color name="info_5">#ECF4FF</color>
+    <color name="info_85">#5895F7</color>
+
+    <color name="primary">#6DC560</color>
+    <color name="primary_5">#F5FBF4</color>
+
+    <color name="yellow_65">#FFD334</color>
+
+    <color name="middle_night">#F5FAFE</color>
+    <color name="background_light">#F5F7FC</color>
+</resources>
