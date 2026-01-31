@@ -8,6 +8,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.cajaac.ui.ExpandableCardView;
 import com.example.cajaac.ui.TransactionSectionView;
 
 import java.util.Arrays;
@@ -141,7 +142,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Tabla con múltiples totales (Movimientos de ingresos extra)
         // NOTA: Si tableItems está vacío (Arrays.asList()), los totales NO se mostrarán automáticamente
-        List<TransactionItem> ingresosTableItems = Arrays.asList(
+        List<TransactionItem> tableItems = Arrays.asList(
                 new TransactionItem("00/00/0000\n04:05 P.M.", "Jean Pierre Santillán García",
                         "Ingreso por confirmación de Delivery #31765 con forma de pago En línea", "S/20.00"),
                 new TransactionItem("00/00/0000\n04:05 P.M.", "Jean Pierre Santillán García",
@@ -151,32 +152,24 @@ public class MainActivity extends AppCompatActivity {
         // Para probar sin items, cambia la línea anterior por:
         // List<TransactionItem> tableItems = Arrays.asList();
 
-        List<TransactionTotal> ingresosTotals = Arrays.asList(
+        List<TransactionTotal> tableTotals = Arrays.asList(
                 new TransactionTotal("TOTAL INGRESOS (Efectivo y Tarjeta)", "S/ 0.00", R.color.info_5),
                 new TransactionTotal("TOTAL INGRESOS POR DELIVERY (En línea, transferencia, Yape, Plin)", "S/ 40.00", R.color.info_5)
         );
 
-        TransactionSection ingresosTableSection = new TransactionSection(
+        TransactionSection tableSection = new TransactionSection(
                 "Movimientos de ingresos extra",
                 R.color.info,
                 R.drawable.icon_svg_arrow_trend_up_blue,
-                ingresosTableItems,
-                ingresosTotals,
+                tableItems,
+                tableTotals,
                 TransactionSection.ColumnType.TABLE,
                 "No hay ingresos registrados"
         );
 
         // Tabla de egresos (5 columnas: Fecha, Usuario, Recibido de, Concepto, Monto)
         // Lista vacía para mostrar el mensaje
-        List<TransactionItem> egresosTableItems = Arrays.asList(
-                new TransactionItem("00/00/0000\n04:05 P.M.", "Jean Pierre Santillán García",
-                        "Juan Pérez", "Pago de servicios", "S/150.00"),
-                new TransactionItem("00/00/0000\n05:30 P.M.", "María López",
-                        "Proveedor ABC", "Compra de insumos", "S/320.00"),
-                new TransactionItem("00/00/0000\n06:15 P.M.", "Carlos Ramírez",
-                        "Servicio Delivery", "Pago de comisión", "S/85.00")
-        );
-
+        List<TransactionItem> egresosTableItems = Arrays.asList();
 
         List<TransactionTotal> egresosTotals = Arrays.asList(
                 new TransactionTotal("TOTAL EGRESOS (Efectivo y Tarjeta)", "S/ 0.00", R.color.danger_5),
@@ -198,8 +191,65 @@ public class MainActivity extends AppCompatActivity {
         transactionSectionCorrelativos.setData(correlativosSection);
         transactionSectionHechas.setData(hechosSection);
         transactionSectionAnuladas.setData(anuladasSection);
-        transactionSectionTable.setData(ingresosTableSection);
+        transactionSectionTable.setData(tableSection);
         transactionSectionEgresosTable.setData(egresosTableSection);
+
+        // Configurar cards expandibles
+        ExpandableCardView expandableCardVentas = findViewById(R.id.expandableCardVentas);
+        ExpandableCardView expandableCardDelivery = findViewById(R.id.expandableCardDelivery);
+
+        // Datos para "Ingresos en efectivo/tarjetas por ventas"
+        List<ExpandableCardView.ExpandableItem> ventasItems = Arrays.asList(
+                new ExpandableCardView.ExpandableItem("Soles", "0", "S/546.00"),
+                new ExpandableCardView.ExpandableItem("POS", "0", "S/4,027.60"),
+                new ExpandableCardView.ExpandableItem("Pago en linea", "0", "S/9.80"),
+                new ExpandableCardView.ExpandableItem("Pago por transferencia", "0", "S/1,331.30"),
+                new ExpandableCardView.ExpandableItem("Pago por Yape", "0", "S/2,405.38"),
+                new ExpandableCardView.ExpandableItem("Pago por Plin", "-", "S/195.91"),
+                new ExpandableCardView.ExpandableItem("Pago por Niubiz", "-", "S/228.22"),
+                new ExpandableCardView.ExpandableItem("Pago por Vale", "0", "S/88.46"),
+                new ExpandableCardView.ExpandableItem("Pago por Mercado pago", "-", "S/112.72"),
+                new ExpandableCardView.ExpandableItem("Pago por Fpay", "-", "S/0.00"),
+                new ExpandableCardView.ExpandableItem("Pago por POS Niubiz", "-", "S/0.00"),
+                new ExpandableCardView.ExpandableItem("Pago por Izipay", "-", "S/0.00"),
+                new ExpandableCardView.ExpandableItem("Pago por Qr Izipay", "-", "S/0.00"),
+                new ExpandableCardView.ExpandableItem("Pago por Databank", "-", "S/0.00"),
+                new ExpandableCardView.ExpandableItem("Pago por Qr Databank", "-", "S/0.00"),
+                new ExpandableCardView.ExpandableItem("Cupón Yape", "-", "S/0.00"),
+                new ExpandableCardView.ExpandableItem("Pago Otros", "-", "S/0.00")
+        );
+
+        ExpandableCardView.ExpandableCardData ventasData = new ExpandableCardView.ExpandableCardData(
+                R.drawable.icon_svg_arrow_trend_up_blue, R.color.info, "Ingresos en efectivo/tarjetas por ventas"
+        )
+                .setHeaders("Moneda o tarjeta", "Retención", "Monto")
+                .setTotal("TOTAL INGRESOS EFECTIVO/TARJETAS POR VENTAS", "S/9,027.60")
+                .setItems(ventasItems)
+                .setCollapsedItemCount(8);
+
+        expandableCardVentas.setData(ventasData);
+
+        // Datos para "Ingresos por canales de delivery"
+        List<ExpandableCardView.ExpandableItem> deliveryItems = Arrays.asList(
+                new ExpandableCardView.ExpandableItem("Ecommerce Cfi", "0", "S/546.00", "S/546.00"),
+                new ExpandableCardView.ExpandableItem("Ecommerce Android", "0", "S/4,027.60", "S/4,027.60"),
+                new ExpandableCardView.ExpandableItem("Rappi", "0", "S/1,331.30", "S/1,331.30"),
+                new ExpandableCardView.ExpandableItem("Pedidos Ya", "0", "S/2,405.38", "S/2,405.38"),
+                new ExpandableCardView.ExpandableItem("Justo", "0", "S/228.22", "S/228.22"),
+                new ExpandableCardView.ExpandableItem("Didi Food", "0", "S/88.46", "S/88.46"),
+                new ExpandableCardView.ExpandableItem("Ecommerce", "0", "S/1,331.30", "S/1,331.30"),
+                new ExpandableCardView.ExpandableItem("Ecommerce IOS", "0", "S/195.91", "S/195.91")
+        );
+
+        ExpandableCardView.ExpandableCardData deliveryData = new ExpandableCardView.ExpandableCardData(
+                R.drawable.icon_svg_list, R.color.info, "Ingresos por canales de delivery"
+        )
+                .setHeaders("Canal de delivery", "# Operaciones", "Importe total", "Prom. x operación")
+                .setTotal("TOTAL INGRESOS POR CANALES", "S/9,027.60")
+                .setItems(deliveryItems)
+                .setCollapsedItemCount(8);
+
+        expandableCardDelivery.setData(deliveryData);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());

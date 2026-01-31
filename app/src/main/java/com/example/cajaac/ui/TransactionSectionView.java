@@ -160,7 +160,7 @@ public class TransactionSectionView extends LinearLayout {
             for (com.example.cajaac.TransactionTotal total : section.getSecondaryTotals()) {
                 View totalView;
 
-                if (section.getColumnType() == TransactionSection.ColumnType.TABLE
+                if (section.getColumnType() == TransactionSection.ColumnType.TABLE 
                     || section.getColumnType() == TransactionSection.ColumnType.FIVE_COLUMNS) {
                     // Para tabla (4 o 5 columnas), usar layout de total simplificado (solo label y monto)
                     totalView = inflater.inflate(R.layout.item_transaction_table_total, secondaryTotalsContainer, false);

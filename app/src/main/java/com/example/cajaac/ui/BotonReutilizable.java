@@ -46,6 +46,7 @@ public class BotonReutilizable extends MaterialButton {
         setAllCaps(false);
         setTextSize(TypedValue.COMPLEX_UNIT_PX, res.getDimension(R.dimen.boton_text_size));
         setLetterSpacing(0);
+
         // Quitar la sombra/elevación
         setElevation(0f);
         setStateListAnimator(null);

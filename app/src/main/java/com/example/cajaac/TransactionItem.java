@@ -35,7 +35,7 @@ public class TransactionItem {
         this.concept = "";
         this.receivedFrom = "";
     }
-
+    
     // Constructor para tabla de 4 columnas (date, user, concept, amount)
     public TransactionItem(String date, String user, String concept, String amount) {
         this.date = date;
@@ -47,7 +47,7 @@ public class TransactionItem {
         this.quantity = "";
         this.receivedFrom = "";
     }
-
+    
     // Constructor para tabla de 5 columnas (date, user, receivedFrom, concept, amount)
     public TransactionItem(String date, String user, String receivedFrom, String concept, String amount) {
         this.date = date;
@@ -79,15 +79,15 @@ public class TransactionItem {
     public String getDate() {
         return date;
     }
-
+    
     public String getUser() {
         return user;
     }
-
+    
     public String getConcept() {
         return concept;
     }
-
+    
     public String getReceivedFrom() {
         return receivedFrom;
     }

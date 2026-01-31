@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingHorizontal="8dp"
+    android:paddingVertical="6dp">
+
+    <TextView
+        android:id="@+id/tvLabel"
+        style="@style/fontListas"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="2"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/tvRetention"
+        style="@style/fontListas"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="end"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/tvAmount"
+        style="@style/fontListasMedium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="end"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/tvCol4"
+        style="@style/fontListasMedium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:gravity="end"
+        android:visibility="gone"
+        android:textSize="12sp" />
+</LinearLayout>
