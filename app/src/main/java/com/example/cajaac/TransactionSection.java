@@ -24,6 +24,9 @@ public class TransactionSection {
     // Totales secundarios (para secciones con múltiples totales)
     private List<TransactionTotal> secondaryTotals;
 
+    // Mensaje cuando la lista está vacía
+    private String emptyMessage;
+
     // Constructor completo
     public TransactionSection(String title, int titleColor, int iconRes,
                               List<TransactionItem> items, String totalLabel,
@@ -59,6 +62,16 @@ public class TransactionSection {
         this.totalQuantity = "";
         this.totalAmount = "";
         this.totalBackgroundColor = android.R.color.transparent;
+        this.emptyMessage = "No hay registros";
+    }
+
+    // Constructor con totales secundarios y mensaje vacío personalizado
+    public TransactionSection(String title, int titleColor, int iconRes,
+                              List<TransactionItem> items,
+                              List<TransactionTotal> secondaryTotals,
+                              ColumnType columnType, String emptyMessage) {
+        this(title, titleColor, iconRes, items, secondaryTotals, columnType);
+        this.emptyMessage = emptyMessage;
     }
 
     // Constructor sin total (para compatibilidad)
@@ -99,4 +112,5 @@ public class TransactionSection {
     public boolean hasTotal() { return hasTotal; }
     public ColumnType getColumnType() { return columnType; }
     public List<TransactionTotal> getSecondaryTotals() { return secondaryTotals; }
+    public String getEmptyMessage() { return emptyMessage; }
 }

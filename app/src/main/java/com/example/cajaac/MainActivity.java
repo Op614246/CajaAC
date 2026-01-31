@@ -138,12 +138,16 @@ public class MainActivity extends AppCompatActivity {
         );
 
         // Tabla con múltiples totales (Movimientos de ingresos extra)
+        // NOTA: Si tableItems está vacío (Arrays.asList()), los totales NO se mostrarán automáticamente
         List<TransactionItem> tableItems = Arrays.asList(
                 new TransactionItem("00/00/0000\n04:05 P.M.", "Jean Pierre Santillán García",
                         "Ingreso por confirmación de Delivery #31765 con forma de pago En línea", "S/20.00"),
                 new TransactionItem("00/00/0000\n04:05 P.M.", "Jean Pierre Santillán García",
                         "Ingreso por confirmación de Delivery #31765 con forma de pago En línea", "S/20.00")
         );
+
+        // Para probar sin items, cambia la línea anterior por:
+        // List<TransactionItem> tableItems = Arrays.asList();
 
         List<TransactionTotal> tableTotals = Arrays.asList(
                 new TransactionTotal("TOTAL INGRESOS (Efectivo y Tarjeta)", "S/ 0.00", R.color.info_5),
@@ -156,7 +160,8 @@ public class MainActivity extends AppCompatActivity {
                 R.drawable.icon_svg_arrow_trend_up_blue,
                 tableItems,
                 tableTotals,
-                TransactionSection.ColumnType.TABLE
+                TransactionSection.ColumnType.TABLE,
+                "No hay ingresos registrados"
         );
 
         transactionSectionIngresos.setData(ingresosSection);

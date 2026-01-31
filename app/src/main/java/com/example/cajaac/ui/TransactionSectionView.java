@@ -117,8 +117,23 @@ public class TransactionSectionView extends LinearLayout {
             itemsContainer.addView(itemView);
         }
 
-        // Configurar totales secundarios si existen
-        if (section.getSecondaryTotals() != null && !section.getSecondaryTotals().isEmpty()) {
+        // Mostrar mensaje vacío si no hay items
+        if (section.getItems().isEmpty()) {
+            View emptyView = inflater.inflate(R.layout.item_empty_message, itemsContainer, false);
+            TextView tvEmptyMessage = emptyView.findViewById(R.id.tvEmptyMessage);
+
+            String message = section.getEmptyMessage();
+            if (message == null || message.isEmpty()) {
+                message = "No hay registros";
+            }
+            tvEmptyMessage.setText(message);
+
+            itemsContainer.addView(emptyView);
+        }
+
+        // Configurar totales secundarios si existen Y hay items
+        if (section.getSecondaryTotals() != null && !section.getSecondaryTotals().isEmpty()
+            && section.getItems() != null && !section.getItems().isEmpty()) {
             totalContainer.setVisibility(View.GONE); // Ocultar el total principal
             secondaryTotalsContainer.setVisibility(View.VISIBLE);
             secondaryTotalsContainer.removeAllViews();
@@ -175,8 +190,10 @@ public class TransactionSectionView extends LinearLayout {
             secondaryTotalsContainer.setVisibility(View.GONE);
         }
 
-        // Configurar o ocultar la sección de total principal
-        if (section.hasTotal() && (section.getSecondaryTotals() == null || section.getSecondaryTotals().isEmpty())) {
+        // Configurar o ocultar la sección de total principal (también valida si hay items)
+        if (section.hasTotal()
+            && (section.getSecondaryTotals() == null || section.getSecondaryTotals().isEmpty())
+            && section.getItems() != null && !section.getItems().isEmpty()) {
             totalContainer.setVisibility(View.VISIBLE);
             tvTotalLabel.setText(section.getTotalLabel());
             totalContainer.setBackgroundColor(
