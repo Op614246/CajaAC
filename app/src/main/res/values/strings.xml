@@ -2,5 +2,11 @@
     <string name="app_name">CajaAC</string>
     <string name="title">Apertura y cierre</string>
     <string name="cerrar_caja">Cerrar caja</string>
+    <string name="arqueo">Arqueo caja</string>
+    <string name="imprimir">Imprimir paloteo</string>
+    <string name="egreso_propina">Egreso propina</string>
+    <string name="actualizar">Actualizar</string>
+
+
 
 </resources>

@@ -6,5 +6,9 @@
             <enum name="relleno" value="1"/>
         </attr>
         <attr name="colorBase" format="color"/>
+        <attr name="tamanoBoton" format="enum">
+            <enum name="grande" value="0"/>
+            <enum name="pequeno" value="1"/>
+        </attr>
     </declare-styleable>
 </resources>
