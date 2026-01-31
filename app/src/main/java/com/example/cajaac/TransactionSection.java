@@ -7,6 +7,7 @@ public class TransactionSection {
     public enum ColumnType {
         DEFAULT,
         THREE_COLUMNS,
+        FOUR_COLUMNS,
         TABLE,
         FIVE_COLUMNS
     }
@@ -114,4 +115,7 @@ public class TransactionSection {
     public ColumnType getColumnType() { return columnType; }
     public List<TransactionTotal> getSecondaryTotals() { return secondaryTotals; }
     public String getEmptyMessage() { return emptyMessage; }
+
+    // Setter para columnType
+    public void setColumnType(ColumnType columnType) { this.columnType = columnType; }
 }

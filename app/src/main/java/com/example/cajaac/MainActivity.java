@@ -196,7 +196,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Configurar cards expandibles
         ExpandableCardView expandableCardVentas = findViewById(R.id.expandableCardVentas);
-        ExpandableCardView expandableCardDelivery = findViewById(R.id.expandableCardDelivery);
+        TransactionSectionView transactionSectionDelivery = findViewById(R.id.transactionSectionDelivery);
 
         // Datos para "Ingresos en efectivo/tarjetas por ventas"
         List<ExpandableCardView.ExpandableItem> ventasItems = Arrays.asList(
@@ -229,27 +229,29 @@ public class MainActivity extends AppCompatActivity {
 
         expandableCardVentas.setData(ventasData);
 
-        // Datos para "Ingresos por canales de delivery"
-        List<ExpandableCardView.ExpandableItem> deliveryItems = Arrays.asList(
-                new ExpandableCardView.ExpandableItem("Ecommerce Cfi", "0", "S/546.00", "S/546.00"),
-                new ExpandableCardView.ExpandableItem("Ecommerce Android", "0", "S/4,027.60", "S/4,027.60"),
-                new ExpandableCardView.ExpandableItem("Rappi", "0", "S/1,331.30", "S/1,331.30"),
-                new ExpandableCardView.ExpandableItem("Pedidos Ya", "0", "S/2,405.38", "S/2,405.38"),
-                new ExpandableCardView.ExpandableItem("Justo", "0", "S/228.22", "S/228.22"),
-                new ExpandableCardView.ExpandableItem("Didi Food", "0", "S/88.46", "S/88.46"),
-                new ExpandableCardView.ExpandableItem("Ecommerce", "0", "S/1,331.30", "S/1,331.30"),
-                new ExpandableCardView.ExpandableItem("Ecommerce IOS", "0", "S/195.91", "S/195.91")
+        // Datos para "Ingresos por canales de delivery" (card normal con 4 columnas)
+        List<TransactionItem> deliveryItems = Arrays.asList(
+                TransactionItem.createFourColumns("Ecommerce Cfi", "0", "S/546.00", "S/546.00"),
+                TransactionItem.createFourColumns("Ecommerce Android", "0", "S/4,027.60", "S/4,027.60"),
+                TransactionItem.createFourColumns("Rappi", "0", "S/1,331.30", "S/1,331.30"),
+                TransactionItem.createFourColumns("Pedidos Ya", "0", "S/2,405.38", "S/2,405.38"),
+                TransactionItem.createFourColumns("Justo", "0", "S/228.22", "S/228.22"),
+                TransactionItem.createFourColumns("Didi Food", "0", "S/88.46", "S/88.46"),
+                TransactionItem.createFourColumns("Ecommerce", "0", "S/1,331.30", "S/1,331.30"),
+                TransactionItem.createFourColumns("Ecommerce IOS", "0", "S/195.91", "S/195.91")
         );
 
-        ExpandableCardView.ExpandableCardData deliveryData = new ExpandableCardView.ExpandableCardData(
-                R.drawable.icon_svg_list, R.color.info, "Ingresos por canales de delivery"
-        )
-                .setHeaders("Canal de delivery", "# Operaciones", "Importe total", "Prom. x operación")
-                .setTotal("TOTAL INGRESOS POR CANALES", "S/9,027.60")
-                .setItems(deliveryItems)
-                .setCollapsedItemCount(8);
-
-        expandableCardDelivery.setData(deliveryData);
+        TransactionSection deliverySection = new TransactionSection(
+                "Ingresos por canales de delivery",
+                R.color.info,
+                R.drawable.icon_svg_mobile,
+                deliveryItems,
+                "TOTAL INGRESOS POR CANALES",
+                "S/9,027.60",
+                R.color.info_5
+        );
+        deliverySection.setColumnType(TransactionSection.ColumnType.FOUR_COLUMNS);
+        transactionSectionDelivery.setData(deliverySection);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());

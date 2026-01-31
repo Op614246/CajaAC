@@ -947,9 +947,9 @@
                         android:layout_weight="1"
                         android:layout_marginEnd="8dp" />
 
-                    <!-- Card expandible derecha: Ingresos por canales de delivery -->
-                    <com.example.cajaac.ui.ExpandableCardView
-                        android:id="@+id/expandableCardDelivery"
+                    <!-- Card derecha: Ingresos por canales de delivery (4 columnas con header de tabla) -->
+                    <com.example.cajaac.ui.TransactionSectionView
+                        android:id="@+id/transactionSectionDelivery"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"

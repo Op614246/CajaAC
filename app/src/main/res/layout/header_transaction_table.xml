@@ -10,44 +10,39 @@
 
     <TextView
         android:id="@+id/tvHeaderDate"
-        style="@style/fontListas"
+        style="@style/bold_65"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.5"
-        android:text="Fecha de ingreso"
-        android:layout_marginEnd="12dp"
-        android:fontFamily="@font/roboto_bold" />
+        android:text="Fecha de ingreso" />
 
     <TextView
         android:id="@+id/tvHeaderUser"
-        style="@style/fontListas"
+        style="@style/bold_65"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1.5"
         android:layout_marginEnd="12dp"
         android:text="Usuario"
-        android:textAlignment="center"
-        android:fontFamily="@font/roboto_bold" />
+        android:textAlignment="center" />
 
     <TextView
         android:id="@+id/tvHeaderConcept"
-        style="@style/fontListas"
+        style="@style/bold_65"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="2"
         android:layout_marginEnd="12dp"
         android:text="Concepto"
-        android:textAlignment="center"
-        android:fontFamily="@font/roboto_bold" />
+        android:textAlignment="center" />
 
     <TextView
         android:id="@+id/tvHeaderAmount"
-        style="@style/fontListas"
+        style="@style/bold_65"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Monto"
         android:textAlignment="textEnd"
-        android:minWidth="70dp"
-        android:fontFamily="@font/roboto_bold" />
+        android:minWidth="70dp" />
 
 </LinearLayout>

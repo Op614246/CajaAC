@@ -66,10 +66,14 @@ public class TransactionSectionView extends LinearLayout {
         // Limpiar items anteriores
         itemsContainer.removeAllViews();
 
-        // Agregar header si es tipo TABLE o FIVE_COLUMNS
+        // Agregar header si es tipo TABLE, FOUR_COLUMNS o FIVE_COLUMNS
         if (section.getColumnType() == TransactionSection.ColumnType.TABLE) {
             View headerView = LayoutInflater.from(getContext()).inflate(
                     R.layout.header_transaction_table, itemsContainer, false);
+            itemsContainer.addView(headerView);
+        } else if (section.getColumnType() == TransactionSection.ColumnType.FOUR_COLUMNS) {
+            View headerView = LayoutInflater.from(getContext()).inflate(
+                    R.layout.header_transaction_four_columns, itemsContainer, false);
             itemsContainer.addView(headerView);
         } else if (section.getColumnType() == TransactionSection.ColumnType.FIVE_COLUMNS) {
             View headerView = LayoutInflater.from(getContext()).inflate(
@@ -109,6 +113,18 @@ public class TransactionSectionView extends LinearLayout {
                 tvUser.setText(item.getUser());
                 tvConcept.setText(item.getConcept());
                 tvAmount.setText(item.getAmount());
+            } else if (section.getColumnType() == TransactionSection.ColumnType.FOUR_COLUMNS) {
+                itemView = inflater.inflate(R.layout.item_transaction_four_columns, itemsContainer, false);
+
+                TextView tvLabel = itemView.findViewById(R.id.tvLabel);
+                TextView tvOperations = itemView.findViewById(R.id.tvOperations);
+                TextView tvTotal = itemView.findViewById(R.id.tvTotal);
+                TextView tvAverage = itemView.findViewById(R.id.tvAverage);
+
+                tvLabel.setText(item.getLabel());
+                tvOperations.setText(item.getOperations());
+                tvTotal.setText(item.getAmount());
+                tvAverage.setText(item.getAverage());
             } else if (section.getColumnType() == TransactionSection.ColumnType.THREE_COLUMNS) {
                 itemView = inflater.inflate(R.layout.item_transaction_three_columns, itemsContainer, false);
 

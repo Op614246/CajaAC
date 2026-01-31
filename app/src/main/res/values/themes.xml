@@ -30,4 +30,9 @@
         <item name="android:textColor">@color/info</item>
         <item name="android:fontFamily">@font/montserrat_bold</item>
     </style>
+    <style name="bold_65" parent="android:Widget.TextView">
+        <item name="android:textSize">@dimen/text_list_size</item>
+        <item name="android:textColor">@color/text_65</item>
+        <item name="android:fontFamily">@font/roboto_bold</item>
+    </style>
 </resources>

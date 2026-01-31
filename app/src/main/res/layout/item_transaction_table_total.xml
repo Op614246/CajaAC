@@ -9,19 +9,16 @@
 
     <TextView
         android:id="@+id/tvTotalLabel"
-        style="@style/fontListas"
+        style="@style/bold_65"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:fontFamily="@font/roboto_bold"
-        android:textColor="@color/text_85" />
+        android:layout_weight="1" />
 
     <TextView
         android:id="@+id/tvTotalAmount"
-        style="@style/fontListas"
+        style="@style/bold_65"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textAlignment="textEnd"
-        android:fontFamily="@font/roboto_bold" />
+        android:textAlignment="textEnd" />
 
 </LinearLayout>
