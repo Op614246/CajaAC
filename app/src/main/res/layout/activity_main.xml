@@ -918,17 +918,25 @@
                     android:orientation="vertical"
                     android:layout_marginBottom="16dp">
 
-                    <!-- Nueva tabla con múltiples totales -->
+                    <!-- Nueva tabla con múltiples totales (Ingresos - 4 columnas) -->
                     <com.example.cajaac.ui.TransactionSectionView
                         android:id="@+id/transactionSectionTable"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="20dp" />
 
+                    <!-- Nueva tabla de egresos (5 columnas) -->
                     <com.example.cajaac.ui.TransactionSectionView
-                        android:id="@+id/transactionSectionTable"
+                        android:id="@+id/transactionSectionEgresosTable"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
 
                 </LinearLayout>
             </LinearLayout>

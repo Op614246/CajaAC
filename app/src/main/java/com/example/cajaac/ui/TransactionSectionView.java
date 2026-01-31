@@ -66,10 +66,14 @@ public class TransactionSectionView extends LinearLayout {
         // Limpiar items anteriores
         itemsContainer.removeAllViews();
 
-        // Agregar header si es tipo TABLE
+        // Agregar header si es tipo TABLE o FIVE_COLUMNS
         if (section.getColumnType() == TransactionSection.ColumnType.TABLE) {
             View headerView = LayoutInflater.from(getContext()).inflate(
                     R.layout.header_transaction_table, itemsContainer, false);
+            itemsContainer.addView(headerView);
+        } else if (section.getColumnType() == TransactionSection.ColumnType.FIVE_COLUMNS) {
+            View headerView = LayoutInflater.from(getContext()).inflate(
+                    R.layout.header_transaction_table_five_columns, itemsContainer, false);
             itemsContainer.addView(headerView);
         }
 
@@ -79,7 +83,21 @@ public class TransactionSectionView extends LinearLayout {
             View itemView;
 
             // Seleccionar el layout según el tipo de columnas
-            if (section.getColumnType() == TransactionSection.ColumnType.TABLE) {
+            if (section.getColumnType() == TransactionSection.ColumnType.FIVE_COLUMNS) {
+                itemView = inflater.inflate(R.layout.item_transaction_table_five_columns, itemsContainer, false);
+
+                TextView tvDate = itemView.findViewById(R.id.tvDate);
+                TextView tvUser = itemView.findViewById(R.id.tvUser);
+                TextView tvReceivedFrom = itemView.findViewById(R.id.tvReceivedFrom);
+                TextView tvConcept = itemView.findViewById(R.id.tvConcept);
+                TextView tvAmount = itemView.findViewById(R.id.tvAmount);
+
+                tvDate.setText(item.getDate());
+                tvUser.setText(item.getUser());
+                tvReceivedFrom.setText(item.getReceivedFrom());
+                tvConcept.setText(item.getConcept());
+                tvAmount.setText(item.getAmount());
+            } else if (section.getColumnType() == TransactionSection.ColumnType.TABLE) {
                 itemView = inflater.inflate(R.layout.item_transaction_table, itemsContainer, false);
 
                 TextView tvDate = itemView.findViewById(R.id.tvDate);
@@ -142,8 +160,9 @@ public class TransactionSectionView extends LinearLayout {
             for (com.example.cajaac.TransactionTotal total : section.getSecondaryTotals()) {
                 View totalView;
 
-                if (section.getColumnType() == TransactionSection.ColumnType.TABLE) {
-                    // Para tabla, usar layout de total simplificado (solo label y monto)
+                if (section.getColumnType() == TransactionSection.ColumnType.TABLE
+                    || section.getColumnType() == TransactionSection.ColumnType.FIVE_COLUMNS) {
+                    // Para tabla (4 o 5 columnas), usar layout de total simplificado (solo label y monto)
                     totalView = inflater.inflate(R.layout.item_transaction_table_total, secondaryTotalsContainer, false);
 
                     TextView tvTotalLabel = totalView.findViewById(R.id.tvTotalLabel);

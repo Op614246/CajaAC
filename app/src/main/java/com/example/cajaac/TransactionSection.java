@@ -7,7 +7,8 @@ public class TransactionSection {
     public enum ColumnType {
         DEFAULT,
         THREE_COLUMNS,
-        TABLE
+        TABLE,
+        FIVE_COLUMNS
     }
 
     private String title;

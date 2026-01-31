@@ -13,6 +13,7 @@
         android:paddingVertical="8dp"
         android:background="@drawable/border_bottom"
         android:paddingLeft="10dp">
+
         <TextView
             android:id="@+id/tvDate"
             style="@style/fontListas"
@@ -25,7 +26,17 @@
             style="@style/fontListas"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="1.5"
+            android:layout_weight="1"
+            android:layout_marginEnd="12dp"
+            android:gravity="center"
+            android:textAlignment="center" />
+
+        <TextView
+            android:id="@+id/tvReceivedFrom"
+            style="@style/fontListas"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:layout_marginEnd="12dp"
             android:gravity="center"
             android:textAlignment="center" />
@@ -35,7 +46,7 @@
             style="@style/fontListas"
             android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_weight="2"
+            android:layout_weight="1.5"
             android:layout_marginEnd="12dp"
             android:gravity="center_vertical|start"
             android:textAlignment="viewStart" />
@@ -44,11 +55,9 @@
             android:id="@+id/tvAmount"
             style="@style/fontListas"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:gravity="center_vertical|end"
+            android:layout_height="wrap_content"
             android:textAlignment="textEnd"
             android:minWidth="70dp" />
     </LinearLayout>
-
 
 </LinearLayout>

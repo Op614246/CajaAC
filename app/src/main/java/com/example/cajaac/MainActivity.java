@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
         TransactionSectionView transactionSectionHechas = findViewById(R.id.transactionSectionHechas);
         TransactionSectionView transactionSectionAnuladas = findViewById(R.id.transactionSectionAnuladas);
         TransactionSectionView transactionSectionTable = findViewById(R.id.transactionSectionTable);
+        TransactionSectionView transactionSectionEgresosTable = findViewById(R.id.transactionSectionEgresosTable);
 
         List<TransactionItem> ingresosItems = Arrays.asList(
                 new TransactionItem("Apertura", "S/ 1,062.70"),
@@ -133,13 +134,14 @@ public class MainActivity extends AppCompatActivity {
                 R.color.info,
                 R.drawable.icon_svg_circle_xmark,
                 anuladasItems,
-                false,
-                TransactionSection.ColumnType.DEFAULT
+                "TOTAL TRANSACCIONES ANULADAS",
+                "0",
+                R.color.info_5
         );
 
         // Tabla con múltiples totales (Movimientos de ingresos extra)
         // NOTA: Si tableItems está vacío (Arrays.asList()), los totales NO se mostrarán automáticamente
-        List<TransactionItem> tableItems = Arrays.asList(
+        List<TransactionItem> ingresosTableItems = Arrays.asList(
                 new TransactionItem("00/00/0000\n04:05 P.M.", "Jean Pierre Santillán García",
                         "Ingreso por confirmación de Delivery #31765 con forma de pago En línea", "S/20.00"),
                 new TransactionItem("00/00/0000\n04:05 P.M.", "Jean Pierre Santillán García",
@@ -149,19 +151,46 @@ public class MainActivity extends AppCompatActivity {
         // Para probar sin items, cambia la línea anterior por:
         // List<TransactionItem> tableItems = Arrays.asList();
 
-        List<TransactionTotal> tableTotals = Arrays.asList(
+        List<TransactionTotal> ingresosTotals = Arrays.asList(
                 new TransactionTotal("TOTAL INGRESOS (Efectivo y Tarjeta)", "S/ 0.00", R.color.info_5),
                 new TransactionTotal("TOTAL INGRESOS POR DELIVERY (En línea, transferencia, Yape, Plin)", "S/ 40.00", R.color.info_5)
         );
 
-        TransactionSection tableSection = new TransactionSection(
+        TransactionSection ingresosTableSection = new TransactionSection(
                 "Movimientos de ingresos extra",
                 R.color.info,
                 R.drawable.icon_svg_arrow_trend_up_blue,
-                tableItems,
-                tableTotals,
+                ingresosTableItems,
+                ingresosTotals,
                 TransactionSection.ColumnType.TABLE,
                 "No hay ingresos registrados"
+        );
+
+        // Tabla de egresos (5 columnas: Fecha, Usuario, Recibido de, Concepto, Monto)
+        // Lista vacía para mostrar el mensaje
+        List<TransactionItem> egresosTableItems = Arrays.asList(
+                new TransactionItem("00/00/0000\n04:05 P.M.", "Jean Pierre Santillán García",
+                        "Juan Pérez", "Pago de servicios", "S/150.00"),
+                new TransactionItem("00/00/0000\n05:30 P.M.", "María López",
+                        "Proveedor ABC", "Compra de insumos", "S/320.00"),
+                new TransactionItem("00/00/0000\n06:15 P.M.", "Carlos Ramírez",
+                        "Servicio Delivery", "Pago de comisión", "S/85.00")
+        );
+
+
+        List<TransactionTotal> egresosTotals = Arrays.asList(
+                new TransactionTotal("TOTAL EGRESOS (Efectivo y Tarjeta)", "S/ 0.00", R.color.danger_5),
+                new TransactionTotal("TOTAL EGRESOS POR DELIVERY (En línea, transferencia, Yape, Plin)", "S/ 0.00", R.color.danger_5)
+        );
+
+        TransactionSection egresosTableSection = new TransactionSection(
+                "Movimientos de egresos extra",
+                R.color.info,
+                R.drawable.icon_svg_arrow_trend_down,
+                egresosTableItems,
+                egresosTotals,
+                TransactionSection.ColumnType.FIVE_COLUMNS,
+                "No hay egresos registrados"
         );
 
         transactionSectionIngresos.setData(ingresosSection);
@@ -169,7 +198,8 @@ public class MainActivity extends AppCompatActivity {
         transactionSectionCorrelativos.setData(correlativosSection);
         transactionSectionHechas.setData(hechosSection);
         transactionSectionAnuladas.setData(anuladasSection);
-        transactionSectionTable.setData(tableSection);
+        transactionSectionTable.setData(ingresosTableSection);
+        transactionSectionEgresosTable.setData(egresosTableSection);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());

@@ -14,8 +14,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="0.5"
-        android:text="Fecha de ingreso"
+        android:text="Fecha de egreso"
         android:layout_marginEnd="12dp"
+        android:textAlignment="textStart"
         android:fontFamily="@font/roboto_bold" />
 
     <TextView
@@ -23,9 +24,20 @@
         style="@style/fontListas"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="1.5"
+        android:layout_weight="1"
         android:layout_marginEnd="12dp"
         android:text="Usuario"
+        android:textAlignment="center"
+        android:fontFamily="@font/roboto_bold" />
+
+    <TextView
+        android:id="@+id/tvHeaderReceivedFrom"
+        style="@style/fontListas"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_marginEnd="12dp"
+        android:text="Recibido de"
         android:textAlignment="center"
         android:fontFamily="@font/roboto_bold" />
 
@@ -34,7 +46,7 @@
         style="@style/fontListas"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="2"
+        android:layout_weight="1.5"
         android:layout_marginEnd="12dp"
         android:text="Concepto"
         android:textAlignment="center"
@@ -49,5 +61,4 @@
         android:textAlignment="textEnd"
         android:minWidth="70dp"
         android:fontFamily="@font/roboto_bold" />
-
 </LinearLayout>
