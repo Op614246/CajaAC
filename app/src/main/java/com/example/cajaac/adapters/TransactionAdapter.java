@@ -1,4 +1,4 @@
-package com.example.cajaac;
+package com.example.cajaac.adapters;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -7,6 +7,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.cajaac.R;
+import com.example.cajaac.models.TransactionItem;
 
 import java.util.ArrayList;
 import java.util.List;

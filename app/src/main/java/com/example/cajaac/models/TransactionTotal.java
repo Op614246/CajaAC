@@ -1,4 +1,4 @@
-package com.example.cajaac;
+package com.example.cajaac.models;
 
 public class TransactionTotal {
     private String label;
@@ -11,14 +11,6 @@ public class TransactionTotal {
         this.label = label;
         this.amount = amount;
         this.quantity = "";
-        this.backgroundColor = backgroundColor;
-    }
-
-    // Constructor para totales con 3 columnas
-    public TransactionTotal(String label, String quantity, String amount, int backgroundColor) {
-        this.label = label;
-        this.quantity = quantity;
-        this.amount = amount;
         this.backgroundColor = backgroundColor;
     }
 

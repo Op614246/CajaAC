@@ -1,4 +1,4 @@
-package com.example.cajaac;
+package com.example.cajaac.models;
 
 public class TransactionItem {
     private String label;

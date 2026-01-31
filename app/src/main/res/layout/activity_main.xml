@@ -945,15 +945,14 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:layout_marginEnd="8dp" />
+                        android:layout_marginEnd="20dp" />
 
                     <!-- Card derecha: Ingresos por canales de delivery (4 columnas con header de tabla) -->
                     <com.example.cajaac.ui.TransactionSectionView
                         android:id="@+id/transactionSectionDelivery"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:layout_marginStart="8dp" />
+                        android:layout_weight="1" />
 
                 </LinearLayout>
             </LinearLayout>

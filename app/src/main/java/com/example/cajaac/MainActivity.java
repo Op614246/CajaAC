@@ -8,6 +8,9 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.cajaac.models.TransactionItem;
+import com.example.cajaac.models.TransactionSection;
+import com.example.cajaac.models.TransactionTotal;
 import com.example.cajaac.ui.ExpandableCardView;
 import com.example.cajaac.ui.TransactionSectionView;
 
@@ -169,7 +172,11 @@ public class MainActivity extends AppCompatActivity {
 
         // Tabla de egresos (5 columnas: Fecha, Usuario, Recibido de, Concepto, Monto)
         // Lista vacía para mostrar el mensaje
-        List<TransactionItem> egresosTableItems = Arrays.asList();
+        List<TransactionItem> egresosTableItems = Arrays.asList(
+//                new TransactionItem("15/01/2025\n10:30 A.M.", "María López", "Proveedor ABC", "Compra de insumos", "S/150.00"),
+//                new TransactionItem("15/01/2025\n02:15 P.M.", "Carlos Ruiz", "Distribuidora XYZ", "Pago de factura pendiente", "S/320.50"),
+//                new TransactionItem("16/01/2025\n09:00 A.M.", "Ana García", "Servicios Generales", "Mantenimiento de equipos", "S/85.00")
+        );
 
         List<TransactionTotal> egresosTotals = Arrays.asList(
                 new TransactionTotal("TOTAL EGRESOS (Efectivo y Tarjeta)", "S/ 0.00", R.color.danger_5),

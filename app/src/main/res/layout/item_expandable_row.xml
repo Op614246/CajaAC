@@ -3,7 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:paddingHorizontal="8dp"
     android:paddingVertical="6dp">
 
     <TextView
@@ -11,17 +10,15 @@
         style="@style/fontListas"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_weight="2"
-        android:textSize="12sp" />
+        android:layout_weight="3" />
 
     <TextView
         android:id="@+id/tvRetention"
-        style="@style/fontListas"
+        style="@style/fontListasMedium"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:gravity="end"
-        android:textSize="12sp" />
+        android:gravity="center" />
 
     <TextView
         android:id="@+id/tvAmount"
@@ -29,16 +26,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:gravity="end"
-        android:textSize="12sp" />
+        android:gravity="end" />
 
-    <TextView
-        android:id="@+id/tvCol4"
-        style="@style/fontListasMedium"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:gravity="end"
-        android:visibility="gone"
-        android:textSize="12sp" />
 </LinearLayout>

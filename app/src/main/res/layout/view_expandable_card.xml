@@ -4,143 +4,149 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/border_rounded"
-    android:orientation="vertical"
-    android:padding="12dp">
+    android:orientation="vertical">
 
+    <!-- Contenedor con padding para título, header y items -->
     <!-- Header con icono y título -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingBottom="8dp">
-
-        <ImageView
-            android:id="@+id/ivIcon"
-            android:layout_width="16dp"
-            android:layout_height="16dp"
-            android:layout_marginEnd="8dp"
-            app:tint="@color/info" />
-
-        <TextView
-            android:id="@+id/tvTitle"
-            android:layout_width="wrap_content"
+        android:paddingHorizontal="10dp">
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_semibold"
-            android:textColor="@color/info"
-            android:textSize="14sp" />
-    </LinearLayout>
+            android:background="@drawable/border_bottom"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingTop="8dp"
+            android:paddingBottom="4dp">
 
-    <!-- Header de la tabla -->
+            <ImageView
+                android:id="@+id/ivIcon"
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:layout_marginEnd="8dp"
+                app:tint="@color/info" />
+
+            <TextView
+                android:id="@+id/tvTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_bold"
+                android:textColor="@color/info"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </LinearLayout>
     <LinearLayout
-        android:id="@+id/tableHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/background_middle_night"
-        android:orientation="horizontal"
-        android:paddingHorizontal="8dp"
-        android:paddingVertical="8dp">
-
-        <TextView
-            android:id="@+id/tvHeaderCol1"
-            android:layout_width="0dp"
+        android:orientation="vertical"
+        android:paddingVertical="12dp"
+        android:paddingHorizontal="10dp">
+        <!-- Header de la tabla -->
+        <LinearLayout
+            android:id="@+id/tableHeader"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="2"
-            android:fontFamily="@font/montserrat_semibold"
-            android:text="Moneda o tarjeta"
-            android:textColor="@color/text_85"
-            android:textSize="12sp" />
+            android:layout_marginBottom="4dp"
+            android:background="@drawable/border_bottom"
+            android:orientation="horizontal"
+            android:paddingBottom="4dp">
 
-        <TextView
-            android:id="@+id/tvHeaderCol2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/montserrat_semibold"
-            android:gravity="end"
-            android:text="Retención"
-            android:textColor="@color/text_85"
-            android:textSize="12sp" />
+            <TextView
+                android:id="@+id/tvHeaderCol1"
+                style="@style/bold_65"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:text="Moneda o tarjeta" />
 
-        <TextView
-            android:id="@+id/tvHeaderCol3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/montserrat_semibold"
-            android:gravity="end"
-            android:text="Monto"
-            android:textColor="@color/text_85"
-            android:textSize="12sp" />
+            <TextView
+                android:id="@+id/tvHeaderCol2"
+                style="@style/bold_65"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="Retención" />
 
-        <TextView
-            android:id="@+id/tvHeaderCol4"
-            android:layout_width="0dp"
+            <TextView
+                android:id="@+id/tvHeaderCol3"
+                style="@style/bold_65"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:text="Monto" />
+
+            <TextView
+                android:id="@+id/tvHeaderCol4"
+                style="@style/bold_65"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="end"
+                android:visibility="gone" />
+        </LinearLayout>
+
+        <!-- Contenedor de items -->
+        <LinearLayout
+            android:id="@+id/itemsContainer"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="@font/montserrat_semibold"
-            android:gravity="end"
-            android:visibility="gone"
-            android:textColor="@color/text_85"
-            android:textSize="12sp" />
+            android:orientation="vertical" />
     </LinearLayout>
 
-    <!-- Contenedor de items (se expande/contrae) -->
-    <LinearLayout
-        android:id="@+id/itemsContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical" />
 
-    <!-- Sección de Total -->
+    <!-- Sección de Total (oculto por defecto, se muestra al expandir) - cubre todo el ancho -->
     <LinearLayout
         android:id="@+id/totalContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/info_5"
         android:orientation="horizontal"
-        android:paddingHorizontal="8dp"
-        android:paddingVertical="10dp">
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="10dp"
+        android:visibility="gone">
 
         <TextView
             android:id="@+id/tvTotalLabel"
+            style="@style/bold_65"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="2"
-            android:fontFamily="@font/montserrat_bold"
-            android:text="TOTAL INGRESOS EFECTIVO/TARJETAS POR VENTAS"
-            android:textColor="@color/text_85"
-            android:textSize="12sp" />
+            android:text="TOTAL INGRESOS EFECTIVO/TARJETAS POR VENTAS" />
 
         <TextView
             android:id="@+id/tvTotalAmount"
+            style="@style/bold_65"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:fontFamily="@font/montserrat_bold"
             android:gravity="end"
-            android:text="S/9,027.60"
-            android:textColor="@color/info"
-            android:textSize="12sp" />
+            android:text="" />
+
     </LinearLayout>
 
-    <!-- Botón Mostrar más/menos -->
+    <!-- Botón Mostrar más/menos - cubre todo el ancho -->
     <LinearLayout
         android:id="@+id/expandButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@color/background_light"
         android:gravity="center"
         android:orientation="horizontal"
-        android:paddingTop="12dp">
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="8dp">
 
         <TextView
             android:id="@+id/tvExpandText"
+            style="@style/fontListas"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_semibold"
             android:text="Mostrar más"
-            android:textColor="@color/info"
-            android:textSize="12sp" />
+            android:textColor="@color/info" />
 
         <ImageView
             android:id="@+id/ivExpandArrow"

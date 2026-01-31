@@ -11,8 +11,9 @@ import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 
 import com.example.cajaac.R;
-import com.example.cajaac.TransactionItem;
-import com.example.cajaac.TransactionSection;
+import com.example.cajaac.models.TransactionItem;
+import com.example.cajaac.models.TransactionSection;
+import com.example.cajaac.models.TransactionTotal;
 
 public class TransactionSectionView extends LinearLayout {
 
@@ -173,7 +174,7 @@ public class TransactionSectionView extends LinearLayout {
             secondaryTotalsContainer.removeAllViews();
 
             // Agregar cada total secundario al contenedor dedicado
-            for (com.example.cajaac.TransactionTotal total : section.getSecondaryTotals()) {
+            for (TransactionTotal total : section.getSecondaryTotals()) {
                 View totalView;
 
                 if (section.getColumnType() == TransactionSection.ColumnType.TABLE 

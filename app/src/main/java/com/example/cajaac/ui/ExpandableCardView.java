@@ -23,6 +23,7 @@ public class ExpandableCardView extends LinearLayout {
     private TextView tvHeaderCol3;
     private TextView tvHeaderCol4;
     private LinearLayout itemsContainer;
+    private LinearLayout totalContainer;
     private TextView tvTotalLabel;
     private TextView tvTotalAmount;
     private LinearLayout expandButton;
@@ -60,6 +61,7 @@ public class ExpandableCardView extends LinearLayout {
         tvHeaderCol3 = findViewById(R.id.tvHeaderCol3);
         tvHeaderCol4 = findViewById(R.id.tvHeaderCol4);
         itemsContainer = findViewById(R.id.itemsContainer);
+        totalContainer = findViewById(R.id.totalContainer);
         tvTotalLabel = findViewById(R.id.tvTotalLabel);
         tvTotalAmount = findViewById(R.id.tvTotalAmount);
         expandButton = findViewById(R.id.expandButton);
@@ -93,7 +95,6 @@ public class ExpandableCardView extends LinearLayout {
         // Configurar total
         tvTotalLabel.setText(data.totalLabel);
         tvTotalAmount.setText(data.totalAmount);
-        tvTotalAmount.setTextColor(ContextCompat.getColor(getContext(), data.titleColor));
 
         // Guardar todos los items
         this.allItems = data.items;
@@ -123,19 +124,10 @@ public class ExpandableCardView extends LinearLayout {
             TextView tvLabel = itemView.findViewById(R.id.tvLabel);
             TextView tvRetention = itemView.findViewById(R.id.tvRetention);
             TextView tvAmount = itemView.findViewById(R.id.tvAmount);
-            TextView tvCol4 = itemView.findViewById(R.id.tvCol4);
 
             tvLabel.setText(item.label);
             tvRetention.setText(item.retention);
             tvAmount.setText(item.amount);
-
-            // Mostrar 4ta columna si está habilitada
-            if (hasFourColumns && item.col4 != null) {
-                tvCol4.setText(item.col4);
-                tvCol4.setVisibility(View.VISIBLE);
-            } else {
-                tvCol4.setVisibility(View.GONE);
-            }
 
             itemsContainer.addView(itemView);
         }
@@ -148,9 +140,11 @@ public class ExpandableCardView extends LinearLayout {
         if (isExpanded) {
             tvExpandText.setText("Mostrar menos");
             ivExpandArrow.setRotation(180);
+            totalContainer.setVisibility(View.VISIBLE);
         } else {
             tvExpandText.setText("Mostrar más");
             ivExpandArrow.setRotation(0);
+            totalContainer.setVisibility(View.GONE);
         }
     }
 
@@ -211,19 +205,11 @@ public class ExpandableCardView extends LinearLayout {
         public String label;
         public String retention;
         public String amount;
-        public String col4;
 
         public ExpandableItem(String label, String retention, String amount) {
             this.label = label;
             this.retention = retention;
             this.amount = amount;
-        }
-
-        public ExpandableItem(String label, String retention, String amount, String col4) {
-            this.label = label;
-            this.retention = retention;
-            this.amount = amount;
-            this.col4 = col4;
         }
     }
 }
