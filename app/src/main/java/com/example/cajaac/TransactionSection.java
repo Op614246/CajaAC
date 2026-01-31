@@ -6,7 +6,8 @@ public class TransactionSection {
 
     public enum ColumnType {
         DEFAULT,
-        THREE_COLUMNS
+        THREE_COLUMNS,
+        TABLE
     }
 
     private String title;
@@ -19,6 +20,9 @@ public class TransactionSection {
     private int totalBackgroundColor;
     private boolean hasTotal;
     private ColumnType columnType;
+
+    // Totales secundarios (para secciones con múltiples totales)
+    private List<TransactionTotal> secondaryTotals;
 
     // Constructor completo
     public TransactionSection(String title, int titleColor, int iconRes,
@@ -36,6 +40,25 @@ public class TransactionSection {
         this.totalBackgroundColor = totalBackgroundColor;
         this.hasTotal = hasTotal;
         this.columnType = columnType;
+        this.secondaryTotals = null;
+    }
+
+    // Constructor con totales secundarios
+    public TransactionSection(String title, int titleColor, int iconRes,
+                              List<TransactionItem> items,
+                              List<TransactionTotal> secondaryTotals,
+                              ColumnType columnType) {
+        this.title = title;
+        this.titleColor = titleColor;
+        this.iconRes = iconRes;
+        this.items = items;
+        this.secondaryTotals = secondaryTotals;
+        this.columnType = columnType;
+        this.hasTotal = false;  // Usa totales secundarios en lugar del total principal
+        this.totalLabel = "";
+        this.totalQuantity = "";
+        this.totalAmount = "";
+        this.totalBackgroundColor = android.R.color.transparent;
     }
 
     // Constructor sin total (para compatibilidad)
@@ -52,6 +75,7 @@ public class TransactionSection {
         this.totalQuantity = "";
         this.totalAmount = "";
         this.totalBackgroundColor = android.R.color.transparent;
+        this.secondaryTotals = null;
     }
 
     // Constructor original (para compatibilidad)
@@ -60,6 +84,7 @@ public class TransactionSection {
                               String totalAmount, int totalBackgroundColor) {
         this(title, titleColor, iconRes, items, totalLabel, "", totalAmount,
              totalBackgroundColor, true, ColumnType.DEFAULT);
+        this.secondaryTotals = null;
     }
 
     // Getters
@@ -73,4 +98,5 @@ public class TransactionSection {
     public int getTotalBackgroundColor() { return totalBackgroundColor; }
     public boolean hasTotal() { return hasTotal; }
     public ColumnType getColumnType() { return columnType; }
+    public List<TransactionTotal> getSecondaryTotals() { return secondaryTotals; }
 }

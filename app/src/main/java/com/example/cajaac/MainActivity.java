@@ -26,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
         TransactionSectionView transactionSectionCorrelativos = findViewById(R.id.transactionSectionCorrelativos);
         TransactionSectionView transactionSectionHechas = findViewById(R.id.transactionSectionHechas);
         TransactionSectionView transactionSectionAnuladas = findViewById(R.id.transactionSectionAnuladas);
+        TransactionSectionView transactionSectionTable = findViewById(R.id.transactionSectionTable);
 
         List<TransactionItem> ingresosItems = Arrays.asList(
                 new TransactionItem("Apertura", "S/ 1,062.70"),
@@ -132,9 +133,30 @@ public class MainActivity extends AppCompatActivity {
                 R.color.info,
                 R.drawable.icon_svg_circle_xmark,
                 anuladasItems,
-                "TOTAL TRANSACCIONES ANULADAS",
-                "0",
-                R.color.info_5
+                false,
+                TransactionSection.ColumnType.DEFAULT
+        );
+
+        // Tabla con múltiples totales (Movimientos de ingresos extra)
+        List<TransactionItem> tableItems = Arrays.asList(
+                new TransactionItem("00/00/0000\n04:05 P.M.", "Jean Pierre Santillán García",
+                        "Ingreso por confirmación de Delivery #31765 con forma de pago En línea", "S/20.00"),
+                new TransactionItem("00/00/0000\n04:05 P.M.", "Jean Pierre Santillán García",
+                        "Ingreso por confirmación de Delivery #31765 con forma de pago En línea", "S/20.00")
+        );
+
+        List<TransactionTotal> tableTotals = Arrays.asList(
+                new TransactionTotal("TOTAL INGRESOS (Efectivo y Tarjeta)", "S/ 0.00", R.color.info_5),
+                new TransactionTotal("TOTAL INGRESOS POR DELIVERY (En línea, transferencia, Yape, Plin)", "S/ 40.00", R.color.info_5)
+        );
+
+        TransactionSection tableSection = new TransactionSection(
+                "Movimientos de ingresos extra",
+                R.color.info,
+                R.drawable.icon_svg_arrow_trend_up_blue,
+                tableItems,
+                tableTotals,
+                TransactionSection.ColumnType.TABLE
         );
 
         transactionSectionIngresos.setData(ingresosSection);
@@ -142,6 +164,7 @@ public class MainActivity extends AppCompatActivity {
         transactionSectionCorrelativos.setData(correlativosSection);
         transactionSectionHechas.setData(hechosSection);
         transactionSectionAnuladas.setData(anuladasSection);
+        transactionSectionTable.setData(tableSection);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());

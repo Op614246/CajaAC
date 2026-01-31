@@ -911,6 +911,20 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1" />
                 </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <!-- Nueva tabla con múltiples totales -->
+                    <com.example.cajaac.ui.TransactionSectionView
+                        android:id="@+id/transactionSectionTable"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp" />
+                    
+                </LinearLayout>
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
