@@ -62,11 +62,24 @@
                 android:fontFamily="@font/roboto_bold" />
 
             <TextView
+                android:id="@+id/tvTotalQuantity"
+                style="@style/fontListas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:fontFamily="@font/roboto_bold"
+                android:textAlignment="textEnd"
+                android:minWidth="40dp"
+                android:visibility="gone" />
+
+            <TextView
                 android:id="@+id/tvTotalAmount"
                 style="@style/fontListas"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:fontFamily="@font/roboto_bold" />
+                android:fontFamily="@font/roboto_bold"
+                android:textAlignment="textEnd"
+                android:minWidth="80dp" />
         </LinearLayout>
 
     </LinearLayout>

@@ -23,6 +23,9 @@ public class MainActivity extends AppCompatActivity {
 
         TransactionSectionView transactionSectionIngresos = findViewById(R.id.transactionSectionIngresos);
         TransactionSectionView transactionSectionEgresos = findViewById(R.id.transactionSectionEgresos);
+        TransactionSectionView transactionSectionCorrelativos = findViewById(R.id.transactionSectionCorrelativos);
+        TransactionSectionView transactionSectionHechas = findViewById(R.id.transactionSectionHechas);
+        TransactionSectionView transactionSectionAnuladas = findViewById(R.id.transactionSectionAnuladas);
 
         List<TransactionItem> ingresosItems = Arrays.asList(
                 new TransactionItem("Apertura", "S/ 1,062.70"),
@@ -49,14 +52,37 @@ public class MainActivity extends AppCompatActivity {
                 new TransactionItem("Descuentos en euros", "S/ 0.00")
         );
 
-        TransactionSection egresosSection = new TransactionSection(
-                "Egresos",
-                R.color.info,
-                R.drawable.icon_svg_arrow_trend_down,
-                egresosItems,
-                "TOTAL EGRESOS",
-                "S/ 0.00",
-                R.color.danger_5
+        // Card 1: Correlativos usados (2 columnas, sin total)
+        List<TransactionItem> correlativosItems = Arrays.asList(
+                new TransactionItem("Facturas", "Serie F002 del 00002266 al 00002267"),
+                new TransactionItem("Boletas", "Serie B002 del 00130834 al 00131035"),
+                new TransactionItem("Nota de Ventas", "-"),
+                new TransactionItem("Nota de credito Boletas", "-"),
+                new TransactionItem("Nota de debito Boletas", "-"),
+                new TransactionItem("Nota de credito Facturas", "-"),
+                new TransactionItem("Nota de debito Facturas", "-")
+        );
+
+        // Card 2: Transacciones hechas (3 columnas, con total)
+        List<TransactionItem> hechosItems = Arrays.asList(
+                new TransactionItem("N° Facturas", "0", "S/1,062.70"),
+                new TransactionItem("N° Boletas", "0", "S/0.00"),
+                new TransactionItem("N° Nota de Ventas", "0", "S/0.00"),
+                new TransactionItem("N° Nota de credito Boletas", "0", "S/6,875.09"),
+                new TransactionItem("N° Nota de debito Boletas", "0", "S/0.00"),
+                new TransactionItem("N° Nota de credito Facturas", "0", "S/0.00"),
+                new TransactionItem("N° Nota de debito Facturas", "0", "S/0.00")
+        );
+
+        // Card 3: Transacciones anuladas (3 columnas, sin total)
+        List<TransactionItem> anuladasItems = Arrays.asList(
+                new TransactionItem("N° Facturas", "0"),
+                new TransactionItem("N° Boletas", "0"),
+                new TransactionItem("N° Nota de Ventas", "0"),
+                new TransactionItem("N° Nota de credito Boletas", "0"),
+                new TransactionItem("N° Nota de debito Boletas","0"),
+                new TransactionItem("N° Nota de credito Facturas", "0"),
+                new TransactionItem("N° Nota de debito Facturas", "0")
         );
 
         TransactionSection ingresosSection = new TransactionSection(
@@ -69,8 +95,53 @@ public class MainActivity extends AppCompatActivity {
                 R.color.primary_5
         );
 
+        TransactionSection egresosSection = new TransactionSection(
+                "Egresos",
+                R.color.info,
+                R.drawable.icon_svg_arrow_trend_down,
+                egresosItems,
+                "TOTAL EGRESOS",
+                "S/ 0.00",
+                R.color.danger_5
+        );
+
+        TransactionSection correlativosSection = new TransactionSection(
+                "Correlativos usados",
+                R.color.info,
+                R.drawable.icon_svg_list,
+                correlativosItems,
+                false,
+                TransactionSection.ColumnType.DEFAULT
+        );
+
+        TransactionSection hechosSection = new TransactionSection(
+                "Transacciones hechas",
+                R.color.info,
+                R.drawable.icon_svg_arrow_left_arrow_right,
+                hechosItems,
+                "TOTAL TRANSACCIONES HECHAS",
+                "0",
+                "S/8,945.41",
+                R.color.info_5,
+                true,
+                TransactionSection.ColumnType.THREE_COLUMNS
+        );
+
+        TransactionSection anuladasSection = new TransactionSection(
+                "Transacciones anuladas",
+                R.color.info,
+                R.drawable.icon_svg_circle_xmark,
+                anuladasItems,
+                "TOTAL TRANSACCIONES ANULADAS",
+                "0",
+                R.color.info_5
+        );
+
         transactionSectionIngresos.setData(ingresosSection);
         transactionSectionEgresos.setData(egresosSection);
+        transactionSectionCorrelativos.setData(correlativosSection);
+        transactionSectionHechas.setData(hechosSection);
+        transactionSectionAnuladas.setData(anuladasSection);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -79,3 +150,8 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 }
+
+
+
+
+

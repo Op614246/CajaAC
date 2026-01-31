@@ -20,6 +20,7 @@ public class TransactionSectionView extends LinearLayout {
     private TextView tvTitle;
     private LinearLayout itemsContainer;
     private TextView tvTotalLabel;
+    private TextView tvTotalQuantity;
     private TextView tvTotalAmount;
     private LinearLayout totalContainer;
 
@@ -48,6 +49,7 @@ public class TransactionSectionView extends LinearLayout {
         tvTitle = findViewById(R.id.tvTitle);
         itemsContainer = findViewById(R.id.itemsContainer);
         tvTotalLabel = findViewById(R.id.tvTotalLabel);
+        tvTotalQuantity = findViewById(R.id.tvTotalQuantity);
         tvTotalAmount = findViewById(R.id.tvTotalAmount);
         totalContainer = findViewById(R.id.totalContainer);
     }
@@ -65,23 +67,55 @@ public class TransactionSectionView extends LinearLayout {
         // Agregar items dinámicamente
         LayoutInflater inflater = LayoutInflater.from(getContext());
         for (TransactionItem item : section.getItems()) {
-            View itemView = inflater.inflate(R.layout.item_transaction, itemsContainer, false);
+            View itemView;
 
-            TextView tvLabel = itemView.findViewById(R.id.tvLabel);
-            TextView tvAmount = itemView.findViewById(R.id.tvAmount);
+            // Seleccionar el layout según el tipo de columnas
+            if (section.getColumnType() == TransactionSection.ColumnType.THREE_COLUMNS) {
+                itemView = inflater.inflate(R.layout.item_transaction_three_columns, itemsContainer, false);
 
-            tvLabel.setText(item.getLabel());
-            tvAmount.setText(item.getAmount());
+                TextView tvLabel = itemView.findViewById(R.id.tvLabel);
+                TextView tvQuantity = itemView.findViewById(R.id.tvQuantity);
+                TextView tvAmount = itemView.findViewById(R.id.tvAmount);
+
+                tvLabel.setText(item.getLabel());
+                tvQuantity.setText(item.getQuantity());
+                tvAmount.setText(item.getAmount());
+            } else {
+                // DEFAULT usamos el mismo layout genérico
+                itemView = inflater.inflate(R.layout.item_transaction, itemsContainer, false);
+
+                TextView tvLabel = itemView.findViewById(R.id.tvLabel);
+                TextView tvValue = itemView.findViewById(R.id.tvValue);
+
+                tvLabel.setText(item.getLabel());
+                // Usar serie si está disponible, sino usar amount
+                String value = !item.getSerie().isEmpty() ? item.getSerie() : item.getAmount();
+                tvValue.setText(value);
+            }
 
             itemsContainer.addView(itemView);
         }
 
-        // Configurar total
-        tvTotalLabel.setText(section.getTotalLabel());
-        tvTotalAmount.setText(section.getTotalAmount());
-        totalContainer.setBackgroundColor(
-                ContextCompat.getColor(getContext(), section.getTotalBackgroundColor())
-        );
+        // Configurar o ocultar la sección de total
+        if (section.hasTotal()) {
+            totalContainer.setVisibility(View.VISIBLE);
+            tvTotalLabel.setText(section.getTotalLabel());
+            totalContainer.setBackgroundColor(
+                    ContextCompat.getColor(getContext(), section.getTotalBackgroundColor())
+            );
+
+            // Mostrar columna de cantidad si es THREE_COLUMNS
+            if (section.getColumnType() == TransactionSection.ColumnType.THREE_COLUMNS) {
+                tvTotalQuantity.setVisibility(View.VISIBLE);
+                tvTotalQuantity.setText(section.getTotalQuantity());
+                tvTotalAmount.setText(section.getTotalAmount());
+            } else {
+                tvTotalQuantity.setVisibility(View.GONE);
+                tvTotalAmount.setText(section.getTotalAmount());
+            }
+        } else {
+            totalContainer.setVisibility(View.GONE);
+        }
     }
 }
 

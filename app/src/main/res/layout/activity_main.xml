@@ -515,7 +515,8 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="16dp">
 
                     <com.example.cajaac.ui.TransactionSectionView
                         android:id="@+id/transactionSectionIngresos"
@@ -883,15 +884,36 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:weightSum="3"
+                    android:layout_marginBottom="16dp">
+
+                    <!-- Card 1: Correlativos usados (2 columnas, sin total) -->
                     <com.example.cajaac.ui.TransactionSectionView
-                        android:id="@+id/transactionSectionEgresos"
-                        android:layout_width="match_parent"
+                        android:id="@+id/transactionSectionCorrelativos"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="20dp" />
+
+                    <!-- Card 2: Transacciones hechas (3 columnas, con total) -->
+                    <com.example.cajaac.ui.TransactionSectionView
+                        android:id="@+id/transactionSectionHechas"
+                        android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="16dp" />
+                        android:layout_weight="1"
+                        android:layout_marginEnd="20dp" />
+
+                    <!-- Card 3: Transacciones anuladas (2 columnas, con total) -->
+                    <com.example.cajaac.ui.TransactionSectionView
+                        android:id="@+id/transactionSectionAnuladas"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
                 </LinearLayout>
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
