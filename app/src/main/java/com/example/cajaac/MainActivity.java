@@ -3,6 +3,7 @@ package com.example.cajaac;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
@@ -11,6 +12,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.cajaac.adapters.CustomSpinnerAdapter;
 import com.example.cajaac.models.TransactionItem;
 import com.example.cajaac.models.TransactionSection;
 import com.example.cajaac.models.TransactionTotal;
@@ -22,12 +24,29 @@ import java.util.Arrays;
 import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
+    private Spinner spinnerProductos, spinnerPeriodo;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
+        // Inicializar todas las secciones
+        setupTransactionSections();
+        setupExpandableCards();
+        setupDeliverySections();
+        setupPropinasCreditosSections();
+        setupChartTabs();
+        initSpinners();
+
+        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
+            return insets;
+        });
+    }
+
+    private void setupTransactionSections() {
         TransactionSectionView transactionSectionIngresos = findViewById(R.id.transactionSectionIngresos);
         TransactionSectionView transactionSectionEgresos = findViewById(R.id.transactionSectionEgresos);
         TransactionSectionView transactionSectionCorrelativos = findViewById(R.id.transactionSectionCorrelativos);
@@ -36,7 +55,17 @@ public class MainActivity extends AppCompatActivity {
         TransactionSectionView transactionSectionTable = findViewById(R.id.transactionSectionTable);
         TransactionSectionView transactionSectionEgresosTable = findViewById(R.id.transactionSectionEgresosTable);
 
-        List<TransactionItem> ingresosItems = Arrays.asList(
+        transactionSectionIngresos.setData(createIngresosSection());
+        transactionSectionEgresos.setData(createEgresosSection());
+        transactionSectionCorrelativos.setData(createCorrelativosSection());
+        transactionSectionHechas.setData(createTransaccionesHechasSection());
+        transactionSectionAnuladas.setData(createTransaccionesAnuladasSection());
+        transactionSectionTable.setData(createMovimientosIngresosSection());
+        transactionSectionEgresosTable.setData(createMovimientosEgresosSection());
+    }
+
+    private TransactionSection createIngresosSection() {
+        List<TransactionItem> items = Arrays.asList(
                 new TransactionItem("Apertura", "S/ 1,062.70"),
                 new TransactionItem("Ventas en S/", "S/ 0.00"),
                 new TransactionItem("Ingresos extras", "S/ 0.00"),
@@ -52,7 +81,19 @@ public class MainActivity extends AppCompatActivity {
                 new TransactionItem("Total por costo de delivery (incluido en total de ventas)", "S/ 0.00")
         );
 
-        List<TransactionItem> egresosItems = Arrays.asList(
+        return new TransactionSection(
+                "Ingresos",
+                R.color.info,
+                R.drawable.icon_svg_arrow_trend_up_blue,
+                items,
+                "TOTAL INGRESOS",
+                "S/ 7,937.79",
+                R.color.primary_5
+        );
+    }
+
+    private TransactionSection createEgresosSection() {
+        List<TransactionItem> items = Arrays.asList(
                 new TransactionItem("Egresos extra", "S/ 0.00"),
                 new TransactionItem("Compras", "S/ 0.00"),
                 new TransactionItem("Pag. de compras al crédito", "S/ 0.00"),
@@ -61,8 +102,19 @@ public class MainActivity extends AppCompatActivity {
                 new TransactionItem("Descuentos en euros", "S/ 0.00")
         );
 
-        // Card 1: Correlativos usados (2 columnas, sin total)
-        List<TransactionItem> correlativosItems = Arrays.asList(
+        return new TransactionSection(
+                "Egresos",
+                R.color.info,
+                R.drawable.icon_svg_arrow_trend_down,
+                items,
+                "TOTAL EGRESOS",
+                "S/ 0.00",
+                R.color.danger_5
+        );
+    }
+
+    private TransactionSection createCorrelativosSection() {
+        List<TransactionItem> items = Arrays.asList(
                 new TransactionItem("Facturas", "Serie F002 del 00002266 al 00002267"),
                 new TransactionItem("Boletas", "Serie B002 del 00130834 al 00131035"),
                 new TransactionItem("Nota de Ventas", "-"),
@@ -72,8 +124,18 @@ public class MainActivity extends AppCompatActivity {
                 new TransactionItem("Nota de debito Facturas", "-")
         );
 
-        // Card 2: Transacciones hechas (3 columnas, con total)
-        List<TransactionItem> hechosItems = Arrays.asList(
+        return new TransactionSection(
+                "Correlativos usados",
+                R.color.info,
+                R.drawable.icon_svg_list,
+                items,
+                false,
+                TransactionSection.ColumnType.DEFAULT
+        );
+    }
+
+    private TransactionSection createTransaccionesHechasSection() {
+        List<TransactionItem> items = Arrays.asList(
                 new TransactionItem("N° Facturas", "0", "S/1,062.70"),
                 new TransactionItem("N° Boletas", "0", "S/0.00"),
                 new TransactionItem("N° Nota de Ventas", "0", "S/0.00"),
@@ -83,8 +145,22 @@ public class MainActivity extends AppCompatActivity {
                 new TransactionItem("N° Nota de debito Facturas", "0", "S/0.00")
         );
 
-        // Card 3: Transacciones anuladas (3 columnas, sin total)
-        List<TransactionItem> anuladasItems = Arrays.asList(
+        return new TransactionSection(
+                "Transacciones hechas",
+                R.color.info,
+                R.drawable.icon_svg_arrow_left_arrow_right,
+                items,
+                "TOTAL TRANSACCIONES HECHAS",
+                "0",
+                "S/8,945.41",
+                R.color.info_5,
+                true,
+                TransactionSection.ColumnType.THREE_COLUMNS
+        );
+    }
+
+    private TransactionSection createTransaccionesAnuladasSection() {
+        List<TransactionItem> items = Arrays.asList(
                 new TransactionItem("N° Facturas", "0"),
                 new TransactionItem("N° Boletas", "0"),
                 new TransactionItem("N° Nota de Ventas", "0"),
@@ -94,121 +170,67 @@ public class MainActivity extends AppCompatActivity {
                 new TransactionItem("N° Nota de debito Facturas", "0")
         );
 
-        TransactionSection ingresosSection = new TransactionSection(
-                "Ingresos",
-                R.color.info,
-                R.drawable.icon_svg_arrow_trend_up_blue,
-                ingresosItems,
-                "TOTAL INGRESOS",
-                "S/ 7,937.79",
-                R.color.primary_5
-        );
-
-        TransactionSection egresosSection = new TransactionSection(
-                "Egresos",
-                R.color.info,
-                R.drawable.icon_svg_arrow_trend_down,
-                egresosItems,
-                "TOTAL EGRESOS",
-                "S/ 0.00",
-                R.color.danger_5
-        );
-
-        TransactionSection correlativosSection = new TransactionSection(
-                "Correlativos usados",
-                R.color.info,
-                R.drawable.icon_svg_list,
-                correlativosItems,
-                false,
-                TransactionSection.ColumnType.DEFAULT
-        );
-
-        TransactionSection hechosSection = new TransactionSection(
-                "Transacciones hechas",
-                R.color.info,
-                R.drawable.icon_svg_arrow_left_arrow_right,
-                hechosItems,
-                "TOTAL TRANSACCIONES HECHAS",
-                "0",
-                "S/8,945.41",
-                R.color.info_5,
-                true,
-                TransactionSection.ColumnType.THREE_COLUMNS
-        );
-
-        TransactionSection anuladasSection = new TransactionSection(
+        return new TransactionSection(
                 "Transacciones anuladas",
                 R.color.info,
                 R.drawable.icon_svg_circle_xmark,
-                anuladasItems,
+                items,
                 "TOTAL TRANSACCIONES ANULADAS",
                 "0",
                 R.color.info_5
         );
+    }
 
-        // Tabla con múltiples totales (Movimientos de ingresos extra)
-        // NOTA: Si tableItems está vacío (Arrays.asList()), los totales NO se mostrarán automáticamente
-        List<TransactionItem> tableItems = Arrays.asList(
+    private TransactionSection createMovimientosIngresosSection() {
+        List<TransactionItem> items = Arrays.asList(
                 new TransactionItem("00/00/0000\n04:05 P.M.", "Jean Pierre Santillán García",
                         "Ingreso por confirmación de Delivery #31765 con forma de pago En línea", "S/20.00"),
                 new TransactionItem("00/00/0000\n04:05 P.M.", "Jean Pierre Santillán García",
                         "Ingreso por confirmación de Delivery #31765 con forma de pago En línea", "S/20.00")
         );
 
-        // Para probar sin items, cambia la línea anterior por:
-        // List<TransactionItem> tableItems = Arrays.asList();
-
-        List<TransactionTotal> tableTotals = Arrays.asList(
+        List<TransactionTotal> totals = Arrays.asList(
                 new TransactionTotal("TOTAL INGRESOS (Efectivo y Tarjeta)", "S/ 0.00", R.color.info_5),
                 new TransactionTotal("TOTAL INGRESOS POR DELIVERY (En línea, transferencia, Yape, Plin)", "S/ 40.00", R.color.info_5)
         );
 
-        TransactionSection tableSection = new TransactionSection(
+        return new TransactionSection(
                 "Movimientos de ingresos extra",
                 R.color.info,
                 R.drawable.icon_svg_arrow_trend_up_blue,
-                tableItems,
-                tableTotals,
+                items,
+                totals,
                 TransactionSection.ColumnType.TABLE,
                 "No hay ingresos registrados"
         );
+    }
 
-        // Tabla de egresos (5 columnas: Fecha, Usuario, Recibido de, Concepto, Monto)
-        // Lista vacía para mostrar el mensaje
-        List<TransactionItem> egresosTableItems = Arrays.asList(
+    private TransactionSection createMovimientosEgresosSection() {
+        List<TransactionItem> items = Arrays.asList(
                 new TransactionItem("15/01/2025\n10:30 A.M.", "María López", "Proveedor ABC", "Compra de insumos", "S/150.00"),
                 new TransactionItem("15/01/2025\n02:15 P.M.", "Carlos Ruiz", "Distribuidora XYZ", "Pago de factura pendiente", "S/320.50"),
                 new TransactionItem("16/01/2025\n09:00 A.M.", "Ana García", "Servicios Generales", "Mantenimiento de equipos", "S/85.00")
         );
 
-        List<TransactionTotal> egresosTotals = Arrays.asList(
+        List<TransactionTotal> totals = Arrays.asList(
                 new TransactionTotal("TOTAL EGRESOS (Efectivo y Tarjeta)", "S/ 0.00", R.color.info_5),
                 new TransactionTotal("TOTAL EGRESOS POR DELIVERY (En línea, transferencia, Yape, Plin)", "S/ 0.00", R.color.info_5)
         );
 
-        TransactionSection egresosTableSection = new TransactionSection(
+        return new TransactionSection(
                 "Movimientos de egresos extra",
                 R.color.info,
                 R.drawable.icon_svg_arrow_trend_down,
-                egresosTableItems,
-                egresosTotals,
+                items,
+                totals,
                 TransactionSection.ColumnType.FIVE_COLUMNS,
                 "No hay egresos registrados"
         );
+    }
 
-        transactionSectionIngresos.setData(ingresosSection);
-        transactionSectionEgresos.setData(egresosSection);
-        transactionSectionCorrelativos.setData(correlativosSection);
-        transactionSectionHechas.setData(hechosSection);
-        transactionSectionAnuladas.setData(anuladasSection);
-        transactionSectionTable.setData(tableSection);
-        transactionSectionEgresosTable.setData(egresosTableSection);
-
-        // Configurar cards expandibles
+    private void setupExpandableCards() {
         ExpandableCardView expandableCardVentas = findViewById(R.id.expandableCardVentas);
-        TransactionSectionView transactionSectionDelivery = findViewById(R.id.transactionSectionDelivery);
 
-        // Datos para "Ingresos en efectivo/tarjetas por ventas"
         List<ExpandableCardView.ExpandableItem> ventasItems = Arrays.asList(
                 new ExpandableCardView.ExpandableItem("Soles", "0", "S/546.00"),
                 new ExpandableCardView.ExpandableItem("POS", "0", "S/4,027.60"),
@@ -238,8 +260,11 @@ public class MainActivity extends AppCompatActivity {
                 .setCollapsedItemCount(8);
 
         expandableCardVentas.setData(ventasData);
+    }
 
-        // Datos para "Ingresos por canales de delivery" (card normal con 4 columnas)
+    private void setupDeliverySections() {
+        TransactionSectionView transactionSectionDelivery = findViewById(R.id.transactionSectionDelivery);
+
         List<TransactionItem> deliveryItems = Arrays.asList(
                 TransactionItem.createFourColumns("Ecommerce Cfi", "0", "S/546.00", "S/546.00"),
                 TransactionItem.createFourColumns("Ecommerce Android", "0", "S/4,027.60", "S/4,027.60"),
@@ -262,12 +287,13 @@ public class MainActivity extends AppCompatActivity {
         );
         deliverySection.setColumnType(TransactionSection.ColumnType.FOUR_COLUMNS);
         transactionSectionDelivery.setData(deliverySection);
+    }
 
-        // Configurar secciones de 2 columnas
+    private void setupPropinasCreditosSections() {
         TransactionSectionView transactionSectionPropinas = findViewById(R.id.transactionSectionPropinas);
         TransactionSectionView transactionSectionCreditos = findViewById(R.id.transactionSectionCreditos);
 
-        // Datos para "Ingresos por propinas" (2 columnas con header de tabla)
+        // Propinas
         List<TransactionItem> propinasItems = Arrays.asList(
                 new TransactionItem("POS", "S/30.00")
         );
@@ -287,7 +313,7 @@ public class MainActivity extends AppCompatActivity {
 
         transactionSectionPropinas.setData(propinasSection);
 
-        // Datos para "Ingresos por créditos cobrados" (2 columnas con header de tabla - vacío)
+        // Créditos
         List<TransactionItem> creditosItems = new ArrayList<>();
 
         TransactionSection creditosSection = new TransactionSection(
@@ -301,15 +327,6 @@ public class MainActivity extends AppCompatActivity {
         );
 
         transactionSectionCreditos.setData(creditosSection);
-
-        // Configurar gráficos y pestañas
-        setupChartTabs();
-
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
-        });
     }
 
     private void setupChartTabs() {
@@ -365,6 +382,76 @@ public class MainActivity extends AppCompatActivity {
         setupCategoriesBarChart();
         setupProductsPieChart();
         setupProductosEstrella();
+        setupNestedScrollBehavior();
+    }
+
+    private void initSpinners() {
+        spinnerProductos = findViewById(R.id.spinnerProductos);
+        spinnerPeriodo = findViewById(R.id.spinnerPeriodo);
+
+        // Datos para spinner de productos
+        String[] productos = {
+                "Productos", "Bebidas", "Comida", "Postres", "Entradas", "Platos principales"
+        };
+
+        // Datos para spinner de período
+        String[] periodos = {
+                "Últimos 7 días", "Últimos 15 días", "Último mes", "Últimos 3 meses", "Este año"
+        };
+
+        // Configurar adapters personalizados
+        CustomSpinnerAdapter adapterProductos = new CustomSpinnerAdapter(this, productos);
+        spinnerProductos.setAdapter(adapterProductos);
+
+        CustomSpinnerAdapter adapterPeriodos = new CustomSpinnerAdapter(this, periodos);
+        spinnerPeriodo.setAdapter(adapterPeriodos);
+
+        // Establecer valores por defecto
+        spinnerProductos.setSelection(0);
+        spinnerPeriodo.setSelection(0);
+    }
+    private void setupNestedScrollBehavior() {
+        androidx.core.widget.NestedScrollView nestedScrollProductos = findViewById(R.id.nestedScrollProductos);
+        android.widget.ScrollView mainScrollView = findViewById(R.id.mainScrollView);
+
+        if (nestedScrollProductos != null && mainScrollView != null) {
+            nestedScrollProductos.setOnTouchListener((v, event) -> {
+                int action = event.getAction();
+
+                switch (action) {
+                    case android.view.MotionEvent.ACTION_DOWN:
+                        // Deshabilitar COMPLETAMENTE el scroll del padre
+                        disableParentScroll(v, true);
+                        break;
+
+                    case android.view.MotionEvent.ACTION_UP:
+                    case android.view.MotionEvent.ACTION_CANCEL:
+                        // Re-habilitar el scroll del padre
+                        disableParentScroll(v, false);
+                        break;
+                }
+
+                return false;
+            });
+        }
+    }
+
+    private void disableParentScroll(View view, boolean disable) {
+        android.view.ViewParent parent = view.getParent();
+        while (parent != null) {
+            if (parent instanceof android.widget.ScrollView) {
+                if (disable) {
+                    // Deshabilitar scroll completamente
+                    ((android.widget.ScrollView) parent).setOnTouchListener((v, event) -> true);
+                } else {
+                    // Rehabilitar scroll
+                    ((android.widget.ScrollView) parent).setOnTouchListener(null);
+                }
+                break;
+            }
+            parent = parent.getParent();
+        }
+        view.getParent().requestDisallowInterceptTouchEvent(disable);
     }
 
     private void setupCategoriesBarChart() {
