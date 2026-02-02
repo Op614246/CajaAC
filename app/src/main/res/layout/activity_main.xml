@@ -955,6 +955,29 @@
                         android:layout_weight="1" />
 
                 </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginBottom="16dp">
+
+                    <!-- Card izquierda: Ingresos por propinas (2 columnas con header de tabla) -->
+                    <com.example.cajaac.ui.TransactionSectionView
+                        android:id="@+id/transactionSectionPropinas"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:layout_marginEnd="20dp" />
+
+                    <!-- Card derecha: Ingresos por créditos cobrados (2 columnas con header de tabla) -->
+                    <com.example.cajaac.ui.TransactionSectionView
+                        android:id="@+id/transactionSectionCreditos"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1" />
+
+                </LinearLayout>
             </LinearLayout>
         </ScrollView>
     </LinearLayout>

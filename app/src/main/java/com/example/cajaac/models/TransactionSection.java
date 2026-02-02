@@ -6,6 +6,7 @@ public class TransactionSection {
 
     public enum ColumnType {
         DEFAULT,
+        TWO_COLUMNS,
         THREE_COLUMNS,
         FOUR_COLUMNS,
         TABLE,

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingBottom="4dp"
+    android:layout_marginBottom="4dp"
+    android:background="@drawable/border_bottom"
+    android:gravity="center_vertical">
+
+    <TextView
+        android:id="@+id/tvHeaderColumn1"
+        style="@style/bold_65"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Moneda o tarjeta" />
+
+    <TextView
+        android:id="@+id/tvHeaderColumn2"
+        style="@style/bold_65"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Monto"
+        android:textAlignment="textEnd"
+        android:minWidth="70dp" />
+
+</LinearLayout>

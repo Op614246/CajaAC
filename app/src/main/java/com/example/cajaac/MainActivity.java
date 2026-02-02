@@ -14,6 +14,7 @@ import com.example.cajaac.models.TransactionTotal;
 import com.example.cajaac.ui.ExpandableCardView;
 import com.example.cajaac.ui.TransactionSectionView;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -259,6 +260,45 @@ public class MainActivity extends AppCompatActivity {
         );
         deliverySection.setColumnType(TransactionSection.ColumnType.FOUR_COLUMNS);
         transactionSectionDelivery.setData(deliverySection);
+
+        // Configurar secciones de 2 columnas
+        TransactionSectionView transactionSectionPropinas = findViewById(R.id.transactionSectionPropinas);
+        TransactionSectionView transactionSectionCreditos = findViewById(R.id.transactionSectionCreditos);
+
+        // Datos para "Ingresos por propinas" (2 columnas con header de tabla)
+        List<TransactionItem> propinasItems = Arrays.asList(
+                new TransactionItem("POS", "S/30.00")
+        );
+
+        List<TransactionTotal> propinasTotals = Arrays.asList(
+                new TransactionTotal("TOTAL INGRESOS PROPINAS", "S/30.00", R.color.info_5)
+        );
+
+        TransactionSection propinasSection = new TransactionSection(
+                "Ingresos por propinas",
+                R.color.info,
+                R.drawable.icon_svg_arrow_trend_up_blue,
+                propinasItems,
+                propinasTotals,
+                TransactionSection.ColumnType.TWO_COLUMNS
+        );
+
+        transactionSectionPropinas.setData(propinasSection);
+
+        // Datos para "Ingresos por créditos cobrados" (2 columnas con header de tabla - vacío)
+        List<TransactionItem> creditosItems = new ArrayList<>();
+
+        TransactionSection creditosSection = new TransactionSection(
+                "Ingresos por créditos cobrados",
+                R.color.info,
+                R.drawable.icon_svg_arrow_trend_up_blue,
+                creditosItems,
+                new ArrayList<>(),
+                TransactionSection.ColumnType.TWO_COLUMNS,
+                "No hay ingresos por créditos cobrados"
+        );
+
+        transactionSectionCreditos.setData(creditosSection);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());

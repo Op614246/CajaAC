@@ -67,10 +67,14 @@ public class TransactionSectionView extends LinearLayout {
         // Limpiar items anteriores
         itemsContainer.removeAllViews();
 
-        // Agregar header si es tipo TABLE, FOUR_COLUMNS o FIVE_COLUMNS
+        // Agregar header si es tipo TABLE, TWO_COLUMNS, FOUR_COLUMNS o FIVE_COLUMNS
         if (section.getColumnType() == TransactionSection.ColumnType.TABLE) {
             View headerView = LayoutInflater.from(getContext()).inflate(
                     R.layout.header_transaction_table, itemsContainer, false);
+            itemsContainer.addView(headerView);
+        } else if (section.getColumnType() == TransactionSection.ColumnType.TWO_COLUMNS) {
+            View headerView = LayoutInflater.from(getContext()).inflate(
+                    R.layout.header_transaction_two_columns, itemsContainer, false);
             itemsContainer.addView(headerView);
         } else if (section.getColumnType() == TransactionSection.ColumnType.FOUR_COLUMNS) {
             View headerView = LayoutInflater.from(getContext()).inflate(
@@ -136,6 +140,14 @@ public class TransactionSectionView extends LinearLayout {
                 tvLabel.setText(item.getLabel());
                 tvQuantity.setText(item.getQuantity());
                 tvAmount.setText(item.getAmount());
+            } else if (section.getColumnType() == TransactionSection.ColumnType.TWO_COLUMNS) {
+                itemView = inflater.inflate(R.layout.item_transaction, itemsContainer, false);
+
+                TextView tvLabel = itemView.findViewById(R.id.tvLabel);
+                TextView tvValue = itemView.findViewById(R.id.tvValue);
+
+                tvLabel.setText(item.getLabel());
+                tvValue.setText(item.getAmount());
             } else {
                 // DEFAULT usamos el mismo layout genérico
                 itemView = inflater.inflate(R.layout.item_transaction, itemsContainer, false);
@@ -178,8 +190,9 @@ public class TransactionSectionView extends LinearLayout {
                 View totalView;
 
                 if (section.getColumnType() == TransactionSection.ColumnType.TABLE 
-                    || section.getColumnType() == TransactionSection.ColumnType.FIVE_COLUMNS) {
-                    // Para tabla (4 o 5 columnas), usar layout de total simplificado (solo label y monto)
+                    || section.getColumnType() == TransactionSection.ColumnType.FIVE_COLUMNS
+                    || section.getColumnType() == TransactionSection.ColumnType.TWO_COLUMNS) {
+                    // Para tabla (2, 4 o 5 columnas), usar layout de total simplificado (solo label y monto)
                     totalView = inflater.inflate(R.layout.item_transaction_table_total, secondaryTotalsContainer, false);
 
                     TextView tvTotalLabel = totalView.findViewById(R.id.tvTotalLabel);
