@@ -1,6 +1,9 @@
 package com.example.cajaac;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,7 +20,6 @@ import com.example.cajaac.ui.TransactionSectionView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -300,11 +302,191 @@ public class MainActivity extends AppCompatActivity {
 
         transactionSectionCreditos.setData(creditosSection);
 
+        // Configurar gráficos y pestañas
+        setupChartTabs();
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+    }
+
+    private void setupChartTabs() {
+        TextView tabGrafico1 = findViewById(R.id.tabGrafico1);
+        TextView tabGrafico2 = findViewById(R.id.tabGrafico2);
+        LinearLayout grafico1Container = findViewById(R.id.grafico1Container);
+        LinearLayout grafico2Container = findViewById(R.id.grafico2Container);
+
+        // Click en pestaña 1 (Top ventas)
+        tabGrafico1.setOnClickListener(v -> {
+            tabGrafico1.setTextColor(getResources().getColor(R.color.info, null));
+            tabGrafico2.setTextColor(getResources().getColor(R.color.text_65, null));
+
+            grafico1Container.setVisibility(View.VISIBLE);
+            grafico2Container.setVisibility(View.GONE);
+        });
+
+        // Click en pestaña 2 (Productos estrella)
+        tabGrafico2.setOnClickListener(v -> {
+            tabGrafico2.setTextColor(getResources().getColor(R.color.info, null));
+            tabGrafico1.setTextColor(getResources().getColor(R.color.text_65, null));
+
+            grafico1Container.setVisibility(View.GONE);
+            grafico2Container.setVisibility(View.VISIBLE);
+        });
+
+        // Configurar gráficos
+        setupCharts();
+    }
+
+    private void setupCharts() {
+        setupCategoriesBarChart();
+        setupProductsPieChart();
+    }
+
+    private void setupCategoriesBarChart() {
+        com.github.mikephil.charting.charts.BarChart barChart = findViewById(R.id.barChartCategorias);
+        LinearLayout listaCategorias = findViewById(R.id.listaCategorias);
+
+        // Configurar el gráfico de barras vertical
+        barChart.getDescription().setEnabled(false);
+        barChart.setDrawGridBackground(false);
+        barChart.setDrawBarShadow(false);
+        barChart.setDrawValueAboveBar(false);
+        barChart.setPinchZoom(false);
+        barChart.setScaleEnabled(false);
+        barChart.setDoubleTapToZoomEnabled(false);
+        barChart.getLegend().setEnabled(false);
+        barChart.getAxisRight().setEnabled(false);
+        barChart.setFitBars(true);
+        barChart.setExtraBottomOffset(15f);
+        barChart.setExtraTopOffset(10f);
+        barChart.setExtraLeftOffset(10f);
+        barChart.setExtraRightOffset(10f);
+
+        // Configurar eje X (abajo - para los porcentajes)
+        com.github.mikephil.charting.components.XAxis xAxis = barChart.getXAxis();
+        xAxis.setPosition(com.github.mikephil.charting.components.XAxis.XAxisPosition.BOTTOM);
+        xAxis.setDrawGridLines(false);
+        xAxis.setDrawAxisLine(false);
+        xAxis.setGranularity(1f);
+        xAxis.setTextColor(getResources().getColor(R.color.info, null));
+        xAxis.setTextSize(11f);
+        xAxis.setLabelCount(5);
+
+        // Etiquetas personalizadas para porcentajes
+        final String[] labels = {"95,8%", "76,12%", "59,20%", "25,20%", "10,19%"};
+        xAxis.setValueFormatter(new com.github.mikephil.charting.formatter.IndexAxisValueFormatter(labels));
+
+        // Configurar eje Y (izquierda - oculto)
+        com.github.mikephil.charting.components.YAxis leftAxis = barChart.getAxisLeft();
+        leftAxis.setDrawGridLines(false);
+        leftAxis.setDrawAxisLine(false);
+        leftAxis.setDrawLabels(false);
+        leftAxis.setAxisMinimum(0f);
+        leftAxis.setAxisMaximum(100f);
+
+        // Datos de ejemplo para categorías (porcentajes como valores)
+        java.util.ArrayList<com.github.mikephil.charting.data.BarEntry> entries = new java.util.ArrayList<>();
+        entries.add(new com.github.mikephil.charting.data.BarEntry(0f, 95.8f));
+        entries.add(new com.github.mikephil.charting.data.BarEntry(1f, 76.12f));
+        entries.add(new com.github.mikephil.charting.data.BarEntry(2f, 59.20f));
+        entries.add(new com.github.mikephil.charting.data.BarEntry(3f, 25.20f));
+        entries.add(new com.github.mikephil.charting.data.BarEntry(4f, 10.19f));
+
+        com.github.mikephil.charting.data.BarDataSet dataSet = new com.github.mikephil.charting.data.BarDataSet(entries, "Categorías");
+        dataSet.setColors(
+                getResources().getColor(R.color.info, null),
+                getResources().getColor(R.color.primary, null),
+                getResources().getColor(R.color.warning, null),
+                getResources().getColor(R.color.secondary_1, null),
+                getResources().getColor(R.color.secondary_3, null)
+        );
+        dataSet.setDrawValues(false);
+
+        com.github.mikephil.charting.data.BarData data = new com.github.mikephil.charting.data.BarData(dataSet);
+        data.setBarWidth(0.4f); // Barras más delgadas
+        barChart.setData(data);
+        barChart.invalidate();
+        barChart.animateY(1000);
+
+        // Crear lista de categorías
+        addCategoryItem(listaCategorias, "Bebidas con alcohol", "S/989.09", R.color.info);
+        addCategoryItem(listaCategorias, "Bebidas sin alcohol", "S/497.25", R.color.primary);
+        addCategoryItem(listaCategorias, "Menú", "S/352.32", R.color.warning);
+        addCategoryItem(listaCategorias, "Platos a la carta", "S/170.87", R.color.secondary_1);
+        addCategoryItem(listaCategorias, "Postres", "S/90.25", R.color.secondary_3);
+    }
+
+    private void setupProductsPieChart() {
+        com.github.mikephil.charting.charts.PieChart pieChart = findViewById(R.id.pieChartProductos);
+        LinearLayout listaProductos = findViewById(R.id.listaProductos);
+
+        // Configurar el gráfico - sin agujero en el centro (pie chart sólido)
+        pieChart.setUsePercentValues(false);
+        pieChart.getDescription().setEnabled(false);
+        pieChart.setDrawHoleEnabled(false);
+        pieChart.setDrawEntryLabels(true);
+        pieChart.setEntryLabelTextSize(14f);
+        pieChart.setEntryLabelColor(getResources().getColor(R.color.white, null));
+        pieChart.setEntryLabelTypeface(android.graphics.Typeface.DEFAULT_BOLD);
+        pieChart.getLegend().setEnabled(false);
+        pieChart.setRotationEnabled(false);
+        pieChart.setHighlightPerTapEnabled(false);
+
+        // Datos de ejemplo para productos
+        java.util.ArrayList<com.github.mikephil.charting.data.PieEntry> entries = new java.util.ArrayList<>();
+        entries.add(new com.github.mikephil.charting.data.PieEntry(55f, "55%"));
+        entries.add(new com.github.mikephil.charting.data.PieEntry(30f, "30%"));
+        entries.add(new com.github.mikephil.charting.data.PieEntry(15f, "15%"));
+
+        com.github.mikephil.charting.data.PieDataSet dataSet = new com.github.mikephil.charting.data.PieDataSet(entries, "Productos");
+        dataSet.setColors(new int[]{
+                getResources().getColor(R.color.info, null),
+                getResources().getColor(R.color.yellow, null),
+                getResources().getColor(R.color.primary, null)
+        });
+        dataSet.setDrawValues(false);
+        dataSet.setSliceSpace(0f);
+
+        com.github.mikephil.charting.data.PieData data = new com.github.mikephil.charting.data.PieData(dataSet);
+        pieChart.setData(data);
+        pieChart.invalidate();
+        pieChart.animateY(1000);
+
+        // Crear lista de productos
+        addProductItem(listaProductos, "Pilsen", "S/90.39", R.color.info);
+        addProductItem(listaProductos, "Ensalada Cesar's", "S/40.39", R.color.yellow);
+        addProductItem(listaProductos, "Torta helada", "S/10.39", R.color.primary);
+    }
+
+    private void addCategoryItem(LinearLayout container, String label, String value, int colorRes) {
+        View item = getLayoutInflater().inflate(R.layout.item_category_chart, container, false);
+
+        android.widget.ImageView colorIndicator = item.findViewById(R.id.colorIndicator);
+        TextView tvLabel = item.findViewById(R.id.tvCategoryLabel);
+        TextView tvValue = item.findViewById(R.id.tvCategoryValue);
+
+        colorIndicator.setColorFilter(getResources().getColor(colorRes, null));
+        tvLabel.setText(label);
+        tvValue.setText(value);
+
+        container.addView(item);
+    }
+
+    private void addProductItem(LinearLayout container, String label, String value, int colorRes) {
+        View item = getLayoutInflater().inflate(R.layout.item_product_chart, container, false);
+
+        android.widget.ImageView colorIndicator = item.findViewById(R.id.colorIndicator);
+        TextView tvLabel = item.findViewById(R.id.tvProductLabel);
+        TextView tvValue = item.findViewById(R.id.tvProductValue);
+
+        colorIndicator.setColorFilter(getResources().getColor(colorRes, null));
+        tvLabel.setText(label);
+        tvValue.setText(value);
+
+        container.addView(item);
     }
 }
 

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical"
+    android:paddingVertical="8dp">
+
+    <ImageView
+        android:id="@+id/colorIndicator"
+        android:layout_width="9dp"
+        android:layout_height="8dp"
+        android:layout_marginEnd="12dp"
+        android:src="@drawable/icon_svg_green_circle" />
+
+    <TextView
+        android:id="@+id/tvProductLabel"
+        style="@style/fontListasMedium"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:textSize="14sp"
+        android:text="Pilsen" />
+
+    <TextView
+        android:id="@+id/tvProductValue"
+        style="@style/regular_85"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="S/90.39" />
+
+</LinearLayout>

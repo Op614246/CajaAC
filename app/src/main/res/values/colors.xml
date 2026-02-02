@@ -15,7 +15,13 @@
     <color name="info">#3B82F6</color>
     <color name="info_5">#ECF4FF</color>
 
+    <color name="primary">#6DC560</color>
     <color name="primary_5">#F5FBF4</color>
+
+    <color name="yellow">#F2A626</color>
+    <color name="warning">#FF8947</color>
+    <color name="secondary_1">#6863FB</color>
+    <color name="secondary_3">#FF3E7D</color>
 
     <color name="middle_night">#F5FAFE</color>
     <color name="background_light">#F5F7FC</color>
