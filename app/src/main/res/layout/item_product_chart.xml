@@ -13,20 +13,25 @@
         android:layout_marginEnd="12dp"
         android:src="@drawable/icon_svg_green_circle" />
 
-    <TextView
-        android:id="@+id/tvProductLabel"
-        style="@style/fontListasMedium"
-        android:layout_width="0dp"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:textSize="14sp"
-        android:text="Pilsen" />
+        android:orientation="vertical">
+        <TextView
+            android:id="@+id/tvProductLabel"
+            style="@style/fontListasMedium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:layout_marginBottom="2dp"
+            android:text="Pilsen" />
 
-    <TextView
-        android:id="@+id/tvProductValue"
-        style="@style/regular_85"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="S/90.39" />
-
+        <TextView
+            android:id="@+id/tvProductValue"
+            style="@style/regular_85"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:text="S/90.39" />
+    </LinearLayout>
 </LinearLayout>

@@ -176,14 +176,14 @@ public class MainActivity extends AppCompatActivity {
         // Tabla de egresos (5 columnas: Fecha, Usuario, Recibido de, Concepto, Monto)
         // Lista vacía para mostrar el mensaje
         List<TransactionItem> egresosTableItems = Arrays.asList(
-//                new TransactionItem("15/01/2025\n10:30 A.M.", "María López", "Proveedor ABC", "Compra de insumos", "S/150.00"),
-//                new TransactionItem("15/01/2025\n02:15 P.M.", "Carlos Ruiz", "Distribuidora XYZ", "Pago de factura pendiente", "S/320.50"),
-//                new TransactionItem("16/01/2025\n09:00 A.M.", "Ana García", "Servicios Generales", "Mantenimiento de equipos", "S/85.00")
+                new TransactionItem("15/01/2025\n10:30 A.M.", "María López", "Proveedor ABC", "Compra de insumos", "S/150.00"),
+                new TransactionItem("15/01/2025\n02:15 P.M.", "Carlos Ruiz", "Distribuidora XYZ", "Pago de factura pendiente", "S/320.50"),
+                new TransactionItem("16/01/2025\n09:00 A.M.", "Ana García", "Servicios Generales", "Mantenimiento de equipos", "S/85.00")
         );
 
         List<TransactionTotal> egresosTotals = Arrays.asList(
-                new TransactionTotal("TOTAL EGRESOS (Efectivo y Tarjeta)", "S/ 0.00", R.color.danger_5),
-                new TransactionTotal("TOTAL EGRESOS POR DELIVERY (En línea, transferencia, Yape, Plin)", "S/ 0.00", R.color.danger_5)
+                new TransactionTotal("TOTAL EGRESOS (Efectivo y Tarjeta)", "S/ 0.00", R.color.info_5),
+                new TransactionTotal("TOTAL EGRESOS POR DELIVERY (En línea, transferencia, Yape, Plin)", "S/ 0.00", R.color.info_5)
         );
 
         TransactionSection egresosTableSection = new TransactionSection(
@@ -313,15 +313,15 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupChartTabs() {
-        TextView tabGrafico1 = findViewById(R.id.tabGrafico1);
-        TextView tabGrafico2 = findViewById(R.id.tabGrafico2);
+        android.view.ViewGroup tabGrafico1 = findViewById(R.id.tabGrafico1);
+        android.view.ViewGroup tabGrafico2 = findViewById(R.id.tabGrafico2);
         LinearLayout grafico1Container = findViewById(R.id.grafico1Container);
         LinearLayout grafico2Container = findViewById(R.id.grafico2Container);
 
         // Click en pestaña 1 (Top ventas)
         tabGrafico1.setOnClickListener(v -> {
-            tabGrafico1.setTextColor(getResources().getColor(R.color.info, null));
-            tabGrafico2.setTextColor(getResources().getColor(R.color.text_65, null));
+            updateTabStyle(tabGrafico1, true);
+            updateTabStyle(tabGrafico2, false);
 
             grafico1Container.setVisibility(View.VISIBLE);
             grafico2Container.setVisibility(View.GONE);
@@ -329,8 +329,8 @@ public class MainActivity extends AppCompatActivity {
 
         // Click en pestaña 2 (Productos estrella)
         tabGrafico2.setOnClickListener(v -> {
-            tabGrafico2.setTextColor(getResources().getColor(R.color.info, null));
-            tabGrafico1.setTextColor(getResources().getColor(R.color.text_65, null));
+            updateTabStyle(tabGrafico2, true);
+            updateTabStyle(tabGrafico1, false);
 
             grafico1Container.setVisibility(View.GONE);
             grafico2Container.setVisibility(View.VISIBLE);
@@ -340,78 +340,49 @@ public class MainActivity extends AppCompatActivity {
         setupCharts();
     }
 
+    private void updateTabStyle(android.view.ViewGroup tab, boolean isSelected) {
+        int color = getResources().getColor(isSelected ? R.color.info : R.color.text_85, null);
+
+        // Cambiar fondo del contenedor
+        if (isSelected) {
+            tab.setBackgroundResource(R.drawable.tab_indicator_background);
+        } else {
+            tab.setBackgroundResource(R.drawable.tab_indicator_background_unselected);
+        }
+
+        // Iterar sobre hijos para cambiar colores de texto e iconos
+        for (int i = 0; i < tab.getChildCount(); i++) {
+            View child = tab.getChildAt(i);
+            if (child instanceof TextView) {
+                ((TextView) child).setTextColor(color);
+            } else if (child instanceof android.widget.ImageView) {
+                ((android.widget.ImageView) child).setColorFilter(color);
+            }
+        }
+    }
+
     private void setupCharts() {
         setupCategoriesBarChart();
         setupProductsPieChart();
+        setupProductosEstrella();
     }
 
     private void setupCategoriesBarChart() {
-        com.github.mikephil.charting.charts.BarChart barChart = findViewById(R.id.barChartCategorias);
+        com.example.cajaac.ui.CustomBarChartView barChart = findViewById(R.id.barChartCategorias);
         LinearLayout listaCategorias = findViewById(R.id.listaCategorias);
+        listaCategorias.removeAllViews(); // Limpiar lista previa
 
-        // Configurar el gráfico de barras vertical
-        barChart.getDescription().setEnabled(false);
-        barChart.setDrawGridBackground(false);
-        barChart.setDrawBarShadow(false);
-        barChart.setDrawValueAboveBar(false);
-        barChart.setPinchZoom(false);
-        barChart.setScaleEnabled(false);
-        barChart.setDoubleTapToZoomEnabled(false);
-        barChart.getLegend().setEnabled(false);
-        barChart.getAxisRight().setEnabled(false);
-        barChart.setFitBars(true);
-        barChart.setExtraBottomOffset(15f);
-        barChart.setExtraTopOffset(10f);
-        barChart.setExtraLeftOffset(10f);
-        barChart.setExtraRightOffset(10f);
+        // Crear datos para las barras
+        java.util.List<com.example.cajaac.ui.CustomBarChartView.BarItem> items = new java.util.ArrayList<>();
+        items.add(new com.example.cajaac.ui.CustomBarChartView.BarItem("95.8%", 95.8f, getResources().getColor(R.color.info, null)));
+        items.add(new com.example.cajaac.ui.CustomBarChartView.BarItem("76.12%", 76.12f, getResources().getColor(R.color.primary, null)));
+        items.add(new com.example.cajaac.ui.CustomBarChartView.BarItem("59.20%", 59.20f, getResources().getColor(R.color.warning, null)));
+        items.add(new com.example.cajaac.ui.CustomBarChartView.BarItem("25.20%", 25.20f, getResources().getColor(R.color.secondary_1, null)));
+        items.add(new com.example.cajaac.ui.CustomBarChartView.BarItem("10.19%", 10.19f, getResources().getColor(R.color.secondary_3, null)));
 
-        // Configurar eje X (abajo - para los porcentajes)
-        com.github.mikephil.charting.components.XAxis xAxis = barChart.getXAxis();
-        xAxis.setPosition(com.github.mikephil.charting.components.XAxis.XAxisPosition.BOTTOM);
-        xAxis.setDrawGridLines(false);
-        xAxis.setDrawAxisLine(false);
-        xAxis.setGranularity(1f);
-        xAxis.setTextColor(getResources().getColor(R.color.info, null));
-        xAxis.setTextSize(11f);
-        xAxis.setLabelCount(5);
+        barChart.setBars(items);
 
-        // Etiquetas personalizadas para porcentajes
-        final String[] labels = {"95,8%", "76,12%", "59,20%", "25,20%", "10,19%"};
-        xAxis.setValueFormatter(new com.github.mikephil.charting.formatter.IndexAxisValueFormatter(labels));
-
-        // Configurar eje Y (izquierda - oculto)
-        com.github.mikephil.charting.components.YAxis leftAxis = barChart.getAxisLeft();
-        leftAxis.setDrawGridLines(false);
-        leftAxis.setDrawAxisLine(false);
-        leftAxis.setDrawLabels(false);
-        leftAxis.setAxisMinimum(0f);
-        leftAxis.setAxisMaximum(100f);
-
-        // Datos de ejemplo para categorías (porcentajes como valores)
-        java.util.ArrayList<com.github.mikephil.charting.data.BarEntry> entries = new java.util.ArrayList<>();
-        entries.add(new com.github.mikephil.charting.data.BarEntry(0f, 95.8f));
-        entries.add(new com.github.mikephil.charting.data.BarEntry(1f, 76.12f));
-        entries.add(new com.github.mikephil.charting.data.BarEntry(2f, 59.20f));
-        entries.add(new com.github.mikephil.charting.data.BarEntry(3f, 25.20f));
-        entries.add(new com.github.mikephil.charting.data.BarEntry(4f, 10.19f));
-
-        com.github.mikephil.charting.data.BarDataSet dataSet = new com.github.mikephil.charting.data.BarDataSet(entries, "Categorías");
-        dataSet.setColors(
-                getResources().getColor(R.color.info, null),
-                getResources().getColor(R.color.primary, null),
-                getResources().getColor(R.color.warning, null),
-                getResources().getColor(R.color.secondary_1, null),
-                getResources().getColor(R.color.secondary_3, null)
-        );
-        dataSet.setDrawValues(false);
-
-        com.github.mikephil.charting.data.BarData data = new com.github.mikephil.charting.data.BarData(dataSet);
-        data.setBarWidth(0.4f); // Barras más delgadas
-        barChart.setData(data);
-        barChart.invalidate();
-        barChart.animateY(1000);
-
-        // Crear lista de categorías
+        // Crear lista de categorías (colores coinciden con las barras)
         addCategoryItem(listaCategorias, "Bebidas con alcohol", "S/989.09", R.color.info);
         addCategoryItem(listaCategorias, "Bebidas sin alcohol", "S/497.25", R.color.primary);
         addCategoryItem(listaCategorias, "Menú", "S/352.32", R.color.warning);
@@ -485,6 +456,57 @@ public class MainActivity extends AppCompatActivity {
         colorIndicator.setColorFilter(getResources().getColor(colorRes, null));
         tvLabel.setText(label);
         tvValue.setText(value);
+
+        container.addView(item);
+    }
+
+    private void setupProductosEstrella() {
+        // Referencias a las vistas
+        TextView tvNombre = findViewById(R.id.tvProductoEstrellaNombre);
+        TextView tvCategoria = findViewById(R.id.tvProductoEstrellaCategoria);
+        TextView tvVentas = findViewById(R.id.tvProductoEstrellaVentas);
+        TextView tvPorcentaje = findViewById(R.id.tvProductoEstrellaPorcentaje);
+        LinearLayout listaOtros = findViewById(R.id.listaOtrosProductosEstrella);
+
+        // Configurar producto #1
+        tvNombre.setText("Ceviche de conchas negras");
+        tvCategoria.setText("Fuente");
+        tvVentas.setText("10,000");
+        tvPorcentaje.setText("90,45%");
+
+        // Limpiar y agregar lista de otros productos
+        listaOtros.removeAllViews();
+
+        addProductoEstrellaItem(listaOtros, "#2", "P", "Cerveza Pilsen", "650ml", "000 VENTAS", "52,45%", R.color.primary);
+        addProductoEstrellaItem(listaOtros, "#3", "P", "Lomo saltado", "Plato", "000 VENTAS", "52,45%", R.color.primary);
+        addProductoEstrellaItem(listaOtros, "#4", "P", "Ronda criolla familiar", "Fuente", "000 VENTAS", "52,45%", R.color.primary);
+        addProductoEstrellaItem(listaOtros, "#5", "P", "Tallarines verdes con chuleta...", "Personal", "000 VENTAS", "52,45%", R.color.primary);
+        addProductoEstrellaItem(listaOtros, "#6", "I", "Pollo", "Entero", "000 VENTAS", "52,45%", R.color.primary);
+        addProductoEstrellaItem(listaOtros, "#6", "I", "Pollo", "Entero", "000 VENTAS", "52,45%", R.color.primary);
+        addProductoEstrellaItem(listaOtros, "#6", "I", "Pollo", "Entero", "000 VENTAS", "52,45%", R.color.primary);
+        addProductoEstrellaItem(listaOtros, "#6", "I", "Pollo", "Entero", "000 VENTAS", "52,45%", R.color.primary);
+        addProductoEstrellaItem(listaOtros, "#6", "I", "Pollo", "Entero", "000 VENTAS", "52,45%", R.color.primary);
+    }
+
+    private void addProductoEstrellaItem(LinearLayout container, String ranking, String letra,
+                                          String nombre, String categoria, String ventas,
+                                          String porcentaje, int colorPorcentaje) {
+        View item = getLayoutInflater().inflate(R.layout.item_producto_estrella, container, false);
+
+        TextView tvRanking = item.findViewById(R.id.tvRanking);
+        TextView tvLetraInicial = item.findViewById(R.id.tvLetraInicial);
+        TextView tvNombre = item.findViewById(R.id.tvNombreProducto);
+        TextView tvCategoria = item.findViewById(R.id.tvCategoriaProducto);
+        TextView tvVentas = item.findViewById(R.id.tvVentasProducto);
+        TextView tvPorcentaje = item.findViewById(R.id.tvPorcentajeProducto);
+
+        tvRanking.setText(ranking);
+        tvLetraInicial.setText(letra);
+        tvNombre.setText(nombre);
+        tvCategoria.setText(categoria);
+        tvVentas.setText(ventas);
+        tvPorcentaje.setText(porcentaje);
+        tvPorcentaje.setTextColor(getResources().getColor(colorPorcentaje, null));
 
         container.addView(item);
     }

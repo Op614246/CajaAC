@@ -986,33 +986,59 @@
                     android:layout_marginBottom="16dp"
                     android:orientation="horizontal">
 
-                    <TextView
+                    <LinearLayout
                         android:id="@+id/tabGrafico1"
-                        style="@style/bold_65"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="@color/white"
-                        android:drawableTop="@drawable/icon_svg_crown"
-                        android:drawablePadding="8dp"
+                        android:background="@drawable/tab_indicator_background"
+                        android:orientation="horizontal"
+                        android:gravity="center"
                         android:padding="12dp"
-                        android:text="Top ventas"
-                        android:textAlignment="center"
-                        android:textColor="@color/info" />
+                        android:clickable="true"
+                        android:focusable="true">
 
-                    <TextView
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/icon_svg_crown"
+                            app:tint="@color/info"
+                            android:layout_marginEnd="8dp" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Top ventas"
+                            android:fontFamily="@font/roboto"
+                            android:textColor="@color/info"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:id="@+id/tabGrafico2"
-                        style="@style/bold_65"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:background="@color/white"
-                        android:drawableTop="@drawable/icon_svg_star"
-                        android:drawablePadding="8dp"
+                        android:background="@drawable/tab_indicator_background_unselected"
+                        android:orientation="horizontal"
+                        android:gravity="center"
                         android:padding="12dp"
-                        android:text="Productos estrella"
-                        android:textAlignment="center"
-                        android:textColor="@color/text_65" />
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <ImageView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:src="@drawable/icon_svg_star"
+                            app:tint="@color/text_85"
+                            android:layout_marginEnd="8dp" />
+
+                        <TextView
+                            style="@style/regular_85"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Productos estrella" />
+                    </LinearLayout>
 
                 </LinearLayout>
 
@@ -1022,7 +1048,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp">
 
-                    <!-- Vista Gráfico 1: Top ventas (ambos gráficos juntos) -->
+                    <!-- Vista Gráficos: Top ventas (ambos gráficos juntos) -->
                     <LinearLayout
                         android:id="@+id/grafico1Container"
                         android:layout_width="match_parent"
@@ -1050,7 +1076,7 @@
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
-                                android:background="@drawable/border_rounded"
+                                android:background="@drawable/border_rounded_10"
                                 android:orientation="horizontal"
                                 android:paddingVertical="20dp"
                                 android:paddingHorizontal="16dp">
@@ -1064,21 +1090,20 @@
                                     android:orientation="vertical">
 
                                     <TextView
-                                        style="@style/bold_65"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginBottom="20dp"
+                                        android:layout_marginBottom="12dp"
                                         android:fontFamily="@font/roboto_bold"
                                         android:text="% DE VENTAS"
                                         android:textAlignment="center"
                                         android:textColor="@color/text_85"
-                                        android:textSize="14sp" />
+                                        android:textSize="12sp" />
 
-                                    <com.github.mikephil.charting.charts.BarChart
+                                    <!-- Custom View para gráfico de barras -->
+                                    <com.example.cajaac.ui.CustomBarChartView
                                         android:id="@+id/barChartCategorias"
                                         android:layout_width="match_parent"
-                                        android:layout_height="220dp"
-                                        android:layout_marginTop="8dp" />
+                                        android:layout_height="220dp" />
 
                                 </LinearLayout>
 
@@ -1095,7 +1120,6 @@
                                         style="@style/bold_65"
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:layout_marginBottom="24dp"
                                         android:fontFamily="@font/roboto_bold"
                                         android:text="LISTA DE CATEGORÍAS"
                                         android:textAlignment="center"
@@ -1105,7 +1129,8 @@
                                     <LinearLayout
                                         android:id="@+id/listaCategorias"
                                         android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:gravity="center_vertical"
                                         android:orientation="vertical" />
 
                                 </LinearLayout>
@@ -1117,7 +1142,7 @@
                         <!-- Card derecha: Por productos (pie chart) -->
                         <LinearLayout
                             android:layout_width="0dp"
-                            android:layout_height="wrap_content"
+                            android:layout_height="match_parent"
                             android:layout_weight="0.45"
                             android:layout_marginStart="10dp"
                             android:orientation="vertical">
@@ -1134,8 +1159,8 @@
 
                             <LinearLayout
                                 android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/border_rounded"
+                                android:layout_height="match_parent"
+                                android:background="@drawable/border_rounded_10"
                                 android:orientation="vertical"
                                 android:paddingVertical="20dp"
                                 android:paddingHorizontal="8dp">
@@ -1179,22 +1204,246 @@
 
                     </LinearLayout>
 
-                    <!-- Vista Gráfico 2: Productos estrella (contenido pendiente) -->
+                    <!-- Vista Productos estrella (contenido pendiente) -->
                     <LinearLayout
                         android:id="@+id/grafico2Container"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
+                        android:orientation="horizontal"
                         android:visibility="gone">
 
-                        <TextView
-                            style="@style/bold_65"
-                            android:layout_width="match_parent"
+                        <!-- Card izquierda: Producto #1 Estrella -->
+                        <LinearLayout
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
-                            android:padding="32dp"
-                            android:text="Contenido de Productos estrella"
-                            android:textAlignment="center"
-                            android:textColor="@color/text_85" />
+                            android:layout_weight="0.25"
+                            android:layout_marginEnd="10dp"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/border_rounded_10"
+                                android:orientation="vertical"
+                                android:padding="16dp">
+
+                                <!-- Etiqueta "Ranking semanal" -->
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="end"
+                                    android:layout_marginBottom="12dp"
+                                    android:background="@drawable/badge_info"
+                                    android:fontFamily="@font/roboto_medium"
+                                    android:paddingHorizontal="12dp"
+                                    android:paddingVertical="4dp"
+                                    android:text="Ranking semanal"
+                                    android:textColor="@color/white"
+                                    android:textSize="10sp" />
+
+                                <!-- Número #1 con estrella -->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="start"
+                                    android:layout_marginBottom="8dp"
+                                    android:orientation="horizontal">
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/montserrat_bold"
+                                        android:text="#1"
+                                        android:textColor="@color/info"
+                                        android:layout_gravity="center_vertical"
+                                        android:textSize="44sp" />
+
+                                    <ImageView
+                                        android:layout_width="40dp"
+                                        android:layout_height="40dp"
+                                        android:layout_marginStart="5dp"
+                                        android:src="@drawable/icon_svg_bigstar"
+                                        android:layout_gravity="center_vertical"
+                                        app:tint="@color/yellow_65" />
+                                </LinearLayout>
+
+                                <!-- Título "PRODUCTO ESTRELLA TOP" -->
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="8dp"
+                                    android:fontFamily="@font/roboto"
+                                    android:text="PRODUCTO ESTRELLA TOP"
+                                    android:textAlignment="textStart"
+                                    android:textColor="@color/info"
+                                    android:textSize="14sp" />
+
+                                <!-- Nombre del producto -->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="start"
+                                    android:layout_marginBottom="8dp"
+                                    android:orientation="horizontal">
+
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical">
+                                        <TextView
+                                            android:id="@+id/tvLetraInicial"
+                                            android:layout_width="20dp"
+                                            android:layout_height="20dp"
+                                            android:layout_marginEnd="12dp"
+                                            android:background="@drawable/circle_badge_info"
+                                            android:fontFamily="@font/roboto_medium"
+                                            android:gravity="center"
+                                            android:text="P"
+                                            android:textColor="@color/info"
+                                            android:textSize="12sp" />
+                                    </LinearLayout>
+
+
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical"
+                                        android:layout_weight="1"
+                                        android:layout_gravity="center_horizontal">
+                                        <TextView
+                                            android:id="@+id/tvProductoEstrellaNombre"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/montserrat_bold"
+                                            android:text="Ceviche de conchas negras"
+                                            android:textColor="@color/text_85"
+                                            android:textSize="18sp"
+                                            android:layout_gravity="center_vertical"/>
+
+                                        <!-- Categoría -->
+                                        <TextView
+                                            android:id="@+id/tvProductoEstrellaCategoria"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/roboto"
+                                            android:text="Fuente"
+                                            android:textColor="@color/text_85"
+                                            android:textSize="14sp" />
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                                <!-- Estadísticas de ventas -->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/background_info"
+                                    android:orientation="horizontal"
+                                    android:padding="16dp"
+                                    android:layout_marginStart="-16dp"
+                                    android:layout_marginEnd="-16dp"
+                                    android:layout_marginBottom="-16dp">
+
+                                    <!-- Número de ventas -->
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:orientation="vertical">
+
+                                        <TextView
+                                            android:id="@+id/tvProductoEstrellaVentas"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/roboto_bold"
+                                            android:text="10,000"
+                                            android:textColor="@color/white"
+                                            android:textSize="28sp" />
+
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/roboto"
+                                            android:text="VENTAS"
+                                            android:textColor="@color/white"
+                                            android:textSize="12sp" />
+                                    </LinearLayout>
+
+                                    <!-- Porcentaje con flecha -->
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:gravity="center_vertical"
+                                        android:orientation="horizontal">
+
+                                        <ImageView
+                                            android:layout_width="16dp"
+                                            android:layout_height="16dp"
+                                            android:layout_marginEnd="4dp"
+                                            android:src="@drawable/icon_svg_arrow_trend_up_blue"
+                                            app:tint="@color/white" />
+
+                                        <TextView
+                                            android:id="@+id/tvProductoEstrellaPorcentaje"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/roboto_bold"
+                                            android:text="90,45%"
+                                            android:textColor="@color/white"
+                                            android:textSize="16sp" />
+                                    </LinearLayout>
+                                </LinearLayout>
+
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <!-- Card derecha: Otros productos estrella -->
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="0.75"
+                            android:paddingStart="20dp"
+                            android:background="@drawable/border_left"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:padding="8dp">
+
+                                <!-- Título "OTROS PRODUCTOS ESTRELLA TOP" -->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/border_bottom"
+                                    android:paddingBottom="5dp"
+                                    android:layout_marginBottom="8dp">
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/roboto_medium"
+                                        android:text="OTROS PRODUCTOS ESTRELLA TOP"
+                                        android:textColor="@color/info"
+                                        android:textSize="14sp" />
+                                </LinearLayout>
+
+                                <ScrollView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:maxHeight="400dp"
+                                    android:fillViewport="false">
+
+                                    <!-- Lista de otros productos -->
+                                    <LinearLayout
+                                        android:id="@+id/listaOtrosProductosEstrella"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:orientation="vertical" />
+
+                                </ScrollView>
+                            </LinearLayout>
+                        </LinearLayout>
 
                     </LinearLayout>
 

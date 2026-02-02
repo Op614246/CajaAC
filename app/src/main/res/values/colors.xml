@@ -3,6 +3,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="text">#1F1F1F</color>
     <color name="text_5">#E4E4E4</color>
     <color name="text_10">#C7C7C7</color>
     <color name="text_25">#878787</color>
@@ -19,6 +20,8 @@
     <color name="primary_5">#F5FBF4</color>
 
     <color name="yellow">#F2A626</color>
+    <color name="yellow_65">#FFD334</color>
+
     <color name="warning">#FF8947</color>
     <color name="secondary_1">#6863FB</color>
     <color name="secondary_3">#FF3E7D</color>

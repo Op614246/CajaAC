@@ -4,7 +4,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:gravity="center_vertical"
-    android:layout_marginBottom="24dp">
+    android:layout_marginTop="24dp">
 
     <ImageView
         android:id="@+id/colorIndicator"
@@ -16,12 +16,22 @@
     <TextView
         android:id="@+id/tvCategoryLabel"
         style="@style/regular_85"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Bebidas con alcohol"
+        android:maxLines="1" />
+
+    <TextView
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:text="Bebidas con alcohol"
+        android:text="................................................................................................................................................................"
+        android:textColor="@color/text_85"
+        android:textSize="14sp"
+        android:fontFamily="@font/roboto"
+        android:maxLines="1"
         android:ellipsize="end"
-        android:maxLines="1" />
+        android:layout_marginEnd="2dp" />
 
     <TextView
         android:id="@+id/tvCategoryValue"
