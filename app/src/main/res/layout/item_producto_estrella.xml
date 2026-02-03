@@ -16,52 +16,57 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="12dp"
+        android:paddingRight="10dp"
         android:fontFamily="@font/roboto_bold"
         android:text="#2"
         android:textColor="@color/info"
         android:textSize="14sp" />
-
-    <!-- Letra inicial con círculo -->
-    <TextView
-        android:id="@+id/tvLetraInicial"
-        android:layout_width="20dp"
-        android:layout_height="20dp"
-        android:layout_marginEnd="12dp"
-        android:background="@drawable/rectangular_badge_info"
-        android:fontFamily="@font/roboto_medium"
-        android:gravity="center"
-        android:text="P"
-        android:textColor="@color/info"
-        android:textSize="12sp" />
 
     <!-- Información del producto -->
     <LinearLayout
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
+        <!-- Letra inicial con círculo -->
         <TextView
-            android:id="@+id/tvNombreProducto"
+            android:id="@+id/tvLetraInicial"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginEnd="12dp"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:fontFamily="@font/roboto_medium"
+            android:gravity="center"
+            android:text="P"
+            android:textSize="12sp" />
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto_bold"
-            android:text="Cerveza Pilsen"
-            android:textColor="@color/text_85"
-            android:textSize="14sp"
-            android:maxLines="1"
-            android:ellipsize="end" />
+            android:orientation="vertical">
+            <TextView
+                android:id="@+id/tvNombreProducto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto_bold"
+                android:text="Cerveza Pilsen"
+                android:textColor="@color/text_85"
+                android:textSize="14sp"
+                android:maxLines="1"
+                android:ellipsize="end" />
 
-        <TextView
-            android:id="@+id/tvCategoriaProducto"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/roboto"
-            android:text="650ml"
-            android:textColor="@color/text"
-            android:textSize="12sp"
-            android:maxLines="1"
-            android:ellipsize="end" />
+            <TextView
+                android:id="@+id/tvCategoriaProducto"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/roboto"
+                android:text="650ml"
+                android:textColor="@color/text"
+                android:textSize="12sp"
+                android:maxLines="1"
+                android:ellipsize="end" />
+        </LinearLayout>
     </LinearLayout>
 
     <!-- Ventas y porcentaje -->

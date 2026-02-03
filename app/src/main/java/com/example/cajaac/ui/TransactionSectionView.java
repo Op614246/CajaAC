@@ -1,6 +1,9 @@
 package com.example.cajaac.ui;
 
 import android.content.Context;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.StyleSpan;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +17,9 @@ import com.example.cajaac.R;
 import com.example.cajaac.models.TransactionItem;
 import com.example.cajaac.models.TransactionSection;
 import com.example.cajaac.models.TransactionTotal;
+
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class TransactionSectionView extends LinearLayout {
 
@@ -104,7 +110,7 @@ public class TransactionSectionView extends LinearLayout {
                 tvDate.setText(item.getDate());
                 tvUser.setText(item.getUser());
                 tvReceivedFrom.setText(item.getReceivedFrom());
-                tvConcept.setText(item.getConcept());
+                tvConcept.setText(formatConceptText(item.getConcept(), item.getDeliveryCode(), item.getPaymentMethod()));
                 tvAmount.setText(item.getAmount());
             } else if (section.getColumnType() == TransactionSection.ColumnType.TABLE) {
                 itemView = inflater.inflate(R.layout.item_transaction_table, itemsContainer, false);
@@ -116,7 +122,7 @@ public class TransactionSectionView extends LinearLayout {
 
                 tvDate.setText(item.getDate());
                 tvUser.setText(item.getUser());
-                tvConcept.setText(item.getConcept());
+                tvConcept.setText(formatConceptText(item.getConcept(), item.getDeliveryCode(), item.getPaymentMethod()));
                 tvAmount.setText(item.getAmount());
             } else if (section.getColumnType() == TransactionSection.ColumnType.FOUR_COLUMNS) {
                 itemView = inflater.inflate(R.layout.item_transaction_four_columns, itemsContainer, false);
@@ -198,7 +204,7 @@ public class TransactionSectionView extends LinearLayout {
                     TextView tvTotalLabel = totalView.findViewById(R.id.tvTotalLabel);
                     TextView tvTotalAmount = totalView.findViewById(R.id.tvTotalAmount);
 
-                    tvTotalLabel.setText(total.getLabel());
+                    tvTotalLabel.setText(formatTotalLabelText(total.getLabel()));
                     tvTotalAmount.setText(total.getAmount());
 
                     totalView.setBackgroundColor(ContextCompat.getColor(getContext(), total.getBackgroundColor()));
@@ -261,6 +267,82 @@ public class TransactionSectionView extends LinearLayout {
         } else if (!section.hasTotal()) {
             totalContainer.setVisibility(View.GONE);
         }
+    }
+
+    /**
+     * Aplica negrita a "Delivery #XXXXX" y "forma de pago" en el texto del concepto.
+     * Si deliveryCode y paymentMethod vienen del backend, los usa para construir el texto formateado.
+     * Si no, intenta encontrar patrones en el texto existente (fallback).
+     */
+    private SpannableString formatConceptText(String baseText, String deliveryCode, String paymentMethod) {
+        String finalText = baseText;
+
+        // Si tenemos deliveryCode y paymentMethod del backend, construir el texto completo
+        if (deliveryCode != null && !deliveryCode.isEmpty() && paymentMethod != null && !paymentMethod.isEmpty()) {
+            // Construir el texto: "Ingreso por confirmación de Delivery #31765 con forma de pago en línea"
+            finalText = "Ingreso por confirmación de Delivery " + deliveryCode + " con forma de pago " + paymentMethod;
+        }
+
+        SpannableString spannable = new SpannableString(finalText);
+
+        // Aplicar negrita a "Delivery #XXXXX"
+        Pattern deliveryPattern = Pattern.compile("Delivery #\\d+");
+        Matcher deliveryMatcher = deliveryPattern.matcher(finalText);
+
+        if (deliveryMatcher.find()) {
+            spannable.setSpan(
+                new StyleSpan(android.graphics.Typeface.BOLD),
+                deliveryMatcher.start(),
+                deliveryMatcher.end(),
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+            );
+        }
+
+        // Aplicar negrita a la forma de pago si está presente
+        if (paymentMethod != null && !paymentMethod.isEmpty()) {
+            int paymentStart = finalText.indexOf(paymentMethod);
+            if (paymentStart != -1) {
+                spannable.setSpan(
+                    new StyleSpan(android.graphics.Typeface.BOLD),
+                    paymentStart,
+                    paymentStart + paymentMethod.length(),
+                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+                );
+            }
+        }
+
+        return spannable;
+    }
+
+    /**
+     * Aplica negrita al texto excepto al contenido entre paréntesis
+     */
+    private SpannableString formatTotalLabelText(String text) {
+        SpannableString spannable = new SpannableString(text);
+
+        // Patrón para encontrar texto entre paréntesis
+        Pattern parenthesisPattern = Pattern.compile("\\([^)]+\\)");
+        Matcher matcher = parenthesisPattern.matcher(text);
+
+        // Aplicar negrita a todo el texto primero
+        spannable.setSpan(
+            new StyleSpan(android.graphics.Typeface.BOLD),
+            0,
+            text.length(),
+            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        );
+
+        // Remover negrita del contenido entre paréntesis
+        if (matcher.find()) {
+            spannable.setSpan(
+                new StyleSpan(android.graphics.Typeface.NORMAL),
+                matcher.start(),
+                matcher.end(),
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+            );
+        }
+
+        return spannable;
     }
 }
 

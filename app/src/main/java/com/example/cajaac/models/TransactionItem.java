@@ -12,6 +12,10 @@ public class TransactionItem {
     private String concept;
     private String receivedFrom; // Para tablas de 5 columnas
 
+    // Campos para formateo de concepto con negrita
+    private String deliveryCode; // Ej: "#31765"
+    private String paymentMethod; // Ej: "en línea"
+
     // Campo para 4 columnas tipo delivery (promedio)
     private String average;
 
@@ -28,6 +32,8 @@ public class TransactionItem {
         this.user = "";
         this.concept = "";
         this.receivedFrom = "";
+        this.deliveryCode = "";
+        this.paymentMethod = "";
         this.average = "";
         this.operations = "";
     }
@@ -42,6 +48,8 @@ public class TransactionItem {
         this.user = "";
         this.concept = "";
         this.receivedFrom = "";
+        this.deliveryCode = "";
+        this.paymentMethod = "";
         this.average = "";
         this.operations = "";
     }
@@ -56,6 +64,8 @@ public class TransactionItem {
         this.serie = "";
         this.quantity = "";
         this.receivedFrom = "";
+        this.deliveryCode = "";
+        this.paymentMethod = "";
         this.average = "";
         this.operations = "";
     }
@@ -70,6 +80,8 @@ public class TransactionItem {
         this.label = "";
         this.serie = "";
         this.quantity = "";
+        this.deliveryCode = "";
+        this.paymentMethod = "";
         this.average = "";
         this.operations = "";
     }
@@ -120,6 +132,22 @@ public class TransactionItem {
 
     public String getOperations() {
         return operations;
+    }
+
+    public String getDeliveryCode() {
+        return deliveryCode;
+    }
+
+    public void setDeliveryCode(String deliveryCode) {
+        this.deliveryCode = deliveryCode;
+    }
+
+    public String getPaymentMethod() {
+        return paymentMethod;
+    }
+
+    public void setPaymentMethod(String paymentMethod) {
+        this.paymentMethod = paymentMethod;
     }
 }
 

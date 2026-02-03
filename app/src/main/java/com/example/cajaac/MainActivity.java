@@ -182,12 +182,18 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private TransactionSection createMovimientosIngresosSection() {
-        List<TransactionItem> items = Arrays.asList(
-                new TransactionItem("00/00/0000\n04:05 P.M.", "Jean Pierre Santillán García",
-                        "Ingreso por confirmación de Delivery #31765 con forma de pago En línea", "S/20.00"),
-                new TransactionItem("00/00/0000\n04:05 P.M.", "Jean Pierre Santillán García",
-                        "Ingreso por confirmación de Delivery #31765 con forma de pago En línea", "S/20.00")
-        );
+        // Crear items
+        TransactionItem item1 = new TransactionItem("00/00/0000\n04:05 P.M.", "Jean Pierre Santillán García",
+                "Ingreso por confirmación de Delivery #31765 con forma de pago en línea", "S/20.00");
+        item1.setDeliveryCode("#31776");
+        item1.setPaymentMethod("en línea");
+
+        TransactionItem item2 = new TransactionItem("00/00/0000\n04:05 P.M.", "Jean Pierre Santillán García",
+                "Ingreso por confirmación de Delivery #31765 con forma de pago en línea", "S/20.00");
+        item2.setDeliveryCode("#31765");
+        item2.setPaymentMethod("en línea");
+
+        List<TransactionItem> items = Arrays.asList(item1, item2);
 
         List<TransactionTotal> totals = Arrays.asList(
                 new TransactionTotal("TOTAL INGRESOS (Efectivo y Tarjeta)", "S/ 0.00", R.color.info_5),
@@ -308,20 +314,28 @@ public class MainActivity extends AppCompatActivity {
                 R.drawable.icon_svg_arrow_trend_up_blue,
                 propinasItems,
                 propinasTotals,
-                TransactionSection.ColumnType.TWO_COLUMNS
+                TransactionSection.ColumnType.TWO_COLUMNS,
+                "No hay ingresos por propinas"
         );
 
         transactionSectionPropinas.setData(propinasSection);
 
         // Créditos
-        List<TransactionItem> creditosItems = new ArrayList<>();
+        List<TransactionItem> creditosItems = Arrays.asList(
+//                new TransactionItem("POS", "S/30.00")
+        );
+
+        List<TransactionTotal> creditosTotals = Arrays.asList(
+                new TransactionTotal("TOTAL INGRESOS CRÉDITOS", "S/30.00", R.color.info_5)
+        );
+
 
         TransactionSection creditosSection = new TransactionSection(
                 "Ingresos por créditos cobrados",
                 R.color.info,
                 R.drawable.icon_svg_arrow_trend_up_blue,
                 creditosItems,
-                new ArrayList<>(),
+                creditosTotals,
                 TransactionSection.ColumnType.TWO_COLUMNS,
                 "No hay ingresos por créditos cobrados"
         );
@@ -565,14 +579,14 @@ public class MainActivity extends AppCompatActivity {
         listaOtros.removeAllViews();
 
         addProductoEstrellaItem(listaOtros, "#2", "P", "Cerveza Pilsen", "650ml", "000 VENTAS", "52,45%", R.color.primary);
-        addProductoEstrellaItem(listaOtros, "#3", "P", "Lomo saltado", "Plato", "000 VENTAS", "52,45%", R.color.primary);
+        addProductoEstrellaItem(listaOtros, "#3", "R", "Lomo saltado", "Plato", "000 VENTAS", "52,45%", R.color.primary);
         addProductoEstrellaItem(listaOtros, "#4", "P", "Ronda criolla familiar", "Fuente", "000 VENTAS", "52,45%", R.color.primary);
-        addProductoEstrellaItem(listaOtros, "#5", "P", "Tallarines verdes con chuleta...", "Personal", "000 VENTAS", "52,45%", R.color.primary);
+        addProductoEstrellaItem(listaOtros, "#5", "R", "Tallarines verdes con chuleta...", "Personal", "000 VENTAS", "52,45%", R.color.primary);
         addProductoEstrellaItem(listaOtros, "#6", "I", "Pollo", "Entero", "000 VENTAS", "52,45%", R.color.primary);
-        addProductoEstrellaItem(listaOtros, "#6", "I", "Pollo", "Entero", "000 VENTAS", "52,45%", R.color.primary);
-        addProductoEstrellaItem(listaOtros, "#6", "I", "Pollo", "Entero", "000 VENTAS", "52,45%", R.color.primary);
-        addProductoEstrellaItem(listaOtros, "#6", "I", "Pollo", "Entero", "000 VENTAS", "52,45%", R.color.primary);
-        addProductoEstrellaItem(listaOtros, "#6", "I", "Pollo", "Entero", "000 VENTAS", "52,45%", R.color.primary);
+        addProductoEstrellaItem(listaOtros, "#7", "I", "Arroz", "Kg", "000 VENTAS", "52,45%", R.color.primary);
+        addProductoEstrellaItem(listaOtros, "#8", "P", "Gaseosa Inca Kola", "1.5L", "000 VENTAS", "52,45%", R.color.primary);
+        addProductoEstrellaItem(listaOtros, "#9", "R", "Ceviche mixto", "Fuente", "000 VENTAS", "52,45%", R.color.primary);
+        addProductoEstrellaItem(listaOtros, "#10", "I", "Cebolla", "Kg", "000 VENTAS", "52,45%", R.color.primary);
     }
 
     private void addProductoEstrellaItem(LinearLayout container, String ranking, String letra,
@@ -594,6 +608,32 @@ public class MainActivity extends AppCompatActivity {
         tvVentas.setText(ventas);
         tvPorcentaje.setText(porcentaje);
         tvPorcentaje.setTextColor(getResources().getColor(colorPorcentaje, null));
+
+        // Configurar badge según el tipo (I, P, R)
+        int badgeBackground;
+        int badgeTextColor;
+
+        switch (letra) {
+            case "I": // Insumo
+                badgeBackground = R.drawable.rectangular_badge_primary;
+                badgeTextColor = R.color.primary;
+                break;
+            case "P": // Producto
+                badgeBackground = R.drawable.rectangular_badge_info;
+                badgeTextColor = R.color.info;
+                break;
+            case "R": // Receta
+                badgeBackground = R.drawable.rectangular_badge_secondary;
+                badgeTextColor = R.color.secondary;
+                break;
+            default: // Por defecto usar info
+                badgeBackground = R.drawable.rectangular_badge_info;
+                badgeTextColor = R.color.info;
+                break;
+        }
+
+        tvLetraInicial.setBackgroundResource(badgeBackground);
+        tvLetraInicial.setTextColor(getResources().getColor(badgeTextColor, null));
 
         container.addView(item);
     }
