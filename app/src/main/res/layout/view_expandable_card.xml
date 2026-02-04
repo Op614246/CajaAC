@@ -150,9 +150,10 @@
 
         <ImageView
             android:id="@+id/ivExpandArrow"
-            android:layout_width="16dp"
+            android:layout_width="9dp"
             android:layout_height="16dp"
             android:layout_marginStart="4dp"
+            android:layout_gravity="center_vertical"
             android:src="@drawable/icon_svg_chevron_down"
             app:tint="@color/info" />
     </LinearLayout>

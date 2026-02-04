@@ -7,6 +7,18 @@
     <string name="egreso_propina">Egreso propina</string>
     <string name="actualizar">Actualizar</string>
 
+    <!-- Valores predeterminados para Créditos -->
+    <string name="default_creditos_generados">0</string>
+    <string name="default_total_creditos">S/00.00</string>
+    <string name="default_vales_pago">S/00.00</string>
+    <string name="default_monto_vales_pago">S/00.00</string>
 
+    <!-- Valores predeterminados para Atenciones -->
+    <string name="default_mesas_atendidas">0</string>
+    <string name="default_personas_atendidas">204</string>
+
+    <!-- Valores predeterminados para Impuestos -->
+    <string name="default_impuestos">S/1,672.55</string>
+    <string name="default_icbper">S/00.00</string>
 
 </resources>

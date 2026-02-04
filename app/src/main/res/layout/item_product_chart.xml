@@ -31,7 +31,6 @@
             style="@style/regular_85"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="12sp"
             android:text="S/90.39" />
     </LinearLayout>
 </LinearLayout>

@@ -22,6 +22,9 @@ public class TransactionItem {
     // Campo para número de operaciones
     private String operations;
 
+    // Campo para tamaño de texto personalizado (en sp)
+    private Integer customTextSize;
+
     // Constructor para 2 columnas (label, amount)
     public TransactionItem(String label, String amount) {
         this.label = label;
@@ -36,6 +39,7 @@ public class TransactionItem {
         this.paymentMethod = "";
         this.average = "";
         this.operations = "";
+        this.customTextSize = null;
     }
 
     // Constructor para 3 columnas (label, quantity, amount)
@@ -52,6 +56,7 @@ public class TransactionItem {
         this.paymentMethod = "";
         this.average = "";
         this.operations = "";
+        this.customTextSize = null;
     }
     
     // Constructor para tabla de 4 columnas (date, user, concept, amount)
@@ -68,6 +73,7 @@ public class TransactionItem {
         this.paymentMethod = "";
         this.average = "";
         this.operations = "";
+        this.customTextSize = null;
     }
     
     // Constructor para tabla de 5 columnas (date, user, receivedFrom, concept, amount)
@@ -84,6 +90,7 @@ public class TransactionItem {
         this.paymentMethod = "";
         this.average = "";
         this.operations = "";
+        this.customTextSize = null;
     }
 
     // Constructor para 4 columnas tipo delivery (label, operations, total, average)
@@ -148,6 +155,14 @@ public class TransactionItem {
 
     public void setPaymentMethod(String paymentMethod) {
         this.paymentMethod = paymentMethod;
+    }
+
+    public Integer getCustomTextSize() {
+        return customTextSize;
+    }
+
+    public void setCustomTextSize(Integer customTextSize) {
+        this.customTextSize = customTextSize;
     }
 }
 

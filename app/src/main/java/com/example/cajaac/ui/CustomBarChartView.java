@@ -59,7 +59,7 @@ public class CustomBarChartView extends View {
 
         textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
         textPaint.setTextAlign(Paint.Align.CENTER);
-        textPaint.setTextSize(spToPx(14, context)); // 11sp
+        textPaint.setTextSize(spToPx(12, context)); // 11sp
 
         try {
             Typeface typeface = ResourcesCompat.getFont(context, R.font.roboto_medium);

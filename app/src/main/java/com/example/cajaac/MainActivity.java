@@ -13,6 +13,7 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.cajaac.adapters.CustomSpinnerAdapter;
+import com.example.cajaac.models.DatosCaja;
 import com.example.cajaac.models.TransactionItem;
 import com.example.cajaac.models.TransactionSection;
 import com.example.cajaac.models.TransactionTotal;
@@ -22,14 +23,31 @@ import com.example.cajaac.ui.TransactionSectionView;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
 
     private Spinner spinnerProductos, spinnerPeriodo;
+
+    // Referencias a los TextViews de datos de caja
+    private TextView tvNumeroCaja;
+    private TextView tvTotalCaja;
+    private TextView tvNombreUsuario;
+    private TextView tvMontoApertura;
+    private TextView tvTurno;
+    private TextView tvFechaApertura;
+    private TextView tvFechaResumen;
+    private TextView tvMontoEfectivo;
+    private TextView tvMontoTarjetas;
+    private TextView tvTotalCajaResumen;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+
+        // Inicializar vistas de datos de caja
+        initializeCajaViews();
 
         // Inicializar todas las secciones
         setupTransactionSections();
@@ -39,12 +57,112 @@ public class MainActivity extends AppCompatActivity {
         setupChartTabs();
         initSpinners();
 
+        // Ejemplo: Cargar datos de caja (aquí conectarías con tu backend)
+        cargarDatosCaja();
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
     }
+
+    /**
+     * Inicializa las referencias a los TextViews de datos de caja
+     */
+    private void initializeCajaViews() {
+        tvNumeroCaja = findViewById(R.id.tvNumeroCaja);
+        tvTotalCaja = findViewById(R.id.tvTotalCaja);
+        tvNombreUsuario = findViewById(R.id.tvNombreUsuario);
+        tvMontoApertura = findViewById(R.id.tvMontoApertura);
+        tvTurno = findViewById(R.id.tvTurno);
+        tvFechaApertura = findViewById(R.id.tvFechaApertura);
+        tvFechaResumen = findViewById(R.id.tvFechaResumen);
+        tvMontoEfectivo = findViewById(R.id.tvMontoEfectivo);
+        tvMontoTarjetas = findViewById(R.id.tvMontoTarjetas);
+        tvTotalCajaResumen = findViewById(R.id.tvTotalCajaResumen);
+    }
+
+    /**
+     * Actualiza la UI con los datos de la caja
+     * @param datos Objeto con los datos de la caja
+     */
+    public void actualizarDatosCaja(DatosCaja datos) {
+        if (datos == null) return;
+
+        if (datos.getNumeroCaja() != null) {
+            tvNumeroCaja.setText(datos.getNumeroCaja());
+        }
+        if (datos.getTotalCaja() != null) {
+            tvTotalCaja.setText(datos.getTotalCaja());
+            tvTotalCajaResumen.setText(datos.getTotalCaja());
+        }
+        if (datos.getNombreUsuario() != null) {
+            tvNombreUsuario.setText(datos.getNombreUsuario());
+        }
+        if (datos.getMontoApertura() != null) {
+            tvMontoApertura.setText(datos.getMontoApertura());
+        }
+        if (datos.getTurno() != null) {
+            tvTurno.setText(datos.getTurno());
+        }
+        if (datos.getFechaApertura() != null) {
+            tvFechaApertura.setText(datos.getFechaApertura());
+        }
+        if (datos.getFechaResumen() != null) {
+            tvFechaResumen.setText(datos.getFechaResumen());
+        }
+        if (datos.getMontoEfectivo() != null) {
+            tvMontoEfectivo.setText(datos.getMontoEfectivo());
+        }
+        if (datos.getMontoTarjetas() != null) {
+            tvMontoTarjetas.setText(datos.getMontoTarjetas());
+        }
+    }
+
+    /**
+     * Método de ejemplo para cargar datos de caja
+     * Aquí conectarías con tu backend/API
+     */
+    private void cargarDatosCaja() {
+        // Ejemplo de datos estáticos - reemplazar con llamada al backend
+        DatosCaja datos = new DatosCaja(
+            "Caja N°02",
+            "S/ 7,937.79",
+            "Mónica González",
+            "S/10.00",
+            "Mañana",
+            "30/06/22 - 04:00 P.M.",
+            "Resumen hasta 27/12/2025, 09:48 AM",
+            "S/ 1,062.70",
+            "S/ 6,875.09"
+        );
+
+        actualizarDatosCaja(datos);
+
+        // TODO: Aquí harías la llamada real a tu API:
+        // fetchDatosFromBackend();
+    }
+
+    // TODO: Método para obtener datos del backend
+    /*
+    private void fetchDatosFromBackend() {
+        // Ejemplo con Retrofit, Volley, etc.
+        // api.getDatosCaja().enqueue(new Callback<DatosCaja>() {
+        //     @Override
+        //     public void onResponse(Call<DatosCaja> call, Response<DatosCaja> response) {
+        //         if (response.isSuccessful() && response.body() != null) {
+        //             actualizarDatosCaja(response.body());
+        //         }
+        //     }
+        //
+        //     @Override
+        //     public void onFailure(Call<DatosCaja> call, Throwable t) {
+        //         // Manejar error
+        //     }
+        // });
+    }
+    */
 
     private void setupTransactionSections() {
         TransactionSectionView transactionSectionIngresos = findViewById(R.id.transactionSectionIngresos);
@@ -124,6 +242,11 @@ public class MainActivity extends AppCompatActivity {
                 new TransactionItem("Nota de debito Facturas", "-")
         );
 
+        // Establecer tamaño de texto personalizado de 10sp para todos los items
+        for (TransactionItem item : items) {
+            item.setCustomTextSize(10);
+        }
+
         return new TransactionSection(
                 "Correlativos usados",
                 R.color.info,
@@ -165,7 +288,7 @@ public class MainActivity extends AppCompatActivity {
                 new TransactionItem("N° Boletas", "0"),
                 new TransactionItem("N° Nota de Ventas", "0"),
                 new TransactionItem("N° Nota de credito Boletas", "0"),
-                new TransactionItem("N° Nota de debito Boletas","0"),
+                new TransactionItem("N° Nota de debito Boletas", "0"),
                 new TransactionItem("N° Nota de credito Facturas", "0"),
                 new TransactionItem("N° Nota de debito Facturas", "0")
         );
@@ -405,7 +528,7 @@ public class MainActivity extends AppCompatActivity {
 
         // Datos para spinner de productos
         String[] productos = {
-                "Productos", "Bebidas", "Comida", "Postres", "Entradas", "Platos principales"
+                "Productos", "Insumos", "Recetas y subrecetas"
         };
 
         // Datos para spinner de período
@@ -638,8 +761,4 @@ public class MainActivity extends AppCompatActivity {
         container.addView(item);
     }
 }
-
-
-
-
 

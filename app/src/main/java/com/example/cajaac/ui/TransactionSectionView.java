@@ -1,9 +1,12 @@
 package com.example.cajaac.ui;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.StyleSpan;
+import android.text.style.MetricAffectingSpan;
+import android.text.TextPaint;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,7 +14,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
+import androidx.core.content.res.ResourcesCompat;
 
 import com.example.cajaac.R;
 import com.example.cajaac.models.TransactionItem;
@@ -165,6 +170,11 @@ public class TransactionSectionView extends LinearLayout {
                 // Usar serie si está disponible, sino usar amount
                 String value = !item.getSerie().isEmpty() ? item.getSerie() : item.getAmount();
                 tvValue.setText(value);
+
+                // Aplicar tamaño de texto personalizado si está definido
+                if (item.getCustomTextSize() != null) {
+                    tvValue.setTextSize(android.util.TypedValue.COMPLEX_UNIT_SP, item.getCustomTextSize());
+                }
             }
 
             itemsContainer.addView(itemView);
@@ -315,7 +325,8 @@ public class TransactionSectionView extends LinearLayout {
     }
 
     /**
-     * Aplica negrita al texto excepto al contenido entre paréntesis
+     * Aplica negrita al texto excepto al contenido entre paréntesis (incluyendo los paréntesis)
+     * El contenido entre paréntesis usará Roboto Regular
      */
     private SpannableString formatTotalLabelText(String text) {
         SpannableString spannable = new SpannableString(text);
@@ -324,25 +335,66 @@ public class TransactionSectionView extends LinearLayout {
         Pattern parenthesisPattern = Pattern.compile("\\([^)]+\\)");
         Matcher matcher = parenthesisPattern.matcher(text);
 
-        // Aplicar negrita a todo el texto primero
-        spannable.setSpan(
-            new StyleSpan(android.graphics.Typeface.BOLD),
-            0,
-            text.length(),
-            Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
-        );
+        // Cargar la fuente Roboto Regular
+        Typeface robotoRegular = ResourcesCompat.getFont(getContext(), R.font.roboto);
 
-        // Remover negrita del contenido entre paréntesis
+        // Si hay paréntesis, aplicar negrita solo antes de ellos
         if (matcher.find()) {
+            int parenthesisStart = matcher.start();
+            int parenthesisEnd = matcher.end();
+
+            // Aplicar negrita solo al texto antes del paréntesis
+            if (parenthesisStart > 0) {
+                spannable.setSpan(
+                    new StyleSpan(android.graphics.Typeface.BOLD),
+                    0,
+                    parenthesisStart,
+                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+                );
+            }
+
+            // Aplicar Roboto Regular al texto entre paréntesis
             spannable.setSpan(
-                new StyleSpan(android.graphics.Typeface.NORMAL),
-                matcher.start(),
-                matcher.end(),
+                new CustomTypefaceSpan(robotoRegular),
+                parenthesisStart,
+                parenthesisEnd,
+                Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+            );
+        } else {
+            // Si no hay paréntesis, aplicar negrita a todo
+            spannable.setSpan(
+                new StyleSpan(android.graphics.Typeface.BOLD),
+                0,
+                text.length(),
                 Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
             );
         }
 
         return spannable;
     }
-}
 
+    /**
+     * Span personalizado para aplicar un Typeface específico
+     */
+    private static class CustomTypefaceSpan extends MetricAffectingSpan {
+        private final Typeface typeface;
+
+        public CustomTypefaceSpan(Typeface typeface) {
+            this.typeface = typeface;
+        }
+
+        @Override
+        public void updateDrawState(@NonNull TextPaint tp) {
+            applyTypeface(tp);
+        }
+
+        @Override
+        public void updateMeasureState(@NonNull TextPaint tp) {
+            applyTypeface(tp);
+        }
+
+        private void applyTypeface(TextPaint paint) {
+            paint.setTypeface(typeface);
+        }
+    }
+}

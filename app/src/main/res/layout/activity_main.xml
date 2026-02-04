@@ -26,8 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="@dimen/spaces"
-                app:srcCompat="@drawable/icon_svg_circle_minus"
-                app:tint="@color/text_85" />
+                app:srcCompat="@drawable/abrir_y_cerrar_caja__1__1"/>
 
             <TextView
                 style="@style/MiApp.Titulo"
@@ -99,10 +98,11 @@
                                         android:textSize="14sp" />
 
                                     <TextView
+                                        android:id="@+id/tvNumeroCaja"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:fontFamily="@font/montserrat_bold"
-                                        android:text="Caja N°01"
+                                        android:text="Caja N°1"
                                         android:textColor="@color/text_85"
                                         android:textSize="20sp" />
                                 </LinearLayout>
@@ -124,6 +124,7 @@
                                         android:textStyle="bold" />
 
                                     <TextView
+                                        android:id="@+id/tvTotalCaja"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:fontFamily="@font/montserrat_bold"
@@ -172,10 +173,11 @@
                                             android:textSize="14sp" />
 
                                         <TextView
+                                            android:id="@+id/tvNombreUsuario"
                                             style="@style/fontListas"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
-                                            android:text="Mónica González"
+                                            android:text="Monica Gonzales"
                                             android:textSize="14sp" />
                                     </LinearLayout>
 
@@ -200,6 +202,7 @@
                                             android:textSize="14sp" />
 
                                         <TextView
+                                            android:id="@+id/tvMontoApertura"
                                             style="@style/fontListas"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
@@ -242,6 +245,7 @@
                                             android:textSize="14sp" />
 
                                         <TextView
+                                            android:id="@+id/tvTurno"
                                             style="@style/fontListas"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
@@ -271,6 +275,7 @@
                                             android:textSize="14sp" />
 
                                         <TextView
+                                            android:id="@+id/tvFechaApertura"
                                             style="@style/fontListas"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
@@ -286,9 +291,10 @@
                                 android:orientation="horizontal">
 
                                 <com.example.cajaac.ui.BotonReutilizable
-                                    android:layout_width="200dp"
+                                    android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
+                                    android:layout_weight="1"
                                     android:layout_marginRight="@dimen/spaces"
                                     android:fontFamily="@font/roboto"
                                     android:text="@string/arqueo"
@@ -298,9 +304,10 @@
                                     app:tipoBoton="bordeado" />
 
                                 <com.example.cajaac.ui.BotonReutilizable
-                                    android:layout_width="200dp"
+                                    android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
+                                    android:layout_weight="1"
                                     android:layout_marginRight="@dimen/spaces"
                                     android:fontFamily="@font/roboto"
                                     android:text="@string/imprimir"
@@ -310,9 +317,10 @@
                                     app:tipoBoton="bordeado" />
 
                                 <com.example.cajaac.ui.BotonReutilizable
-                                    android:layout_width="200dp"
+                                    android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
+                                    android:layout_weight="1"
                                     android:layout_marginRight="@dimen/spaces"
                                     android:fontFamily="@font/roboto"
                                     android:text="@string/egreso_propina"
@@ -322,9 +330,10 @@
                                     app:tipoBoton="bordeado" />
 
                                 <com.example.cajaac.ui.BotonReutilizable
-                                    android:layout_width="200dp"
+                                    android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_gravity="center"
+                                    android:layout_weight="1"
                                     android:fontFamily="@font/roboto"
                                     android:text="@string/actualizar"
                                     app:colorBase="@color/info"
@@ -366,6 +375,7 @@
                                     app:tint="@color/text_85" />
 
                                 <TextView
+                                    android:id="@+id/tvFechaResumen"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:fontFamily="@font/montserrat_bold"
@@ -403,6 +413,7 @@
                                         android:textSize="14sp" />
 
                                     <TextView
+                                        android:id="@+id/tvMontoEfectivo"
                                         style="@style/fontListasMedium"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
@@ -434,6 +445,7 @@
                                         android:textSize="14sp" />
 
                                     <TextView
+                                        android:id="@+id/tvMontoTarjetas"
                                         style="@style/fontListasMedium"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
@@ -468,6 +480,7 @@
 
                                     <TextView
                                         style="@style/fontListas"
+                                        android:id="@+id/tvTotalCajaResumen"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:fontFamily="@font/roboto_bold"
@@ -600,7 +613,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:fontFamily="@font/montserrat_bold"
-                                        android:text="0"
+                                        android:text="@string/default_creditos_generados"
                                         android:textColor="@color/text_85"
                                         android:textSize="16sp" />
                                 </LinearLayout>
@@ -626,7 +639,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:fontFamily="@font/montserrat_bold"
-                                        android:text="S/00.00"
+                                        android:text="@string/default_total_creditos"
                                         android:textColor="@color/text_85"
                                         android:textSize="16sp" />
                                 </LinearLayout>
@@ -653,7 +666,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:fontFamily="@font/montserrat_bold"
-                                        android:text="S/00.00"
+                                        android:text="@string/default_vales_pago"
                                         android:textColor="@color/text_85"
                                         android:textSize="16sp" />
                                 </LinearLayout>
@@ -678,7 +691,7 @@
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:fontFamily="@font/montserrat_bold"
-                                        android:text="S/00.00"
+                                        android:text="@string/default_monto_vales_pago"
                                         android:textColor="@color/text_85"
                                         android:textSize="16sp" />
                                 </LinearLayout>
@@ -754,7 +767,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:fontFamily="@font/montserrat_bold"
-                                            android:text="0"
+                                            android:text="@string/default_mesas_atendidas"
                                             android:textColor="@color/text_85"
                                             android:textSize="16sp" />
                                     </LinearLayout>
@@ -777,7 +790,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:fontFamily="@font/montserrat_bold"
-                                            android:text="204"
+                                            android:text="@string/default_personas_atendidas"
                                             android:textColor="@color/text_85"
                                             android:textSize="16sp" />
                                     </LinearLayout>
@@ -845,7 +858,7 @@
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:fontFamily="@font/montserrat_bold"
-                                            android:text="S/1,672.55"
+                                            android:text="@string/default_impuestos"
                                             android:textColor="@color/text_85"
                                             android:textSize="16sp" />
                                     </LinearLayout>
@@ -865,10 +878,11 @@
                                             android:textColor="@color/text_25" />
 
                                         <TextView
+                                            android:id="@+id/tvIcbper"
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:fontFamily="@font/montserrat_bold"
-                                            android:text="S/00.00"
+                                            android:text="@string/default_icbper"
                                             android:textColor="@color/text_85"
                                             android:textSize="16sp" />
                                     </LinearLayout>
@@ -909,7 +923,7 @@
                     <com.example.cajaac.ui.TransactionSectionView
                         android:id="@+id/transactionSectionAnuladas"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
+                        android:layout_height="match_parent"
                         android:layout_weight="1" />
                 </LinearLayout>
 
@@ -1038,7 +1052,8 @@
                             style="@style/regular_85"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="Productos estrella" />
+                            android:text="Productos estrella"
+                            android:textSize="14sp" />
                     </LinearLayout>
 
                 </LinearLayout>
@@ -1265,7 +1280,6 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:background="@drawable/border_rounded_10"
-
                                     android:clipChildren="false"
                                     android:clipToPadding="false"
                                     android:orientation="vertical">
@@ -1411,7 +1425,7 @@
                                                 android:fontFamily="@font/montserrat_bold"
                                                 android:text="10,000"
                                                 android:textColor="@color/white"
-                                                android:textSize="36sp" />
+                                                android:textSize="24sp" />
 
                                             <TextView
                                                 android:layout_width="wrap_content"

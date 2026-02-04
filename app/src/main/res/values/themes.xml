@@ -36,7 +36,7 @@
         <item name="android:fontFamily">@font/roboto_bold</item>
     </style>
     <style name="regular_85" parent="android:Widget.TextView">
-        <item name="android:textSize">14sp</item>
+        <item name="android:textSize">@dimen/text_list_size_medium</item>
         <item name="android:textColor">@color/text_85</item>
         <item name="android:fontFamily">@font/roboto</item>
     </style>
