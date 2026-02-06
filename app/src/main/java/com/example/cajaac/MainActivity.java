@@ -20,7 +20,6 @@ import com.example.cajaac.models.TransactionTotal;
 import com.example.cajaac.ui.ExpandableCardView;
 import com.example.cajaac.ui.TransactionSectionView;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -57,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
         setupChartTabs();
         initSpinners();
 
-        // Ejemplo: Cargar datos de caja (aquí conectarías con tu backend)
+        // Ejemplo: Cargar datos de caja
         cargarDatosCaja();
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
@@ -125,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
      * Aquí conectarías con tu backend/API
      */
     private void cargarDatosCaja() {
-        // Ejemplo de datos estáticos - reemplazar con llamada al backend
+        // Ejemplo de datos estáticos
         DatosCaja datos = new DatosCaja(
             "Caja N°02",
             "S/ 7,937.79",
@@ -336,9 +335,9 @@ public class MainActivity extends AppCompatActivity {
 
     private TransactionSection createMovimientosEgresosSection() {
         List<TransactionItem> items = Arrays.asList(
-                new TransactionItem("15/01/2025\n10:30 A.M.", "María López", "Proveedor ABC", "Compra de insumos", "S/150.00"),
-                new TransactionItem("15/01/2025\n02:15 P.M.", "Carlos Ruiz", "Distribuidora XYZ", "Pago de factura pendiente", "S/320.50"),
-                new TransactionItem("16/01/2025\n09:00 A.M.", "Ana García", "Servicios Generales", "Mantenimiento de equipos", "S/85.00")
+//                new TransactionItem("15/01/2025\n10:30 A.M.", "María López", "Proveedor ABC", "Compra de insumos", "S/150.00"),
+//                new TransactionItem("15/01/2025\n02:15 P.M.", "Carlos Ruiz", "Distribuidora XYZ", "Pago de factura pendiente", "S/320.50"),
+//                new TransactionItem("16/01/2025\n09:00 A.M.", "Ana García", "Servicios Generales", "Mantenimiento de equipos", "S/85.00")
         );
 
         List<TransactionTotal> totals = Arrays.asList(
@@ -632,15 +631,16 @@ public class MainActivity extends AppCompatActivity {
 
         // Datos de ejemplo para productos
         java.util.ArrayList<com.github.mikephil.charting.data.PieEntry> entries = new java.util.ArrayList<>();
-        entries.add(new com.github.mikephil.charting.data.PieEntry(55f, "55%"));
-        entries.add(new com.github.mikephil.charting.data.PieEntry(30f, "30%"));
         entries.add(new com.github.mikephil.charting.data.PieEntry(15f, "15%"));
+        entries.add(new com.github.mikephil.charting.data.PieEntry(30f, "30%"));
+        entries.add(new com.github.mikephil.charting.data.PieEntry(55f, "55%"));
 
         com.github.mikephil.charting.data.PieDataSet dataSet = new com.github.mikephil.charting.data.PieDataSet(entries, "Productos");
         dataSet.setColors(new int[]{
-                getResources().getColor(R.color.info, null),
+                getResources().getColor(R.color.primary, null),
                 getResources().getColor(R.color.yellow, null),
-                getResources().getColor(R.color.primary, null)
+                getResources().getColor(R.color.info, null)
+
         });
         dataSet.setDrawValues(false);
         dataSet.setSliceSpace(0f);

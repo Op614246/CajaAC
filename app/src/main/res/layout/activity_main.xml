@@ -6,14 +6,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity">
-
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/white"
         android:orientation="vertical"
         android:padding="16dp">
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -21,337 +19,292 @@
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingBottom="8dp">
-
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="@dimen/spaces"
-                app:srcCompat="@drawable/icon_svg_abrir_y_cerrar_caja"/>
-
+                android:layout_marginEnd="@dimen/spaces"
+                app:srcCompat="@drawable/icon_svg_abrir_y_cerrar_caja" />
             <TextView
                 style="@style/MiApp.Titulo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/title" />
-
             <com.example.cajaac.ui.BotonReutilizable
-                android:layout_width="200dp"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
+                android:layout_weight="0.25"
                 android:fontFamily="@font/montserrat_bold"
+                android:gravity="center_vertical|center"
                 android:text="@string/cerrar_caja"
                 app:colorBase="@color/danger"
                 app:icon="@drawable/icon_svg_circle_minus"
                 app:tipoBoton="relleno" />
-
         </LinearLayout>
-
         <ScrollView
             android:id="@+id/mainScrollView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp">
-
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:orientation="horizontal">
-
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
+                        android:layout_marginEnd="10dp"
                         android:layout_weight="0.67"
                         android:orientation="vertical">
                         <!-- Contenedor  Principal -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="vertical">
-
+                            android:orientation="horizontal"
+                            android:paddingBottom="@dimen/spaces">
+                            <!-- Sección Izquierda: Info Caja -->
                             <LinearLayout
-                                android:layout_width="match_parent"
+                                android:layout_width="0dp"
                                 android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:paddingBottom="@dimen/spaces">
-                                <!-- Sección Izquierda: Info Caja -->
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:orientation="vertical">
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:fontFamily="@font/montserrat_semibold"
-                                        android:text="Caja:"
-                                        android:textColor="@color/text_85"
-                                        android:textSize="14sp" />
-
-                                    <TextView
-                                        android:id="@+id/tvNumeroCaja"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:fontFamily="@font/montserrat_bold"
-                                        android:text="Caja N°1"
-                                        android:textColor="@color/text_85"
-                                        android:textSize="20sp" />
-                                </LinearLayout>
-
-                                <!-- Sección Derecha: Total -->
-                                <LinearLayout
+                                android:layout_weight="1"
+                                android:orientation="vertical">
+                                <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:gravity="end"
-                                    android:orientation="vertical">
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:fontFamily="@font/montserrat_bold"
-                                        android:text="TOTAL EN CAJA:"
-                                        android:textColor="@color/text_85"
-                                        android:textSize="12sp"
-                                        android:textStyle="bold" />
-
-                                    <TextView
-                                        android:id="@+id/tvTotalCaja"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:fontFamily="@font/montserrat_bold"
-                                        android:text="S/ 7,937.79"
-                                        android:textColor="@color/info"
-                                        android:textSize="@dimen/total_caja" />
-                                </LinearLayout>
+                                    android:fontFamily="@font/montserrat_semibold"
+                                    android:text="Caja:"
+                                    android:textColor="@color/text_85"
+                                    android:textSize="14sp" />
+                                <TextView
+                                    android:id="@+id/tvNumeroCaja"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/montserrat_bold"
+                                    android:text="Caja N°1"
+                                    android:textColor="@color/text_85"
+                                    android:textSize="20sp" />
                             </LinearLayout>
-
+                            <!-- Sección Derecha: Total -->
                             <LinearLayout
-                                android:layout_width="match_parent"
+                                android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:layout_marginBottom="10dp"
-                                android:orientation="horizontal">
-                                <!-- Columna Izquierda -->
-                                <LinearLayout
-                                    android:layout_width="0dp"
+                                android:gravity="end"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginRight="@dimen/spaces"
-                                    android:layout_weight="1"
-                                    android:background="@drawable/background_middle_night"
-                                    android:orientation="vertical"
-                                    android:paddingHorizontal="@dimen/padding_horizontal"
-                                    android:paddingVertical="@dimen/padding_vertical">
-
-                                    <!-- Usuario -->
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginBottom="8dp"
-                                        android:gravity="center_vertical"
-                                        android:orientation="horizontal">
-
-                                        <ImageView
-                                            android:layout_width="16dp"
-                                            android:layout_height="16dp"
-                                            android:layout_marginEnd="8dp"
-                                            android:src="@drawable/icon_svg_user"
-                                            app:tint="@color/text_85" />
-
-                                        <TextView
-                                            style="@style/fontListasMedium"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="Usuario: "
-                                            android:textSize="14sp" />
-
-                                        <TextView
-                                            android:id="@+id/tvNombreUsuario"
-                                            style="@style/fontListas"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="Monica Gonzales"
-                                            android:textSize="14sp" />
-                                    </LinearLayout>
-
-                                    <!-- Apertura -->
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:gravity="center_vertical"
-                                        android:orientation="horizontal">
-
-                                        <ImageView
-                                            android:layout_width="16dp"
-                                            android:layout_height="16dp"
-                                            android:layout_marginEnd="8dp"
-                                            android:src="@drawable/icon_svg_green_circle" />
-
-                                        <TextView
-                                            style="@style/fontListasMedium"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="Apertura: "
-                                            android:textSize="14sp" />
-
-                                        <TextView
-                                            android:id="@+id/tvMontoApertura"
-                                            style="@style/fontListas"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="S/ 00.00"
-                                            android:textSize="14sp" />
-                                    </LinearLayout>
-
-                                </LinearLayout>
-
-                                <!-- Columna Derecha -->
-                                <LinearLayout
-                                    android:layout_width="0dp"
+                                    android:fontFamily="@font/montserrat_bold"
+                                    android:text="TOTAL EN CAJA:"
+                                    android:textColor="@color/text_85"
+                                    android:textSize="12sp"
+                                    android:textStyle="bold" />
+                                <TextView
+                                    android:id="@+id/tvTotalCaja"
+                                    android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:background="@drawable/background_middle_night"
-                                    android:orientation="vertical"
-                                    android:paddingHorizontal="@dimen/padding_horizontal"
-                                    android:paddingVertical="@dimen/padding_vertical">
-
-                                    <!-- Turno -->
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginBottom="8dp"
-                                        android:gravity="center_vertical"
-                                        android:orientation="horizontal">
-
-                                        <ImageView
-                                            android:layout_width="16dp"
-                                            android:layout_height="16dp"
-                                            android:layout_marginEnd="8dp"
-                                            android:src="@drawable/icon_svg_clock"
-                                            app:tint="@color/text_85" />
-
-                                        <TextView
-                                            style="@style/fontListasMedium"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="Turno: "
-                                            android:textSize="14sp" />
-
-                                        <TextView
-                                            android:id="@+id/tvTurno"
-                                            style="@style/fontListas"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="Mañana"
-                                            android:textSize="14sp" />
-                                    </LinearLayout>
-
-                                    <!-- Abierto desde -->
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:gravity="center_vertical"
-                                        android:orientation="horizontal">
-
-                                        <ImageView
-                                            android:layout_width="16dp"
-                                            android:layout_height="16dp"
-                                            android:layout_marginEnd="8dp"
-                                            android:src="@drawable/icon_svg_calendar_clock"
-                                            app:tint="@color/text_85" />
-
-                                        <TextView
-                                            style="@style/fontListasMedium"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="Abierto desde: "
-                                            android:textSize="14sp" />
-
-                                        <TextView
-                                            android:id="@+id/tvFechaApertura"
-                                            style="@style/fontListas"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:text="30/06/22 - 04:00 P.M."
-                                            android:textSize="14sp" />
-                                    </LinearLayout>
-                                </LinearLayout>
-                            </LinearLayout>
-
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal">
-
-                                <com.example.cajaac.ui.BotonReutilizable
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_weight="1"
-                                    android:layout_marginRight="@dimen/spaces"
-                                    android:fontFamily="@font/roboto"
-                                    android:text="@string/arqueo"
-                                    app:colorBase="@color/info"
-                                    app:icon="@drawable/icon_svg_cash_register"
-                                    app:tamanoBoton="grande"
-                                    app:tipoBoton="bordeado" />
-
-                                <com.example.cajaac.ui.BotonReutilizable
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_weight="1"
-                                    android:layout_marginRight="@dimen/spaces"
-                                    android:fontFamily="@font/roboto"
-                                    android:text="@string/imprimir"
-                                    app:colorBase="@color/info"
-                                    app:icon="@drawable/icon_svg_print_blue"
-                                    app:tamanoBoton="grande"
-                                    app:tipoBoton="bordeado" />
-
-                                <com.example.cajaac.ui.BotonReutilizable
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_weight="1"
-                                    android:layout_marginRight="@dimen/spaces"
-                                    android:fontFamily="@font/roboto"
-                                    android:text="@string/egreso_propina"
-                                    app:colorBase="@color/info"
-                                    app:icon="@drawable/icon_svg_coin_blue"
-                                    app:tamanoBoton="grande"
-                                    app:tipoBoton="bordeado" />
-
-                                <com.example.cajaac.ui.BotonReutilizable
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_weight="1"
-                                    android:fontFamily="@font/roboto"
-                                    android:text="@string/actualizar"
-                                    app:colorBase="@color/info"
-                                    app:icon="@drawable/icon_svg_arrows_rotate_white"
-                                    app:tamanoBoton="grande"
-                                    app:tipoBoton="relleno" />
+                                    android:fontFamily="@font/montserrat_bold"
+                                    android:text="S/ 7,937.79"
+                                    android:textColor="@color/info"
+                                    android:textSize="@dimen/total_caja" />
                             </LinearLayout>
                         </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="10dp"
+                            android:orientation="horizontal">
+                            <!-- Columna Izquierda -->
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="@dimen/spaces"
+                                android:layout_weight="1"
+                                android:background="@drawable/background_middle_light"
+                                android:orientation="vertical"
+                                android:paddingHorizontal="@dimen/padding_horizontal"
+                                android:paddingVertical="@dimen/padding_vertical">
+                                <!-- Usuario -->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="8dp"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+                                    <ImageView
+                                        android:layout_width="16dp"
+                                        android:layout_height="16dp"
+                                        android:layout_marginEnd="8dp"
+                                        android:src="@drawable/icon_svg_user"
+                                        app:tint="@color/text_85" />
+                                    <TextView
+                                        style="@style/fontListasMedium"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Usuario: "
+                                        android:textSize="14sp" />
+                                    <TextView
+                                        android:id="@+id/tvNombreUsuario"
+                                        style="@style/fontListas"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Monica Gonzales"
+                                        android:textSize="14sp" />
+                                </LinearLayout>
+                                <!-- Apertura -->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+                                    <ImageView
+                                        android:layout_width="16dp"
+                                        android:layout_height="16dp"
+                                        android:layout_marginEnd="8dp"
+                                        android:src="@drawable/icon_svg_green_circle" />
+                                    <TextView
+                                        style="@style/fontListasMedium"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Apertura: "
+                                        android:textSize="14sp" />
+                                    <TextView
+                                        android:id="@+id/tvMontoApertura"
+                                        style="@style/fontListas"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="S/ 00.00"
+                                        android:textSize="14sp" />
+                                </LinearLayout>
+                            </LinearLayout>
+                            <!-- Columna Derecha -->
+                            <LinearLayout
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:background="@drawable/background_middle_light"
+                                android:orientation="vertical"
+                                android:paddingHorizontal="@dimen/padding_horizontal"
+                                android:paddingVertical="@dimen/padding_vertical">
+                                <!-- Turno -->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="8dp"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+                                    <ImageView
+                                        android:layout_width="16dp"
+                                        android:layout_height="16dp"
+                                        android:layout_marginEnd="8dp"
+                                        android:src="@drawable/icon_svg_clock"
+                                        app:tint="@color/text_85" />
+                                    <TextView
+                                        style="@style/fontListasMedium"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Turno: "
+                                        android:textSize="14sp" />
+                                    <TextView
+                                        android:id="@+id/tvTurno"
+                                        style="@style/fontListas"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Mañana"
+                                        android:textSize="14sp" />
+                                </LinearLayout>
+                                <!-- Abierto desde -->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:gravity="center_vertical"
+                                    android:orientation="horizontal">
+                                    <ImageView
+                                        android:layout_width="16dp"
+                                        android:layout_height="16dp"
+                                        android:layout_marginEnd="8dp"
+                                        android:src="@drawable/icon_svg_calendar_clock"
+                                        app:tint="@color/text_85" />
+                                    <TextView
+                                        style="@style/fontListasMedium"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Abierto desde: "
+                                        android:textSize="14sp" />
+                                    <TextView
+                                        android:id="@+id/tvFechaApertura"
+                                        style="@style/fontListas"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="30/06/22 - 04:00 P.M."
+                                        android:textSize="14sp" />
+                                </LinearLayout>
+                            </LinearLayout>
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal">
+                            <com.example.cajaac.ui.BotonReutilizable
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginEnd="@dimen/spaces"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/roboto"
+                                android:text="@string/arqueo"
+                                app:colorBase="@color/info"
+                                app:icon="@drawable/icon_svg_cash_register"
+                                app:tamanoBoton="grande"
+                                app:tipoBoton="bordeado" />
+                            <com.example.cajaac.ui.BotonReutilizable
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginEnd="@dimen/spaces"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/roboto"
+                                android:text="@string/imprimir"
+                                app:colorBase="@color/info"
+                                app:icon="@drawable/icon_svg_print_blue"
+                                app:tamanoBoton="grande"
+                                app:tipoBoton="bordeado" />
+                            <com.example.cajaac.ui.BotonReutilizable
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_marginEnd="@dimen/spaces"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/roboto"
+                                android:text="@string/egreso_propina"
+                                app:colorBase="@color/info"
+                                app:icon="@drawable/icon_svg_coin_blue"
+                                app:tamanoBoton="grande"
+                                app:tipoBoton="bordeado" />
+                            <com.example.cajaac.ui.BotonReutilizable
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/roboto"
+                                android:text="@string/actualizar"
+                                app:colorBase="@color/info"
+                                app:icon="@drawable/icon_svg_arrows_rotate_white"
+                                app:tamanoBoton="grande"
+                                app:tipoBoton="relleno" />
+                        </LinearLayout>
                     </LinearLayout>
-
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_weight="0.33"
                         android:background="@drawable/border_left"
                         android:orientation="vertical"
-                        android:paddingLeft="10dp">
-
+                        android:paddingStart="10dp">
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -364,16 +317,14 @@
                                 android:layout_marginBottom="@dimen/spaces"
                                 android:background="@drawable/border_bottom"
                                 android:gravity="center_vertical"
-                                android:paddingLeft="8dp"
+                                android:paddingStart="8dp"
                                 android:paddingBottom="4dp">
-
                                 <ImageView
                                     android:layout_width="12dp"
                                     android:layout_height="24dp"
                                     android:layout_marginEnd="@dimen/spaces"
                                     android:src="@drawable/icon_svg_clock_rotate_left"
                                     app:tint="@color/text_85" />
-
                                 <TextView
                                     android:id="@+id/tvFechaResumen"
                                     android:layout_width="wrap_content"
@@ -383,27 +334,23 @@
                                     android:textColor="@color/text_85"
                                     android:textSize="14sp" />
                             </LinearLayout>
-
                             <!-- Filas -->
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="vertical">
-
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginBottom="@dimen/spaces"
                                     android:gravity="center_vertical"
                                     android:paddingHorizontal="8dp">
-
                                     <ImageView
                                         android:layout_width="14dp"
                                         android:layout_height="12dp"
                                         android:layout_marginEnd="8dp"
                                         android:src="@drawable/icon_svg_money_bill_wave"
                                         app:tint="@color/text_85" />
-
                                     <TextView
                                         style="@style/fontListas"
                                         android:layout_width="0dp"
@@ -411,7 +358,6 @@
                                         android:layout_weight="1"
                                         android:text="En efectivo"
                                         android:textSize="14sp" />
-
                                     <TextView
                                         android:id="@+id/tvMontoEfectivo"
                                         style="@style/fontListasMedium"
@@ -420,7 +366,6 @@
                                         android:text="S/ 1,062.70"
                                         android:textSize="14sp" />
                                 </LinearLayout>
-
                                 <!-- Fila: En tarjetas -->
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -428,14 +373,12 @@
                                     android:layout_marginBottom="@dimen/spaces"
                                     android:gravity="center_vertical"
                                     android:paddingHorizontal="8dp">
-
                                     <ImageView
                                         android:layout_width="14dp"
                                         android:layout_height="12dp"
                                         android:layout_marginEnd="8dp"
                                         android:src="@drawable/icon_svg_credit_card"
                                         app:tint="@color/text_85" />
-
                                     <TextView
                                         style="@style/fontListas"
                                         android:layout_width="0dp"
@@ -443,7 +386,6 @@
                                         android:layout_weight="1"
                                         android:text="En tarjetas"
                                         android:textSize="14sp" />
-
                                     <TextView
                                         android:id="@+id/tvMontoTarjetas"
                                         style="@style/fontListasMedium"
@@ -452,7 +394,6 @@
                                         android:text="S/ 6,875.09"
                                         android:textSize="14sp" />
                                 </LinearLayout>
-
                                 <!-- Fila: Total en caja (Resaltada) -->
                                 <LinearLayout
                                     android:layout_width="match_parent"
@@ -461,14 +402,12 @@
                                     android:gravity="center_vertical"
                                     android:paddingHorizontal="8dp"
                                     android:paddingVertical="4dp">
-
                                     <ImageView
                                         android:layout_width="14dp"
                                         android:layout_height="12dp"
                                         android:layout_marginEnd="8dp"
                                         android:src="@drawable/icon_svg_check_circle"
                                         app:tint="@color/text_85" />
-
                                     <TextView
                                         style="@style/fontListas"
                                         android:layout_width="0dp"
@@ -477,10 +416,9 @@
                                         android:fontFamily="@font/roboto_bold"
                                         android:text="Total en caja"
                                         android:textSize="14sp" />
-
                                     <TextView
-                                        style="@style/fontListas"
                                         android:id="@+id/tvTotalCajaResumen"
+                                        style="@style/fontListas"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:fontFamily="@font/roboto_bold"
@@ -489,8 +427,6 @@
                                 </LinearLayout>
                             </LinearLayout>
                         </LinearLayout>
-
-
                         <!-- Pie de página: Info -->
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -499,14 +435,12 @@
                             android:orientation="horizontal"
                             android:paddingHorizontal="8dp"
                             android:paddingVertical="4dp">
-
                             <ImageView
-                                android:layout_width="14dp"
-                                android:layout_height="14dp"
+                                android:layout_width="10dp"
+                                android:layout_height="10dp"
                                 android:layout_marginEnd="6dp"
                                 android:src="@drawable/icon_svg_info_circle"
                                 app:tint="@color/text_10" />
-
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -514,7 +448,6 @@
                                 android:text="Total en caja = "
                                 android:textColor="@color/text_10"
                                 android:textSize="12sp" />
-
                             <TextView
                                 style="@style/fontListas"
                                 android:layout_width="wrap_content"
@@ -522,35 +455,29 @@
                                 android:text="Apertura + ventas + ingresos - egresos"
                                 android:textColor="@color/text_10" />
                         </LinearLayout>
-
                     </LinearLayout>
                 </LinearLayout>
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:orientation="horizontal">
-
                     <com.example.cajaac.ui.TransactionSectionView
                         android:id="@+id/transactionSectionIngresos"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginEnd="10dp"
                         android:layout_weight="1" />
-
                     <LinearLayout
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:orientation="vertical">
-
                         <com.example.cajaac.ui.TransactionSectionView
                             android:id="@+id/transactionSectionEgresos"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="16dp" />
-
                         <!-- 2. Sección Créditos (weight 1) -->
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -558,9 +485,7 @@
                             android:layout_marginBottom="16dp"
                             android:layout_weight="1"
                             android:background="@drawable/border_rounded"
-                            android:clipToOutline="true"
                             android:orientation="vertical">
-
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -570,7 +495,6 @@
                                 android:orientation="horizontal"
                                 android:paddingTop="8dp"
                                 android:paddingBottom="4dp">
-
                                 <ImageView
                                     android:layout_width="14dp"
                                     android:layout_height="12dp"
@@ -578,29 +502,26 @@
                                     android:layout_marginEnd="@dimen/spaces"
                                     android:src="@drawable/icon_svg_money_bill_wave"
                                     app:tint="@color/info" />
-
                                 <TextView
                                     style="@style/titleCards"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="Créditos" />
                             </LinearLayout>
-
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
                                 android:orientation="horizontal"
                                 android:paddingHorizontal="10dp"
                                 android:paddingVertical="12dp">
-
                                 <!-- Créditos generados (wight 1) -->
                                 <LinearLayout
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginEnd="16dp"
                                     android:layout_weight="1"
-                                    android:orientation="vertical">
-
+                                    android:gravity="center_vertical"
+                                    android:orientation="vertical"
+                                    android:paddingEnd="20dp">
                                     <TextView
                                         style="@style/fontListasMedium"
                                         android:layout_width="wrap_content"
@@ -608,7 +529,6 @@
                                         android:layout_marginBottom="4dp"
                                         android:text="Créditos generados"
                                         android:textColor="@color/text_25" />
-
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
@@ -617,16 +537,14 @@
                                         android:textColor="@color/text_85"
                                         android:textSize="16sp" />
                                 </LinearLayout>
-
                                 <!-- Total de créditos (wight 1) -->
                                 <LinearLayout
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginStart="8dp"
+                                    android:layout_gravity="center_vertical"
                                     android:layout_weight="1"
                                     android:orientation="vertical"
-                                    android:paddingLeft="16dp">
-
+                                    android:paddingStart="16dp">
                                     <TextView
                                         style="@style/fontListasMedium"
                                         android:layout_width="wrap_content"
@@ -634,7 +552,6 @@
                                         android:layout_marginBottom="4dp"
                                         android:text="Total de créditos"
                                         android:textColor="@color/text_25" />
-
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
@@ -643,17 +560,15 @@
                                         android:textColor="@color/text_85"
                                         android:textSize="16sp" />
                                 </LinearLayout>
-
                                 <!-- Vales de pago (wight 1) -->
                                 <LinearLayout
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
-                                    android:layout_marginStart="8dp"
+                                    android:layout_gravity="center_vertical"
                                     android:layout_weight="1"
                                     android:background="@drawable/border_left"
                                     android:orientation="vertical"
-                                    android:paddingLeft="16dp">
-
+                                    android:paddingStart="16dp">
                                     <TextView
                                         style="@style/fontListasMedium"
                                         android:layout_width="wrap_content"
@@ -661,7 +576,6 @@
                                         android:layout_marginBottom="4dp"
                                         android:text="Vales de pago"
                                         android:textColor="@color/text_25" />
-
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
@@ -670,15 +584,14 @@
                                         android:textColor="@color/text_85"
                                         android:textSize="16sp" />
                                 </LinearLayout>
-
                                 <!-- Monto vales de pago (wight 1) -->
                                 <LinearLayout
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
+                                    android:layout_gravity="center_vertical"
                                     android:layout_weight="1"
                                     android:orientation="vertical"
-                                    android:paddingLeft="16dp">
-
+                                    android:paddingStart="16dp">
                                     <TextView
                                         style="@style/fontListasMedium"
                                         android:layout_width="wrap_content"
@@ -686,7 +599,6 @@
                                         android:layout_marginBottom="4dp"
                                         android:text="Vales de pago"
                                         android:textColor="@color/text_25" />
-
                                     <TextView
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
@@ -695,19 +607,14 @@
                                         android:textColor="@color/text_85"
                                         android:textSize="16sp" />
                                 </LinearLayout>
-
                             </LinearLayout>
-
-
                         </LinearLayout>
-
                         <!-- 3. Sección Atenciones e Impuestos (weight 1) -->
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="0dp"
                             android:layout_weight="1"
                             android:orientation="horizontal">
-
                             <!-- Card Atenciones -->
                             <LinearLayout
                                 android:layout_width="0dp"
@@ -715,9 +622,7 @@
                                 android:layout_marginEnd="8dp"
                                 android:layout_weight="1"
                                 android:background="@drawable/border_rounded"
-                                android:clipToOutline="true"
                                 android:orientation="vertical">
-
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -727,7 +632,6 @@
                                     android:orientation="horizontal"
                                     android:paddingTop="8dp"
                                     android:paddingBottom="4dp">
-
                                     <ImageView
                                         android:layout_width="14dp"
                                         android:layout_height="12dp"
@@ -735,26 +639,22 @@
                                         android:layout_marginEnd="8dp"
                                         android:src="@drawable/icon_svg_bell_concierge"
                                         app:tint="@color/info" />
-
                                     <TextView
                                         style="@style/titleCards"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="Atenciones" />
                                 </LinearLayout>
-
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal"
                                     android:padding="12dp">
-
                                     <LinearLayout
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:orientation="vertical">
-
                                         <TextView
                                             style="@style/fontListasMedium"
                                             android:layout_width="wrap_content"
@@ -762,7 +662,6 @@
                                             android:layout_marginBottom="4dp"
                                             android:text="N° mesas atendidas"
                                             android:textColor="@color/text_25" />
-
                                         <TextView
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
@@ -771,13 +670,11 @@
                                             android:textColor="@color/text_85"
                                             android:textSize="16sp" />
                                     </LinearLayout>
-
                                     <LinearLayout
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:orientation="vertical">
-
                                         <TextView
                                             style="@style/fontListasMedium"
                                             android:layout_width="wrap_content"
@@ -785,7 +682,6 @@
                                             android:layout_marginBottom="4dp"
                                             android:text="N° personas atendidas"
                                             android:textColor="@color/text_25" />
-
                                         <TextView
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
@@ -794,11 +690,8 @@
                                             android:textColor="@color/text_85"
                                             android:textSize="16sp" />
                                     </LinearLayout>
-
                                 </LinearLayout>
-
                             </LinearLayout>
-
                             <!-- Card Impuestos -->
                             <LinearLayout
                                 android:layout_width="0dp"
@@ -806,9 +699,7 @@
                                 android:layout_marginStart="8dp"
                                 android:layout_weight="1"
                                 android:background="@drawable/border_rounded"
-                                android:clipToOutline="true"
                                 android:orientation="vertical">
-
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
@@ -818,7 +709,6 @@
                                     android:orientation="horizontal"
                                     android:paddingTop="8dp"
                                     android:paddingBottom="4dp">
-
                                     <ImageView
                                         android:layout_width="14dp"
                                         android:layout_height="12dp"
@@ -826,26 +716,22 @@
                                         android:layout_marginEnd="8dp"
                                         android:src="@drawable/icon_svg_ticket"
                                         app:tint="@color/info" />
-
                                     <TextView
                                         style="@style/titleCards"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:text="Impuestos" />
                                 </LinearLayout>
-
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal"
                                     android:padding="12dp">
-
                                     <LinearLayout
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:orientation="vertical">
-
                                         <TextView
                                             style="@style/fontListasMedium"
                                             android:layout_width="wrap_content"
@@ -853,7 +739,6 @@
                                             android:layout_marginBottom="4dp"
                                             android:text="Impuestos"
                                             android:textColor="@color/text_25" />
-
                                         <TextView
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
@@ -862,13 +747,11 @@
                                             android:textColor="@color/text_85"
                                             android:textSize="16sp" />
                                     </LinearLayout>
-
                                     <LinearLayout
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_weight="1"
                                         android:orientation="vertical">
-
                                         <TextView
                                             style="@style/fontListasMedium"
                                             android:layout_width="wrap_content"
@@ -876,7 +759,6 @@
                                             android:layout_marginBottom="4dp"
                                             android:text="ICBPER"
                                             android:textColor="@color/text_25" />
-
                                         <TextView
                                             android:id="@+id/tvIcbper"
                                             android:layout_width="wrap_content"
@@ -886,23 +768,17 @@
                                             android:textColor="@color/text_85"
                                             android:textSize="16sp" />
                                     </LinearLayout>
-
                                 </LinearLayout>
-
                             </LinearLayout>
-
                         </LinearLayout>
-
                     </LinearLayout>
                 </LinearLayout>
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:orientation="horizontal"
                     android:weightSum="3">
-
                     <!-- Card 1: Correlativos usados (2 columnas, sin total) -->
                     <com.example.cajaac.ui.TransactionSectionView
                         android:id="@+id/transactionSectionCorrelativos"
@@ -910,7 +786,6 @@
                         android:layout_height="match_parent"
                         android:layout_marginEnd="20dp"
                         android:layout_weight="1" />
-
                     <!-- Card 2: Transacciones hechas (3 columnas, con total) -->
                     <com.example.cajaac.ui.TransactionSectionView
                         android:id="@+id/transactionSectionHechas"
@@ -918,7 +793,6 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="20dp"
                         android:layout_weight="1" />
-
                     <!-- Card 3: Transacciones anuladas (2 columnas, con total) -->
                     <com.example.cajaac.ui.TransactionSectionView
                         android:id="@+id/transactionSectionAnuladas"
@@ -926,34 +800,28 @@
                         android:layout_height="match_parent"
                         android:layout_weight="1" />
                 </LinearLayout>
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:orientation="vertical">
-
                     <!-- Nueva tabla con múltiples totales (Ingresos - 4 columnas) -->
                     <com.example.cajaac.ui.TransactionSectionView
                         android:id="@+id/transactionSectionTable"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginBottom="20dp" />
-
                     <!-- Nueva tabla de egresos (5 columnas) -->
                     <com.example.cajaac.ui.TransactionSectionView
                         android:id="@+id/transactionSectionEgresosTable"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content" />
-
                 </LinearLayout>
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:orientation="horizontal">
-
                     <!-- Card expandible izquierda: Ingresos en efectivo/tarjetas por ventas -->
                     <com.example.cajaac.ui.ExpandableCardView
                         android:id="@+id/expandableCardVentas"
@@ -961,22 +829,18 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="20dp"
                         android:layout_weight="1" />
-
                     <!-- Card derecha: Ingresos por canales de delivery (4 columnas con header de tabla) -->
                     <com.example.cajaac.ui.TransactionSectionView
                         android:id="@+id/transactionSectionDelivery"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1" />
-
                 </LinearLayout>
-
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:orientation="horizontal">
-
                     <!-- Card izquierda: Ingresos por propinas (2 columnas con header de tabla) -->
                     <com.example.cajaac.ui.TransactionSectionView
                         android:id="@+id/transactionSectionPropinas"
@@ -984,23 +848,19 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="20dp"
                         android:layout_weight="1" />
-
                     <!-- Card derecha: Ingresos por créditos cobrados (2 columnas con header de tabla) -->
                     <com.example.cajaac.ui.TransactionSectionView
                         android:id="@+id/transactionSectionCreditos"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1" />
-
                 </LinearLayout>
-
                 <!-- Pestañas -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
                     android:orientation="horizontal">
-
                     <LinearLayout
                         android:id="@+id/tabGrafico1"
                         android:layout_width="0dp"
@@ -1012,14 +872,12 @@
                         android:gravity="center"
                         android:orientation="horizontal"
                         android:padding="12dp">
-
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
                             android:src="@drawable/icon_svg_crown"
                             app:tint="@color/info" />
-
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -1028,7 +886,6 @@
                             android:textColor="@color/info"
                             android:textSize="14sp" />
                     </LinearLayout>
-
                     <LinearLayout
                         android:id="@+id/tabGrafico2"
                         android:layout_width="0dp"
@@ -1040,14 +897,12 @@
                         android:gravity="center"
                         android:orientation="horizontal"
                         android:padding="12dp">
-
                         <ImageView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginEnd="8dp"
                             android:src="@drawable/icon_svg_star"
                             app:tint="@color/text_85" />
-
                         <TextView
                             style="@style/regular_85"
                             android:layout_width="wrap_content"
@@ -1055,15 +910,12 @@
                             android:text="Productos estrella"
                             android:textSize="14sp" />
                     </LinearLayout>
-
                 </LinearLayout>
-
                 <!-- FrameLayout para alternar entre gráficos -->
                 <FrameLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp">
-
                     <!-- Vista Gráficos: Top ventas (ambos gráficos juntos) -->
                     <LinearLayout
                         android:id="@+id/grafico1Container"
@@ -1071,7 +923,6 @@
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"
                         android:visibility="visible">
-
                         <!-- Card izquierda: Por categoría (gráfico de barras) -->
                         <LinearLayout
                             android:layout_width="0dp"
@@ -1079,7 +930,6 @@
                             android:layout_marginEnd="10dp"
                             android:layout_weight="0.55"
                             android:orientation="vertical">
-
                             <TextView
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -1088,7 +938,6 @@
                                 android:text="Por categoría"
                                 android:textColor="@color/text_85"
                                 android:textSize="16sp" />
-
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
@@ -1096,7 +945,6 @@
                                 android:orientation="horizontal"
                                 android:paddingHorizontal="16dp"
                                 android:paddingVertical="20dp">
-
                                 <!-- Gráfico de barras verticales -->
                                 <LinearLayout
                                     android:layout_width="0dp"
@@ -1104,7 +952,6 @@
                                     android:layout_marginEnd="16dp"
                                     android:layout_weight="1"
                                     android:orientation="vertical">
-
                                     <TextView
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
@@ -1114,15 +961,12 @@
                                         android:textAlignment="center"
                                         android:textColor="@color/text_85"
                                         android:textSize="12sp" />
-
                                     <!-- Custom View para gráfico de barras -->
                                     <com.example.cajaac.ui.CustomBarChartView
                                         android:id="@+id/barChartCategorias"
                                         android:layout_width="match_parent"
                                         android:layout_height="220dp" />
-
                                 </LinearLayout>
-
                                 <!-- Lista de categorías -->
                                 <LinearLayout
                                     android:layout_width="0dp"
@@ -1130,8 +974,7 @@
                                     android:layout_weight="1"
                                     android:background="@drawable/border_left"
                                     android:orientation="vertical"
-                                    android:paddingLeft="16dp">
-
+                                    android:paddingStart="16dp">
                                     <TextView
                                         style="@style/bold_65"
                                         android:layout_width="match_parent"
@@ -1141,20 +984,15 @@
                                         android:textAlignment="center"
                                         android:textColor="@color/text_85"
                                         android:textSize="14sp" />
-
                                     <LinearLayout
                                         android:id="@+id/listaCategorias"
                                         android:layout_width="match_parent"
                                         android:layout_height="match_parent"
                                         android:gravity="center_vertical"
                                         android:orientation="vertical" />
-
                                 </LinearLayout>
-
                             </LinearLayout>
-
                         </LinearLayout>
-
                         <!-- Card derecha: Por productos (pie chart) -->
                         <LinearLayout
                             android:layout_width="0dp"
@@ -1162,7 +1000,6 @@
                             android:layout_marginStart="10dp"
                             android:layout_weight="0.45"
                             android:orientation="vertical">
-
                             <TextView
                                 style="@style/bold_65"
                                 android:layout_width="match_parent"
@@ -1172,7 +1009,6 @@
                                 android:text="Por productos"
                                 android:textColor="@color/text_85"
                                 android:textSize="16sp" />
-
                             <LinearLayout
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
@@ -1180,7 +1016,6 @@
                                 android:orientation="vertical"
                                 android:paddingHorizontal="8dp"
                                 android:paddingVertical="20dp">
-
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -1191,18 +1026,15 @@
                                     android:textAlignment="center"
                                     android:textColor="@color/text_85"
                                     android:textSize="14sp" />
-
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="horizontal">
-
                                     <com.github.mikephil.charting.charts.PieChart
                                         android:id="@+id/pieChartProductos"
                                         android:layout_width="0dp"
                                         android:layout_height="200dp"
                                         android:layout_weight="1" />
-
                                     <!-- Lista de productos -->
                                     <LinearLayout
                                         android:id="@+id/listaProductos"
@@ -1215,11 +1047,8 @@
                                 </LinearLayout>
                                 <!-- Pie Chart -->
                             </LinearLayout>
-
                         </LinearLayout>
-
                     </LinearLayout>
-
                     <!-- Vista Productos estrella (contenido pendiente) -->
                     <LinearLayout
                         android:id="@+id/grafico2Container"
@@ -1227,7 +1056,6 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
                         android:visibility="gone">
-
                         <!-- Título y Filtros -->
                         <LinearLayout
                             android:layout_width="match_parent"
@@ -1235,7 +1063,6 @@
                             android:layout_marginBottom="16dp"
                             android:gravity="center_vertical"
                             android:orientation="horizontal">
-
                             <TextView
                                 android:layout_width="0dp"
                                 android:layout_height="wrap_content"
@@ -1244,7 +1071,6 @@
                                 android:text="Top 10 productos estrella más vendidos en mi local durante los últimos 7 días"
                                 android:textColor="@color/text_85"
                                 android:textSize="14sp" />
-
                             <!-- Dropdown Productos -->
                             <Spinner
                                 android:id="@+id/spinnerProductos"
@@ -1253,7 +1079,6 @@
                                 android:layout_marginEnd="4dp"
                                 android:background="@null"
                                 android:minWidth="120dp" />
-
                             <!-- Dropdown Últimos 7 días -->
                             <Spinner
                                 android:id="@+id/spinnerPeriodo"
@@ -1261,9 +1086,7 @@
                                 android:layout_height="wrap_content"
                                 android:background="@null"
                                 android:minWidth="140dp" />
-
                         </LinearLayout>
-
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -1274,197 +1097,167 @@
                                 android:layout_height="wrap_content"
                                 android:layout_marginEnd="25dp"
                                 android:layout_weight="0.25"
+                                android:background="@drawable/border_rounded_10"
                                 android:orientation="vertical">
-
+                                <!-- Etiqueta "Ranking semanal" -->
+                                <Space
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="20dp" />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="end"
+                                    android:background="@drawable/badge_info"
+                                    android:fontFamily="@font/roboto_medium"
+                                    android:paddingHorizontal="12dp"
+                                    android:paddingVertical="4dp"
+                                    android:text="Ranking semanal"
+                                    android:textColor="@color/white"
+                                    android:textSize="10sp" />
+                                <!-- Contenido con padding -->
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
-                                    android:background="@drawable/border_rounded_10"
-                                    android:clipChildren="false"
-                                    android:clipToPadding="false"
-                                    android:orientation="vertical">
-
-                                    <!-- Etiqueta "Ranking semanal" -->
-                                    <Space
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="20dp" />
-
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="end"
-                                        android:background="@drawable/badge_info"
-                                        android:fontFamily="@font/roboto_medium"
-                                        android:paddingHorizontal="12dp"
-                                        android:paddingVertical="4dp"
-                                        android:text="Ranking semanal"
-                                        android:textColor="@color/white"
-                                        android:textSize="10sp" />
-
-                                    <!-- Contenido con padding -->
+                                    android:orientation="vertical"
+                                    android:paddingHorizontal="16dp"
+                                    android:paddingTop="8dp">
+                                    <!-- Número #1 con estrella -->
                                     <LinearLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content"
-                                        android:orientation="vertical"
-                                        android:paddingHorizontal="16dp"
-                                        android:paddingTop="8dp">
-
-                                        <!-- Número #1 con estrella -->
-                                        <LinearLayout
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginBottom="4dp"
-                                            android:gravity="start"
-                                            android:orientation="horizontal">
-
-                                            <TextView
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:layout_gravity="center_vertical"
-                                                android:fontFamily="@font/montserrat_bold"
-                                                android:text="#1"
-                                                android:textColor="@color/info"
-                                                android:textSize="44sp" />
-
-                                            <ImageView
-                                                android:layout_width="40dp"
-                                                android:layout_height="40dp"
-                                                android:layout_gravity="center_vertical"
-                                                android:layout_marginStart="5dp"
-                                                android:src="@drawable/icon_svg_bigstar"
-                                                app:tint="@color/yellow_65" />
-                                        </LinearLayout>
-
-                                        <!-- Título "PRODUCTO ESTRELLA TOP" -->
+                                        android:layout_marginBottom="4dp"
+                                        android:gravity="start"
+                                        android:orientation="horizontal">
                                         <TextView
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginBottom="8dp"
-                                            android:fontFamily="@font/roboto"
-                                            android:text="PRODUCTO ESTRELLA TOP"
-                                            android:textAlignment="textStart"
-                                            android:textColor="@color/info"
-                                            android:textSize="14sp" />
-
-                                        <!-- Nombre del producto -->
-                                        <LinearLayout
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginBottom="16dp"
-                                            android:gravity="start"
-                                            android:orientation="horizontal">
-
-                                            <LinearLayout
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:layout_gravity="center_vertical">
-
-                                                <TextView
-                                                    android:id="@+id/tvLetraInicial"
-                                                    android:layout_width="20dp"
-                                                    android:layout_height="20dp"
-                                                    android:layout_marginEnd="12dp"
-                                                    android:background="@drawable/rectangular_badge_info"
-                                                    android:fontFamily="@font/roboto_medium"
-                                                    android:gravity="center"
-                                                    android:text="P"
-                                                    android:textColor="@color/info"
-                                                    android:textSize="12sp" />
-                                            </LinearLayout>
-
-                                            <LinearLayout
-                                                android:layout_width="0dp"
-                                                android:layout_height="wrap_content"
-                                                android:layout_gravity="center_horizontal"
-                                                android:layout_weight="1"
-                                                android:orientation="vertical">
-
-                                                <TextView
-                                                    android:id="@+id/tvProductoEstrellaNombre"
-                                                    android:layout_width="match_parent"
-                                                    android:layout_height="wrap_content"
-                                                    android:layout_gravity="center_vertical"
-                                                    android:fontFamily="@font/montserrat_bold"
-                                                    android:text="Ceviche de conchas negras"
-                                                    android:textColor="@color/text_85"
-                                                    android:textSize="18sp" />
-
-                                                <!-- Categoría -->
-                                                <TextView
-                                                    android:id="@+id/tvProductoEstrellaCategoria"
-                                                    android:layout_width="match_parent"
-                                                    android:layout_height="wrap_content"
-                                                    android:fontFamily="@font/roboto"
-                                                    android:text="Fuente"
-                                                    android:textColor="@color/text_85"
-                                                    android:textSize="14sp" />
-                                            </LinearLayout>
-                                        </LinearLayout>
-                                    </LinearLayout>
-
-                                    <!-- Estadísticas de ventas - Sin padding para llegar a los bordes -->
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:background="@drawable/background_info"
-                                        android:orientation="horizontal"
-                                        android:padding="10dp">
-
-                                        <!-- Número de ventas -->
-                                        <LinearLayout
-                                            android:layout_width="0dp"
-                                            android:layout_height="wrap_content"
-                                            android:layout_weight="1"
-                                            android:orientation="horizontal">
-
-                                            <TextView
-                                                android:id="@+id/tvProductoEstrellaVentas"
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:layout_marginEnd="2dp"
-                                                android:fontFamily="@font/montserrat_bold"
-                                                android:text="10,000"
-                                                android:textColor="@color/white"
-                                                android:textSize="24sp" />
-
-                                            <TextView
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
-                                                android:fontFamily="@font/montserrat"
-                                                android:text="VENTAS"
-                                                android:textColor="@color/white"
-                                                android:textSize="14sp" />
-                                        </LinearLayout>
-
-                                        <!-- Porcentaje con flecha -->
-                                        <LinearLayout
                                             android:layout_width="wrap_content"
                                             android:layout_height="wrap_content"
                                             android:layout_gravity="center_vertical"
-                                            android:orientation="horizontal">
-
-                                            <ImageView
-                                                android:layout_width="12dp"
-                                                android:layout_height="12dp"
-                                                android:layout_gravity="center_vertical"
-                                                android:layout_marginEnd="4dp"
-                                                android:src="@drawable/icon_svg_fillup"
-                                                app:tint="@color/white" />
-
+                                            android:fontFamily="@font/montserrat_bold"
+                                            android:text="#1"
+                                            android:textColor="@color/info"
+                                            android:textSize="44sp" />
+                                        <ImageView
+                                            android:layout_width="40dp"
+                                            android:layout_height="40dp"
+                                            android:layout_gravity="center_vertical"
+                                            android:layout_marginStart="5dp"
+                                            android:src="@drawable/icon_svg_bigstar"
+                                            app:tint="@color/yellow_65" />
+                                    </LinearLayout>
+                                    <!-- Título "PRODUCTO ESTRELLA TOP" -->
+                                    <TextView
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="8dp"
+                                        android:fontFamily="@font/roboto"
+                                        android:text="PRODUCTO ESTRELLA TOP"
+                                        android:textAlignment="textStart"
+                                        android:textColor="@color/info"
+                                        android:textSize="14sp" />
+                                    <!-- Nombre del producto -->
+                                    <LinearLayout
+                                        android:layout_width="match_parent"
+                                        android:layout_height="wrap_content"
+                                        android:layout_marginBottom="16dp"
+                                        android:gravity="start"
+                                        android:orientation="horizontal">
+                                        <LinearLayout
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_vertical">
                                             <TextView
-                                                android:id="@+id/tvProductoEstrellaPorcentaje"
-                                                android:layout_width="wrap_content"
-                                                android:layout_height="wrap_content"
+                                                android:id="@+id/tvLetraInicial"
+                                                android:layout_width="20dp"
+                                                android:layout_height="20dp"
+                                                android:layout_marginEnd="12dp"
+                                                android:background="@drawable/rectangular_badge_info"
                                                 android:fontFamily="@font/roboto_medium"
-                                                android:text="90,45%"
-                                                android:textColor="@color/white"
+                                                android:gravity="center"
+                                                android:text="P"
+                                                android:textColor="@color/info"
                                                 android:textSize="12sp" />
                                         </LinearLayout>
+                                        <LinearLayout
+                                            android:layout_width="0dp"
+                                            android:layout_height="wrap_content"
+                                            android:layout_gravity="center_horizontal"
+                                            android:layout_weight="1"
+                                            android:orientation="vertical">
+                                            <TextView
+                                                android:id="@+id/tvProductoEstrellaNombre"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:layout_gravity="center_vertical"
+                                                android:fontFamily="@font/montserrat_bold"
+                                                android:text="Ceviche de conchas negras"
+                                                android:textColor="@color/text_85"
+                                                android:textSize="18sp" />
+                                            <!-- Categoría -->
+                                            <TextView
+                                                android:id="@+id/tvProductoEstrellaCategoria"
+                                                android:layout_width="match_parent"
+                                                android:layout_height="wrap_content"
+                                                android:fontFamily="@font/roboto"
+                                                android:text="Fuente"
+                                                android:textColor="@color/text_85"
+                                                android:textSize="14sp" />
+                                        </LinearLayout>
                                     </LinearLayout>
-
+                                </LinearLayout>
+                                <!-- Estadísticas de ventas - Sin padding para llegar a los bordes -->
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/background_info"
+                                    android:orientation="horizontal"
+                                    android:padding="10dp">
+                                    <!-- Número de ventas -->
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:orientation="horizontal">
+                                        <TextView
+                                            android:id="@+id/tvProductoEstrellaVentas"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:layout_marginEnd="2dp"
+                                            android:fontFamily="@font/montserrat_bold"
+                                            android:text="10,000"
+                                            android:textColor="@color/white"
+                                            android:textSize="24sp" />
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/montserrat"
+                                            android:text="VENTAS"
+                                            android:textColor="@color/white"
+                                            android:textSize="14sp" />
+                                    </LinearLayout>
+                                    <!-- Porcentaje con flecha -->
+                                    <LinearLayout
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_gravity="center_vertical"
+                                        android:orientation="horizontal">
+                                        <ImageView
+                                            android:layout_width="12dp"
+                                            android:layout_height="12dp"
+                                            android:layout_gravity="center_vertical"
+                                            android:layout_marginEnd="4dp"
+                                            android:src="@drawable/icon_svg_fillup"
+                                            app:tint="@color/white" />
+                                        <TextView
+                                            android:id="@+id/tvProductoEstrellaPorcentaje"
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/roboto_medium"
+                                            android:text="90,45%"
+                                            android:textColor="@color/white"
+                                            android:textSize="12sp" />
+                                    </LinearLayout>
                                 </LinearLayout>
                             </LinearLayout>
-
                             <!-- Card derecha: Otros productos estrella -->
                             <LinearLayout
                                 android:layout_width="0dp"
@@ -1473,13 +1266,11 @@
                                 android:background="@drawable/border_left"
                                 android:orientation="vertical"
                                 android:paddingStart="20dp">
-
                                 <LinearLayout
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="vertical"
                                     android:padding="8dp">
-
                                     <!-- Título "OTROS PRODUCTOS ESTRELLA TOP" -->
                                     <LinearLayout
                                         android:layout_width="match_parent"
@@ -1487,7 +1278,6 @@
                                         android:layout_marginBottom="8dp"
                                         android:background="@drawable/border_bottom"
                                         android:paddingBottom="5dp">
-
                                         <TextView
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
@@ -1496,39 +1286,30 @@
                                             android:textColor="@color/info"
                                             android:textSize="14sp" />
                                     </LinearLayout>
-
                                     <!-- Wrapper para limitar altura máxima -->
                                     <FrameLayout
                                         android:layout_width="match_parent"
                                         android:layout_height="wrap_content">
-
                                         <androidx.core.widget.NestedScrollView
                                             android:id="@+id/nestedScrollProductos"
                                             android:layout_width="match_parent"
                                             android:layout_height="wrap_content"
                                             android:maxHeight="400dp"
                                             android:overScrollMode="never">
-
                                             <!-- Lista de otros productos -->
                                             <LinearLayout
                                                 android:id="@+id/listaOtrosProductosEstrella"
                                                 android:layout_width="match_parent"
                                                 android:layout_height="wrap_content"
                                                 android:orientation="vertical" />
-
                                         </androidx.core.widget.NestedScrollView>
-
                                     </FrameLayout>
                                 </LinearLayout>
                             </LinearLayout>
                         </LinearLayout>
                     </LinearLayout>
-
                 </FrameLayout>
-
             </LinearLayout>
         </ScrollView>
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
-

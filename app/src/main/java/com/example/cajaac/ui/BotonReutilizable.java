@@ -57,7 +57,8 @@ public class BotonReutilizable extends MaterialButton {
                 tipoBoton = a.getInt(R.styleable.BotonReutilizable_tipoBoton, 0);
                 tamanoBoton = a.getInt(R.styleable.BotonReutilizable_tamanoBoton, 1); // Default pequeño (1)
 
-                int colorDefault = getContext().getColor(com.google.android.material.R.color.design_default_color_primary);
+                int colorDefault = getContext().getColor(R.color.info);
+
                 colorBase = a.getColor(R.styleable.BotonReutilizable_colorBase, colorDefault);
             }
         } else {
