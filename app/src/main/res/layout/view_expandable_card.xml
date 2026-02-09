@@ -91,11 +91,12 @@
         </LinearLayout>
 
         <!-- Contenedor de items -->
-        <LinearLayout
-            android:id="@+id/itemsContainer"
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvItems"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" />
+            android:nestedScrollingEnabled="false"
+            android:overScrollMode="never" />
     </LinearLayout>
 
 

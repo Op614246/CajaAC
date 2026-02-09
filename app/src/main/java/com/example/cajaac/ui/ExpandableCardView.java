@@ -9,8 +9,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cajaac.R;
+import com.example.cajaac.adapters.ExpandableItemAdapter;
 
 import java.util.List;
 
@@ -22,7 +25,8 @@ public class ExpandableCardView extends LinearLayout {
     private TextView tvHeaderCol2;
     private TextView tvHeaderCol3;
     private TextView tvHeaderCol4;
-    private LinearLayout itemsContainer;
+    private RecyclerView rvItems;
+    private ExpandableItemAdapter adapter;
     private LinearLayout totalContainer;
     private TextView tvTotalLabel;
     private TextView tvTotalAmount;
@@ -60,13 +64,18 @@ public class ExpandableCardView extends LinearLayout {
         tvHeaderCol2 = findViewById(R.id.tvHeaderCol2);
         tvHeaderCol3 = findViewById(R.id.tvHeaderCol3);
         tvHeaderCol4 = findViewById(R.id.tvHeaderCol4);
-        itemsContainer = findViewById(R.id.itemsContainer);
+        rvItems = findViewById(R.id.rvItems);
         totalContainer = findViewById(R.id.totalContainer);
         tvTotalLabel = findViewById(R.id.tvTotalLabel);
         tvTotalAmount = findViewById(R.id.tvTotalAmount);
         expandButton = findViewById(R.id.expandButton);
         tvExpandText = findViewById(R.id.tvExpandText);
         ivExpandArrow = findViewById(R.id.ivExpandArrow);
+
+        // Configurar RecyclerView
+        rvItems.setLayoutManager(new LinearLayoutManager(context));
+        adapter = new ExpandableItemAdapter();
+        rvItems.setAdapter(adapter);
 
         expandButton.setOnClickListener(v -> toggleExpand());
     }
@@ -112,25 +121,9 @@ public class ExpandableCardView extends LinearLayout {
     }
 
     private void displayItems(boolean showAll) {
-        itemsContainer.removeAllViews();
-        LayoutInflater inflater = LayoutInflater.from(getContext());
-
         int itemsToShow = showAll ? allItems.size() : Math.min(collapsedItemCount, allItems.size());
-
-        for (int i = 0; i < itemsToShow; i++) {
-            ExpandableItem item = allItems.get(i);
-            View itemView = inflater.inflate(R.layout.item_expandable_row, itemsContainer, false);
-
-            TextView tvLabel = itemView.findViewById(R.id.tvLabel);
-            TextView tvRetention = itemView.findViewById(R.id.tvRetention);
-            TextView tvAmount = itemView.findViewById(R.id.tvAmount);
-
-            tvLabel.setText(item.label);
-            tvRetention.setText(item.retention);
-            tvAmount.setText(item.amount);
-
-            itemsContainer.addView(itemView);
-        }
+        List<ExpandableItem> itemsToDisplay = allItems.subList(0, itemsToShow);
+        adapter.submitList(new java.util.ArrayList<>(itemsToDisplay));
     }
 
     private void toggleExpand() {
