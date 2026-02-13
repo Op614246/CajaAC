@@ -91,7 +91,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * Configura el botón para cerrar caja y abrir el modal de cuadre de stock
+     * Configura el botón para cerrar caja y abrir, cuadre de stock
      */
     private void setupCerrarCajaButton() {
         View btnCerrarCaja = findViewById(R.id.btnCuadreStock);
@@ -110,65 +110,60 @@ public class MainActivity extends AppCompatActivity {
                 .setContentLayoutResId(R.layout.content_cuadre_stock)
                 .setHeightPercent(0.9f) // 90% de la pantalla
                 .setShowCloseButton(true)
-                .setCancelable(true)
-                .addButton(new ModalButton(
+                .setCancelable(true);
+
+        BaseModalFragment modal = BaseModalFragment.newInstance(config);
+
+                config.addButton(new ModalButton(
                         "Cancelar",
                         R.drawable.icon_svg_circle_xmark,
                         R.color.text_85,
                         R.color.text_85,
-                        () -> {
-                            // Simplemente cerrar el modal
-                        }
+                        () -> modal.dismiss()
                 ))
                 .addButton(new ModalButton(
                         "Guardar borrador",
                         R.drawable.icon_svg_save_disk,
                         R.color.info,
                         R.color.info,
-                        () -> {
-                            //
-                        }
+                        () -> modal.dismiss()
                 ))
                 .addButton(new ModalButton(
                         "Guardar cuadre",
                         R.drawable.icon_svg_save_disk_solid,
                         ModalButton.ButtonType.INFO,
-                        () -> {
-//                            guardarCuadre()
-                        }
+                        () -> modal.dismiss()
                 ));
 
         // Crear y mostrar el modal
-        BaseModalFragment modal = BaseModalFragment.newInstance(config);
         modal.show(getSupportFragmentManager(), "cuadre_stock");
     }
     private void showImprimirCierreModal() {
         ModalConfig config = new ModalConfig()
                 .setTitle("Imprimir cierre")
                 .setTitleIconResId(R.drawable.icon_svg_print_blue)
+                .setContentLayoutResId(R.layout.content_imprimir_cierre)
                 .setHeightPercent(0.9f)
                 .setHorizontalPaddingDp(256) // Padding más pequeño para modal más ancho
                 .setShowCloseButton(true)
-                .setCancelable(true)
-                .addButton(new ModalButton(
+                .setCancelable(true);
+
+        BaseModalFragment modal = BaseModalFragment.newInstance(config);
+
+                config.addButton(new ModalButton(
                         "Cancelar",
                         R.drawable.icon_svg_circle_xmark,
                         R.color.text_85,
                         R.color.text_85,
-                        () -> {
-                            // Simplemente cerrar el modal
-                        }
+                        () -> modal.dismiss()
                 ))
                 .addButton(new ModalButton(
                         "Imprimir",
                         R.drawable.icon_svg_printer_solid,
                         ModalButton.ButtonType.INFO,
-                        () -> {
-//                            imprimirCierre()
-                        }
+                        () -> modal.dismiss()
                 ));
 
-        BaseModalFragment modal = BaseModalFragment.newInstance(config);
         modal.show(getSupportFragmentManager(), "imprimir_cierre");
     }
 
@@ -570,7 +565,7 @@ public class MainActivity extends AppCompatActivity {
             grafico2Container.setVisibility(View.GONE);
         });
 
-        // Click en pestaña 2 (Productos estrella)
+        // Clic en pestaña 2 (Productos estrella)
         tabGrafico2.setOnClickListener(v -> {
             updateTabStyle(tabGrafico2, true);
             updateTabStyle(tabGrafico1, false);

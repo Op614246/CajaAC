@@ -24,4 +24,12 @@
     <string name="info_cuadre">Antes de cerrar la caja, debes realizar un arqueo de inventario</string>
     <string name="bebidas">Bebidas</string>
 
+    <!-- Array de impresoras -->
+    <string-array name="impresoras">
+        <item>EPSON - TMU220</item>
+        <item>HP LaserJet Pro</item>
+        <item>Canon PIXMA</item>
+        <item>Brother HL-L2350DW</item>
+    </string-array>
+
 </resources>
