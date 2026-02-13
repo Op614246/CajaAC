@@ -10,6 +10,14 @@
         <!-- Customize your theme here. -->
     </style>
 
+    <style name="CustomDialogStyle" parent="Theme.AppCompat.Light.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowActionBar">false</item>
+        <item name="android:backgroundDimAmount">0.1</item>
+    </style>
+
     <style name="MiApp.Titulo" parent="android:Widget.TextView">
         <item name="android:textSize">@dimen/title_text_size</item>
         <item name="android:textColor">@color/text_85</item>
@@ -39,5 +47,11 @@
         <item name="android:textSize">@dimen/text_list_size_medium</item>
         <item name="android:textColor">@color/text_85</item>
         <item name="android:fontFamily">@font/roboto</item>
+    </style>
+    <style name="TextoBuscador" parent="TextAppearance.AppCompat">
+        <item name="android:fontFamily">@font/roboto</item>
+        <item name="fontFamily">@font/roboto</item>
+        <item name="android:textColor">@color/text_25</item>
+        <item name="android:textSize">14sp</item>
     </style>
 </resources>

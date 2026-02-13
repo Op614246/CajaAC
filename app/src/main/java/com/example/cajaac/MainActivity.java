@@ -14,9 +14,12 @@ import androidx.core.view.WindowInsetsCompat;
 
 import com.example.cajaac.adapters.CustomSpinnerAdapter;
 import com.example.cajaac.models.DatosCaja;
+import com.example.cajaac.models.ModalButton;
+import com.example.cajaac.models.ModalConfig;
 import com.example.cajaac.models.TransactionItem;
 import com.example.cajaac.models.TransactionSection;
 import com.example.cajaac.models.TransactionTotal;
+import com.example.cajaac.ui.BaseModalFragment;
 import com.example.cajaac.ui.ExpandableCardView;
 import com.example.cajaac.ui.TransactionSectionView;
 
@@ -47,6 +50,11 @@ public class MainActivity extends AppCompatActivity {
 
         // Inicializar vistas de datos de caja
         initializeCajaViews();
+
+        // Configurar botón cerrar caja
+        setupCerrarCajaButton();
+
+        setupImprimirCierre();
 
         // Inicializar todas las secciones
         setupTransactionSections();
@@ -80,6 +88,88 @@ public class MainActivity extends AppCompatActivity {
         tvMontoEfectivo = findViewById(R.id.tvMontoEfectivo);
         tvMontoTarjetas = findViewById(R.id.tvMontoTarjetas);
         tvTotalCajaResumen = findViewById(R.id.tvTotalCajaResumen);
+    }
+
+    /**
+     * Configura el botón para cerrar caja y abrir el modal de cuadre de stock
+     */
+    private void setupCerrarCajaButton() {
+        View btnCerrarCaja = findViewById(R.id.btnCuadreStock);
+        btnCerrarCaja.setOnClickListener(v -> showCuadreStockModal());
+    }
+    private void setupImprimirCierre() {
+        View btnImprimirCierre = findViewById(R.id.btnCerrarCaja);
+        btnImprimirCierre.setOnClickListener(v -> showImprimirCierreModal());
+    }
+
+    private void showCuadreStockModal() {
+        // Configurar el modal
+        ModalConfig config = new ModalConfig()
+                .setTitle("Cuadre de stock pendiente")
+                .setTitleIconResId(R.drawable.icon_svg_cash_register)
+                .setContentLayoutResId(R.layout.content_cuadre_stock)
+                .setHeightPercent(0.9f) // 90% de la pantalla
+                .setShowCloseButton(true)
+                .setCancelable(true)
+                .addButton(new ModalButton(
+                        "Cancelar",
+                        R.drawable.icon_svg_circle_xmark,
+                        R.color.text_85,
+                        R.color.text_85,
+                        () -> {
+                            // Simplemente cerrar el modal
+                        }
+                ))
+                .addButton(new ModalButton(
+                        "Guardar borrador",
+                        R.drawable.icon_svg_save_disk,
+                        R.color.info,
+                        R.color.info,
+                        () -> {
+                            //
+                        }
+                ))
+                .addButton(new ModalButton(
+                        "Guardar cuadre",
+                        R.drawable.icon_svg_save_disk_solid,
+                        ModalButton.ButtonType.INFO,
+                        () -> {
+//                            guardarCuadre()
+                        }
+                ));
+
+        // Crear y mostrar el modal
+        BaseModalFragment modal = BaseModalFragment.newInstance(config);
+        modal.show(getSupportFragmentManager(), "cuadre_stock");
+    }
+    private void showImprimirCierreModal() {
+        ModalConfig config = new ModalConfig()
+                .setTitle("Imprimir cierre")
+                .setTitleIconResId(R.drawable.icon_svg_print_blue)
+                .setHeightPercent(0.9f)
+                .setHorizontalPaddingDp(256) // Padding más pequeño para modal más ancho
+                .setShowCloseButton(true)
+                .setCancelable(true)
+                .addButton(new ModalButton(
+                        "Cancelar",
+                        R.drawable.icon_svg_circle_xmark,
+                        R.color.text_85,
+                        R.color.text_85,
+                        () -> {
+                            // Simplemente cerrar el modal
+                        }
+                ))
+                .addButton(new ModalButton(
+                        "Imprimir",
+                        R.drawable.icon_svg_printer_solid,
+                        ModalButton.ButtonType.INFO,
+                        () -> {
+//                            imprimirCierre()
+                        }
+                ));
+
+        BaseModalFragment modal = BaseModalFragment.newInstance(config);
+        modal.show(getSupportFragmentManager(), "imprimir_cierre");
     }
 
     /**

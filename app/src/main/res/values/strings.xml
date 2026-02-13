@@ -20,5 +20,8 @@
     <!-- Valores predeterminados para Impuestos -->
     <string name="default_impuestos">S/1,672.55</string>
     <string name="default_icbper">S/00.00</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="info_cuadre">Antes de cerrar la caja, debes realizar un arqueo de inventario</string>
+    <string name="bebidas">Bebidas</string>
 
 </resources>

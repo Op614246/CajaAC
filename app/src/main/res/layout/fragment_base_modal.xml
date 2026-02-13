@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/modal_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingHorizontal="32dp"
+    tools:background="@color/text_10"
+    android:clickable="false">
+
+    <LinearLayout
+        android:id="@+id/modal_container"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:background="@drawable/border_modal"
+        android:orientation="vertical"
+        android:paddingTop="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_default="percent"
+        app:layout_constraintHeight_percent="0.9"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:paddingHorizontal="24dp">
+
+            <!-- Header con título e ícono -->
+            <LinearLayout
+                android:id="@+id/modal_header"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/border_bottom"
+                android:gravity="center_vertical"
+                android:paddingBottom="8dp">
+
+                <ImageView
+                    android:id="@+id/modal_title_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="22dp"
+                    android:layout_marginEnd="8dp"
+                    tools:src="@drawable/icon_svg_cash_register" />
+
+                <TextView
+                    android:id="@+id/modal_title"
+                    style="@style/MiApp.Titulo"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="10dp"
+                    android:layout_weight="1"
+                    tools:text="Título del Modal" />
+
+                <ImageView
+                    android:id="@+id/btn_close_modal"
+                    android:layout_width="16dp"
+                    android:layout_height="20dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:src="@drawable/icon_svg_xmark" />
+            </LinearLayout>
+
+            <!-- Contenedor dinámico para el contenido -->
+            <FrameLayout
+                android:id="@+id/modal_content_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </LinearLayout>
+
+        <!-- Contenedor de botones dinámico -->
+        <LinearLayout
+            android:id="@+id/modal_buttons_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:background="@drawable/border_top" />
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

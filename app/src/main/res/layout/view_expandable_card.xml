@@ -11,39 +11,35 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/border_bottom"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingHorizontal="10dp">
-        <LinearLayout
-            android:layout_width="match_parent"
+        android:layout_marginHorizontal="10dp"
+        android:paddingTop="8dp"
+        android:paddingBottom="4dp">
+
+        <ImageView
+            android:id="@+id/ivIcon"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginEnd="8dp"
+            app:tint="@color/info" />
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/border_bottom"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingTop="8dp"
-            android:paddingBottom="4dp">
-
-            <ImageView
-                android:id="@+id/ivIcon"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:layout_marginEnd="8dp"
-                app:tint="@color/info" />
-
-            <TextView
-                android:id="@+id/tvTitle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/montserrat_bold"
-                android:textColor="@color/info"
-                android:textSize="14sp" />
-        </LinearLayout>
+            android:fontFamily="@font/montserrat_bold"
+            android:textColor="@color/info"
+            android:textSize="14sp" />
     </LinearLayout>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingTop="6dp"
-        android:paddingHorizontal="10dp">
+        android:paddingHorizontal="10dp"
+        android:paddingTop="6dp">
         <!-- Header de la tabla -->
         <LinearLayout
             android:id="@+id/tableHeader"
@@ -153,8 +149,8 @@
             android:id="@+id/ivExpandArrow"
             android:layout_width="9dp"
             android:layout_height="16dp"
-            android:layout_marginStart="4dp"
             android:layout_gravity="center_vertical"
+            android:layout_marginStart="4dp"
             android:src="@drawable/icon_svg_chevron_down"
             app:tint="@color/info" />
     </LinearLayout>

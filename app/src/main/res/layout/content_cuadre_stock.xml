@@ -1,0 +1,693 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <!-- Info banner -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/background_light"
+        android:layout_marginBottom="16dp"
+        android:gravity="center_vertical"
+        android:paddingHorizontal="10dp"
+        android:paddingVertical="8dp">
+
+        <ImageView
+            android:layout_width="12dp"
+            android:layout_height="14dp"
+            android:layout_marginEnd="8dp"
+            android:src="@drawable/icon_svg_info_circle"
+            app:tint="@color/warning" />
+
+        <TextView
+            style="@style/fontListas"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/info_cuadre"
+            android:textColor="@color/warning" />
+    </LinearLayout>
+
+    <!-- Campo de búsqueda -->
+    <EditText
+        android:id="@+id/et_buscar_productos"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/border_search"
+        android:drawableStart="@drawable/icon_svg_search"
+        android:drawablePadding="6dp"
+        android:fontFamily="@font/roboto"
+        android:hint="Buscar productos"
+        android:imeOptions="actionSearch"
+        android:inputType="text"
+        android:maxLines="1"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="6dp"
+        android:textColor="@color/text_85"
+        android:textColorHint="@color/text_25"
+        android:textSize="14sp" />
+
+    <!-- Tabla de productos -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- Header de la tabla -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/background_head_table"
+            android:orientation="horizontal"
+            android:paddingHorizontal="10dp">
+
+            <TextView
+                style="@style/fontListasMedium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:padding="8dp"
+                android:text="Ítem" />
+
+            <TextView
+                style="@style/fontListasMedium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Presentación"
+                android:textAlignment="center" />
+
+            <TextView
+                style="@style/fontListasMedium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Categoría"
+                android:textAlignment="center" />
+
+            <TextView
+                style="@style/fontListasMedium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Almacén (es)"
+                android:textAlignment="center" />
+
+            <TextView
+                style="@style/fontListasMedium"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Cantidad"
+                android:textAlignment="center" />
+
+            <Space
+                android:layout_width="32dp"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <!-- Lista de productos con scroll -->
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/border_bottom"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="10dp"
+                    android:paddingBottom="8dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2">
+
+                        <TextView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center_horizontal|center_vertical"
+                            android:layout_marginEnd="8dp"
+                            android:background="@drawable/badge_producto"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="center"
+                            android:paddingHorizontal="2dp"
+                            android:text="P"
+                            android:textColor="@color/text_85"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto"
+                            android:text="Coca Cola 135 ml"
+                            android:textColor="@color/text_85"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/border_rounded_10"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingHorizontal="12dp"
+                            android:paddingVertical="6dp">
+
+                            <TextView
+                                style="@style/regular_85"
+                                android:layout_width="104dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="8dp"
+                                android:text="UNIDAD" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/icon_svg_chevron_down"
+                                app:tint="@color/text_85" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <TextView
+                        style="@style/regular_85"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|center"
+                        android:layout_weight="1"
+                        android:text="@string/bebidas"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        style="@style/regular_85"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|center"
+                        android:layout_weight="1"
+                        android:text="S/ 0.00"
+                        android:textAlignment="center" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal">
+
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/border_search"
+                            android:fontFamily="@font/roboto"
+                            android:gravity="center_horizontal"
+                            android:hint="0"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:paddingHorizontal="50dp"
+                            android:paddingVertical="6dp"
+                            android:textColor="@color/text_85"
+                            android:textColorHint="@color/text_25"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icon_svg_tres_puntitos" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/border_bottom"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="10dp"
+                    android:paddingBottom="8dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2">
+
+                        <TextView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center_horizontal|center_vertical"
+                            android:layout_marginEnd="8dp"
+                            android:background="@drawable/badge_producto"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="center"
+                            android:paddingHorizontal="2dp"
+                            android:text="P"
+                            android:textColor="@color/text_85"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto"
+                            android:text="Coca Cola 135 ml"
+                            android:textColor="@color/text_85"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/border_rounded_10"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingHorizontal="12dp"
+                            android:paddingVertical="6dp">
+
+                            <TextView
+                                style="@style/regular_85"
+                                android:layout_width="104dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="8dp"
+                                android:text="UNIDAD" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/icon_svg_chevron_down"
+                                app:tint="@color/text_85" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <TextView
+                        style="@style/regular_85"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|center"
+                        android:layout_weight="1"
+                        android:text="@string/bebidas"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        style="@style/regular_85"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|center"
+                        android:layout_weight="1"
+                        android:text="S/ 0.00"
+                        android:textAlignment="center" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal">
+
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/border_search"
+                            android:fontFamily="@font/roboto"
+                            android:gravity="center_horizontal"
+                            android:hint="0"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:paddingHorizontal="50dp"
+                            android:paddingVertical="6dp"
+                            android:textColor="@color/text_85"
+                            android:textColorHint="@color/text_25"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icon_svg_tres_puntitos" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/border_bottom"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="10dp"
+                    android:paddingBottom="8dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2">
+
+                        <TextView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center_horizontal|center_vertical"
+                            android:layout_marginEnd="8dp"
+                            android:background="@drawable/badge_producto"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="center"
+                            android:paddingHorizontal="2dp"
+                            android:text="P"
+                            android:textColor="@color/text_85"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto"
+                            android:text="Coca Cola 135 ml"
+                            android:textColor="@color/text_85"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/border_rounded_10"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingHorizontal="12dp"
+                            android:paddingVertical="6dp">
+
+                            <TextView
+                                style="@style/regular_85"
+                                android:layout_width="104dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="8dp"
+                                android:text="UNIDAD" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/icon_svg_chevron_down"
+                                app:tint="@color/text_85" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <TextView
+                        style="@style/regular_85"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|center"
+                        android:layout_weight="1"
+                        android:text="@string/bebidas"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        style="@style/regular_85"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|center"
+                        android:layout_weight="1"
+                        android:text="S/ 0.00"
+                        android:textAlignment="center" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal">
+
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/border_search"
+                            android:fontFamily="@font/roboto"
+                            android:gravity="center_horizontal"
+                            android:hint="0"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:paddingHorizontal="50dp"
+                            android:paddingVertical="6dp"
+                            android:textColor="@color/text_85"
+                            android:textColorHint="@color/text_25"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icon_svg_tres_puntitos" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/border_bottom"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="10dp"
+                    android:paddingBottom="8dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2">
+
+                        <TextView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center_horizontal|center_vertical"
+                            android:layout_marginEnd="8dp"
+                            android:background="@drawable/badge_producto"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="center"
+                            android:paddingHorizontal="2dp"
+                            android:text="P"
+                            android:textColor="@color/text_85"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto"
+                            android:text="Coca Cola 135 ml"
+                            android:textColor="@color/text_85"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/border_rounded_10"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingHorizontal="12dp"
+                            android:paddingVertical="6dp">
+
+                            <TextView
+                                style="@style/regular_85"
+                                android:layout_width="104dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="8dp"
+                                android:text="UNIDAD" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/icon_svg_chevron_down"
+                                app:tint="@color/text_85" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <TextView
+                        style="@style/regular_85"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|center"
+                        android:layout_weight="1"
+                        android:text="@string/bebidas"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        style="@style/regular_85"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|center"
+                        android:layout_weight="1"
+                        android:text="S/ 0.00"
+                        android:textAlignment="center" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal">
+
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/border_search"
+                            android:fontFamily="@font/roboto"
+                            android:gravity="center_horizontal"
+                            android:hint="0"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:paddingHorizontal="50dp"
+                            android:paddingVertical="6dp"
+                            android:textColor="@color/text_85"
+                            android:textColorHint="@color/text_25"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icon_svg_tres_puntitos" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:background="@drawable/border_bottom"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingHorizontal="10dp"
+                    android:paddingBottom="8dp">
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="2">
+
+                        <TextView
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_gravity="center_horizontal|center_vertical"
+                            android:layout_marginEnd="8dp"
+                            android:background="@drawable/badge_producto"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="center"
+                            android:paddingHorizontal="2dp"
+                            android:text="P"
+                            android:textColor="@color/text_85"
+                            android:textSize="12sp" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto"
+                            android:text="Coca Cola 135 ml"
+                            android:textColor="@color/text_85"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal">
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/border_rounded_10"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingHorizontal="12dp"
+                            android:paddingVertical="6dp">
+
+                            <TextView
+                                style="@style/regular_85"
+                                android:layout_width="104dp"
+                                android:layout_height="wrap_content"
+                                android:layout_marginEnd="8dp"
+                                android:text="UNIDAD" />
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:src="@drawable/icon_svg_chevron_down"
+                                app:tint="@color/text_85" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <TextView
+                        style="@style/regular_85"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|center"
+                        android:layout_weight="1"
+                        android:text="@string/bebidas"
+                        android:textAlignment="center" />
+
+                    <TextView
+                        style="@style/regular_85"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical|center"
+                        android:layout_weight="1"
+                        android:text="S/ 0.00"
+                        android:textAlignment="center" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:gravity="center_horizontal">
+
+                        <EditText
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/border_search"
+                            android:fontFamily="@font/roboto"
+                            android:gravity="center_horizontal"
+                            android:hint="0"
+                            android:inputType="number"
+                            android:maxLines="1"
+                            android:paddingHorizontal="50dp"
+                            android:paddingVertical="6dp"
+                            android:textColor="@color/text_85"
+                            android:textColorHint="@color/text_25"
+                            android:textSize="14sp" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/icon_svg_tres_puntitos" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </LinearLayout>
+
+</LinearLayout>
+
