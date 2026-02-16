@@ -5,1328 +5,1346 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
     tools:context=".MainActivity">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/white"
-        android:orientation="vertical"
-        android:padding="16dp">
-        <LinearLayout
+    <ImageView
+        android:id="@+id/header_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="@dimen/spaces"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/header_title"
+        app:srcCompat="@drawable/icon_svg_abrir_y_cerrar_caja" />
+    <TextView
+        android:id="@+id/header_title"
+        style="@style/MiApp.Titulo"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/spaces"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/title"
+        app:layout_constraintEnd_toStartOf="@+id/btnCerrarCaja"
+        app:layout_constraintStart_toEndOf="@id/header_icon"
+        app:layout_constraintTop_toTopOf="parent" />
+    <com.example.cajaac.ui.BotonReutilizable
+        android:id="@+id/btnCerrarCaja"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/montserrat_bold"
+        android:gravity="center_vertical|center"
+        android:text="@string/cerrar_caja"
+        app:colorBase="@color/danger"
+        app:icon="@drawable/icon_svg_circle_minus"
+        app:layout_constraintBottom_toBottomOf="@id/header_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintWidth_percent="0.2"
+        app:tipoBoton="relleno" />
+    <View
+        android:id="@+id/header_divider"
+        android:layout_width="0dp"
+        android:layout_height="1dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/border_bottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header_title" />
+    <ScrollView
+        android:id="@+id/mainScrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header_divider">
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/border_bottom"
-            android:gravity="center_vertical"
-            android:orientation="horizontal"
-            android:paddingBottom="8dp">
-            <ImageView
+            android:paddingBottom="16dp">
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guide_67"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/spaces"
-                app:srcCompat="@drawable/icon_svg_abrir_y_cerrar_caja" />
-            <TextView
-                style="@style/MiApp.Titulo"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.67" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guide_50"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guide_33"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.333" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guide_66"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.666" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guide_55"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.55" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guide_25"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.25" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/top_left_col"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/title" />
-            <com.example.cajaac.ui.BotonReutilizable
-                android:id="@+id/btnCerrarCaja"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="0.25"
-                android:fontFamily="@font/montserrat_bold"
-                android:gravity="center_vertical|center"
-                android:text="@string/cerrar_caja"
-                app:colorBase="@color/danger"
-                app:icon="@drawable/icon_svg_circle_minus"
-                app:tipoBoton="relleno" />
-        </LinearLayout>
-        <ScrollView
-            android:id="@+id/mainScrollView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp">
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-                <LinearLayout
-                    android:layout_width="match_parent"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintEnd_toStartOf="@id/guide_67"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+                <TextView
+                    android:id="@+id/lbl_caja"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:orientation="horizontal"
-                    android:baselineAligned="false">
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="Caja:"
+                    android:textColor="@color/text_85"
+                    android:textSize="14sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+                <TextView
+                    android:id="@+id/tvNumeroCaja"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="Caja N°1"
+                    android:textColor="@color/text_85"
+                    android:textSize="20sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/lbl_caja" />
+                <TextView
+                    android:id="@+id/tvTotalCaja"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="S/ 7,937.79"
+                    android:textColor="@color/info"
+                    android:textSize="@dimen/total_caja"
+                    app:layout_constraintBottom_toBottomOf="@id/tvNumeroCaja"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/lbl_total_caja"/>
+                <TextView
+                    android:id="@+id/lbl_total_caja"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="TOTAL EN CAJA:"
+                    android:textColor="@color/text_85"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toTopOf="@id/tvTotalCaja"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+                <LinearLayout
+                    android:id="@+id/grid_usuario"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="@dimen/spaces"
+                    android:background="@drawable/background_middle_light"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="@dimen/padding_horizontal"
+                    android:paddingVertical="@dimen/padding_vertical"
+                    app:layout_constraintEnd_toStartOf="@+id/grid_turno"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tvNumeroCaja">
                     <LinearLayout
-                        android:layout_width="0dp"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="10dp"
-                        android:layout_weight="0.67"
-                        android:orientation="vertical">
-                        <!-- Contenedor  Principal -->
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:paddingBottom="@dimen/spaces"
-                            android:baselineAligned="false">
-                            <!-- Sección Izquierda: Info Caja -->
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:orientation="vertical">
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/montserrat_semibold"
-                                    android:text="Caja:"
-                                    android:textColor="@color/text_85"
-                                    android:textSize="14sp" />
-                                <TextView
-                                    android:id="@+id/tvNumeroCaja"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/montserrat_bold"
-                                    android:text="Caja N°1"
-                                    android:textColor="@color/text_85"
-                                    android:textSize="20sp" />
-                            </LinearLayout>
-                            <!-- Sección Derecha: Total -->
-                            <LinearLayout
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:gravity="end"
-                                android:orientation="vertical">
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/montserrat_bold"
-                                    android:text="TOTAL EN CAJA:"
-                                    android:textColor="@color/text_85"
-                                    android:textSize="12sp"
-                                    android:textStyle="bold" />
-                                <TextView
-                                    android:id="@+id/tvTotalCaja"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/montserrat_bold"
-                                    android:text="S/ 7,937.79"
-                                    android:textColor="@color/info"
-                                    android:textSize="@dimen/total_caja" />
-                            </LinearLayout>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="10dp"
-                            android:orientation="horizontal"
-                            android:baselineAligned="false">
-                            <!-- Columna Izquierda -->
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="@dimen/spaces"
-                                android:layout_weight="1"
-                                android:background="@drawable/background_middle_light"
-                                android:orientation="vertical"
-                                android:paddingHorizontal="@dimen/padding_horizontal"
-                                android:paddingVertical="@dimen/padding_vertical">
-                                <!-- Usuario -->
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginBottom="8dp"
-                                    android:gravity="center_vertical"
-                                    android:orientation="horizontal">
-                                    <ImageView
-                                        android:layout_width="16dp"
-                                        android:layout_height="16dp"
-                                        android:layout_marginEnd="8dp"
-                                        android:src="@drawable/icon_svg_user"
-                                        app:tint="@color/text_85" />
-                                    <TextView
-                                        style="@style/fontListasMedium"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="Usuario: "
-                                        android:textSize="14sp" />
-                                    <TextView
-                                        android:id="@+id/tvNombreUsuario"
-                                        style="@style/fontListas"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="Monica Gonzales"
-                                        android:textSize="14sp" />
-                                </LinearLayout>
-                                <!-- Apertura -->
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center_vertical"
-                                    android:orientation="horizontal">
-                                    <ImageView
-                                        android:layout_width="16dp"
-                                        android:layout_height="16dp"
-                                        android:layout_marginEnd="8dp"
-                                        android:src="@drawable/icon_svg_green_circle" />
-                                    <TextView
-                                        style="@style/fontListasMedium"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="Apertura: "
-                                        android:textSize="14sp" />
-                                    <TextView
-                                        android:id="@+id/tvMontoApertura"
-                                        style="@style/fontListas"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="S/ 00.00"
-                                        android:textSize="14sp" />
-                                </LinearLayout>
-                            </LinearLayout>
-                            <!-- Columna Derecha -->
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:background="@drawable/background_middle_light"
-                                android:orientation="vertical"
-                                android:paddingHorizontal="@dimen/padding_horizontal"
-                                android:paddingVertical="@dimen/padding_vertical">
-                                <!-- Turno -->
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginBottom="8dp"
-                                    android:gravity="center_vertical"
-                                    android:orientation="horizontal">
-                                    <ImageView
-                                        android:layout_width="16dp"
-                                        android:layout_height="16dp"
-                                        android:layout_marginEnd="8dp"
-                                        android:src="@drawable/icon_svg_clock"
-                                        app:tint="@color/text_85" />
-                                    <TextView
-                                        style="@style/fontListasMedium"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="Turno: "
-                                        android:textSize="14sp" />
-                                    <TextView
-                                        android:id="@+id/tvTurno"
-                                        style="@style/fontListas"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="Mañana"
-                                        android:textSize="14sp" />
-                                </LinearLayout>
-                                <!-- Abierto desde -->
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:gravity="center_vertical"
-                                    android:orientation="horizontal">
-                                    <ImageView
-                                        android:layout_width="16dp"
-                                        android:layout_height="16dp"
-                                        android:layout_marginEnd="8dp"
-                                        android:src="@drawable/icon_svg_calendar_clock"
-                                        app:tint="@color/text_85" />
-                                    <TextView
-                                        style="@style/fontListasMedium"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="Abierto desde: "
-                                        android:textSize="14sp" />
-                                    <TextView
-                                        android:id="@+id/tvFechaApertura"
-                                        style="@style/fontListas"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="30/06/22 - 04:00 P.M."
-                                        android:textSize="14sp" />
-                                </LinearLayout>
-                            </LinearLayout>
-                        </LinearLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:orientation="horizontal">
-                            <com.example.cajaac.ui.BotonReutilizable
-                                android:id="@+id/btnCuadreStock"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginEnd="@dimen/spaces"
-                                android:layout_weight="1"
-                                android:fontFamily="@font/roboto"
-                                android:text="@string/arqueo"
-                                app:colorBase="@color/info"
-                                app:icon="@drawable/icon_svg_cash_register"
-                                app:tamanoBoton="grande"
-                                app:tipoBoton="bordeado" />
-                            <com.example.cajaac.ui.BotonReutilizable
-                                android:id="@+id/btnImprimirCierre"
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginEnd="@dimen/spaces"
-                                android:layout_weight="1"
-                                android:fontFamily="@font/roboto"
-                                android:text="@string/imprimir"
-                                app:colorBase="@color/info"
-                                app:icon="@drawable/icon_svg_print_blue"
-                                app:tamanoBoton="grande"
-                                app:tipoBoton="bordeado" />
-                            <com.example.cajaac.ui.BotonReutilizable
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_marginEnd="@dimen/spaces"
-                                android:layout_weight="1"
-                                android:fontFamily="@font/roboto"
-                                android:text="@string/egreso_propina"
-                                app:colorBase="@color/info"
-                                app:icon="@drawable/icon_svg_coin_blue"
-                                app:tamanoBoton="grande"
-                                app:tipoBoton="bordeado" />
-                            <com.example.cajaac.ui.BotonReutilizable
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center"
-                                android:layout_weight="1"
-                                android:fontFamily="@font/roboto"
-                                android:text="@string/actualizar"
-                                app:colorBase="@color/info"
-                                app:icon="@drawable/icon_svg_arrows_rotate_white"
-                                app:tamanoBoton="grande"
-                                app:tipoBoton="relleno" />
-                        </LinearLayout>
+                        android:layout_marginBottom="8dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+                        <ImageView android:layout_width="16dp" android:layout_height="16dp" android:layout_marginEnd="8dp" android:src="@drawable/icon_svg_user" app:tint="@color/text_85" />
+                        <TextView style="@style/fontListasMedium" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Usuario: " android:textSize="14sp" />
+                        <TextView android:id="@+id/tvNombreUsuario" style="@style/fontListas" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Monica Gonzales" android:textSize="14sp" />
                     </LinearLayout>
                     <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+                        <ImageView android:layout_width="16dp" android:layout_height="16dp" android:layout_marginEnd="8dp" android:src="@drawable/icon_svg_green_circle" />
+                        <TextView style="@style/fontListasMedium" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Apertura: " android:textSize="14sp" />
+                        <TextView android:id="@+id/tvMontoApertura" style="@style/fontListas" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="S/ 00.00" android:textSize="14sp" />
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:id="@+id/grid_turno"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/background_middle_light"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="@dimen/padding_horizontal"
+                    android:paddingVertical="@dimen/padding_vertical"
+                    app:layout_constraintBottom_toBottomOf="@id/grid_usuario"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/grid_usuario"
+                    app:layout_constraintTop_toTopOf="@id/grid_usuario">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="8dp"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+                        <ImageView android:layout_width="16dp" android:layout_height="16dp" android:layout_marginEnd="8dp" android:src="@drawable/icon_svg_clock" app:tint="@color/text_85" />
+                        <TextView style="@style/fontListasMedium" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Turno: " android:textSize="14sp" />
+                        <TextView android:id="@+id/tvTurno" style="@style/fontListas" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Mañana" android:textSize="14sp" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+                        <ImageView android:layout_width="16dp" android:layout_height="16dp" android:layout_marginEnd="8dp" android:src="@drawable/icon_svg_calendar_clock" app:tint="@color/text_85" />
+                        <TextView style="@style/fontListasMedium" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Abierto desde: " android:textSize="14sp" />
+                        <TextView android:id="@+id/tvFechaApertura" style="@style/fontListas" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="30/06/22 - 04:00 P.M." android:textSize="14sp" />
+                    </LinearLayout>
+                </LinearLayout>
+                <com.example.cajaac.ui.BotonReutilizable
+                    android:id="@+id/btnCuadreStock"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="@dimen/spaces"
+                    android:fontFamily="@font/roboto"
+                    android:text="@string/arqueo"
+                    app:colorBase="@color/info"
+                    app:icon="@drawable/icon_svg_cash_register"
+                    app:layout_constraintEnd_toStartOf="@+id/btnImprimirCierre"
+                    app:layout_constraintHorizontal_chainStyle="spread_inside"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/grid_usuario"
+                    app:tamanoBoton="grande"
+                    app:tipoBoton="bordeado" />
+                <com.example.cajaac.ui.BotonReutilizable
+                    android:id="@+id/btnImprimirCierre"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/spaces"
+                    android:fontFamily="@font/roboto"
+                    android:text="@string/imprimir"
+                    app:colorBase="@color/info"
+                    app:icon="@drawable/icon_svg_print_blue"
+                    app:layout_constraintBottom_toBottomOf="@id/btnCuadreStock"
+                    app:layout_constraintEnd_toStartOf="@+id/btnEgreso"
+                    app:layout_constraintStart_toEndOf="@id/btnCuadreStock"
+                    app:layout_constraintTop_toTopOf="@id/btnCuadreStock"
+                    app:tamanoBoton="grande"
+                    app:tipoBoton="bordeado" />
+                <com.example.cajaac.ui.BotonReutilizable
+                    android:id="@+id/btnEgreso"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/spaces"
+                    android:fontFamily="@font/roboto"
+                    android:text="@string/egreso_propina"
+                    app:colorBase="@color/info"
+                    app:icon="@drawable/icon_svg_coin_blue"
+                    app:layout_constraintBottom_toBottomOf="@id/btnCuadreStock"
+                    app:layout_constraintEnd_toStartOf="@+id/btnActualizar"
+                    app:layout_constraintStart_toEndOf="@id/btnImprimirCierre"
+                    app:layout_constraintTop_toTopOf="@id/btnCuadreStock"
+                    app:tamanoBoton="grande"
+                    app:tipoBoton="bordeado" />
+                <com.example.cajaac.ui.BotonReutilizable
+                    android:id="@+id/btnActualizar"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/roboto"
+                    android:text="@string/actualizar"
+                    app:colorBase="@color/info"
+                    app:icon="@drawable/icon_svg_arrows_rotate_white"
+                    app:layout_constraintBottom_toBottomOf="@id/btnCuadreStock"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/btnEgreso"
+                    app:layout_constraintTop_toTopOf="@id/btnCuadreStock"
+                    app:tamanoBoton="grande"
+                    app:tipoBoton="relleno" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/top_right_col"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="@drawable/border_left"
+                android:paddingStart="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/top_left_col"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guide_67"
+                app:layout_constraintTop_toTopOf="parent">
+                <ImageView
+                    android:id="@+id/img_resumen"
+                    android:layout_width="12dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/icon_svg_clock_rotate_left"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:tint="@color/text_85" />
+                <TextView
+                    android:id="@+id/tvFechaResumen"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/spaces"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:text="Resumen hasta 27/12/2025, 09:48 AM"
+                    android:textColor="@color/text_85"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@id/img_resumen"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/img_resumen"
+                    app:layout_constraintTop_toTopOf="@id/img_resumen" />
+                <View
+                    android:id="@+id/divider_resumen"
+                    android:layout_width="0dp"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/border_bottom"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/img_resumen" />
+                <ImageView
+                    android:id="@+id/ic_footer_info"
+                    android:layout_width="10dp"
+                    android:layout_height="10dp"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginBottom="6dp"
+                    android:src="@drawable/icon_svg_info_circle"
+                    app:layout_constraintBottom_toBottomOf="@id/lbl_footer_bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/lbl_footer_bold"
+                    app:layout_constraintVertical_bias="1.0"
+                    app:tint="@color/text_10" />
+                <ImageView
+                    android:id="@+id/ic_efectivo"
+                    android:layout_width="14dp"
+                    android:layout_height="12dp"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:src="@drawable/icon_svg_money_bill_wave"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/divider_resumen"
+                    app:layout_constraintBottom_toBottomOf="@id/lbl_efectivo"
+                    app:tint="@color/text_85" />
+                <TextView
+                    android:id="@+id/lbl_efectivo"
+                    style="@style/fontListas"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:text="En efectivo"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toStartOf="@id/tvMontoEfectivo"
+                    app:layout_constraintStart_toEndOf="@id/ic_efectivo"
+                    app:layout_constraintTop_toBottomOf="@id/divider_resumen" />
+                <TextView
+                    android:id="@+id/tvMontoEfectivo"
+                    style="@style/fontListasMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:text="S/ 1,062.70"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@id/lbl_efectivo"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/lbl_efectivo" />
+                <ImageView
+                    android:id="@+id/ic_tarjetas"
+                    android:layout_width="14dp"
+                    android:layout_height="12dp"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/icon_svg_credit_card"
+                    app:layout_constraintBottom_toBottomOf="@id/lbl_tarjetas"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/lbl_tarjetas"
+                    app:tint="@color/text_85" />
+                <TextView
+                    android:id="@+id/lbl_tarjetas"
+                    style="@style/fontListas"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="@dimen/spaces"
+                    android:text="En tarjetas"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toStartOf="@id/tvMontoTarjetas"
+                    app:layout_constraintStart_toEndOf="@id/ic_tarjetas"
+                    app:layout_constraintTop_toBottomOf="@id/lbl_efectivo" />
+                <TextView
+                    android:id="@+id/tvMontoTarjetas"
+                    style="@style/fontListasMedium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:text="S/ 6,875.09"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@id/lbl_tarjetas"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/lbl_tarjetas" />
+                <View
+                    android:id="@+id/bg_fila_total"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginTop="@dimen/spaces"
+                    android:background="@color/info_5"
+                    app:layout_constraintBottom_toBottomOf="@id/lbl_total_resumen"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/lbl_tarjetas" />
+                <ImageView
+                    android:id="@+id/ic_check_total"
+                    android:layout_width="14dp"
+                    android:layout_height="12dp"
+                    android:layout_marginStart="8dp"
+                    android:src="@drawable/icon_svg_check_circle"
+                    app:layout_constraintBottom_toBottomOf="@id/lbl_total_resumen"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/lbl_total_resumen"
+                    app:tint="@color/text_85" />
+                <TextView
+                    android:id="@+id/lbl_total_resumen"
+                    style="@style/fontListas"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="@dimen/spaces"
+                    android:fontFamily="@font/roboto_bold"
+                    android:paddingVertical="4dp"
+                    android:text="Total en caja"
+                    android:textSize="14sp"
+                    app:layout_constraintEnd_toStartOf="@id/tvTotalCajaResumen"
+                    app:layout_constraintStart_toEndOf="@id/ic_check_total"
+                    app:layout_constraintTop_toBottomOf="@id/lbl_tarjetas" />
+                <TextView
+                    android:id="@+id/tvTotalCajaResumen"
+                    style="@style/fontListas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:text="S/ 7,937.79"
+                    android:textSize="14sp"
+                    app:layout_constraintBottom_toBottomOf="@id/lbl_total_resumen"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/lbl_total_resumen" />
+                <TextView
+                    android:id="@+id/lbl_footer_bold"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="6dp"
+                    android:layout_marginBottom="4dp"
+                    android:fontFamily="@font/roboto_bold"
+                    android:paddingVertical="4dp"
+                    android:text="Total en caja = "
+                    android:textColor="@color/text_10"
+                    android:textSize="12sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/ic_footer_info"
+                    app:layout_constraintTop_toBottomOf="@+id/lbl_total_resumen" />
+                <TextView
+                    android:id="@+id/lbl_footer_regular"
+                    style="@style/fontListas"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Apertura + ventas + ingresos - egresos"
+                    android:textColor="@color/text_10"
+                    app:layout_constraintBottom_toBottomOf="@id/lbl_footer_bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/lbl_footer_bold"
+                    app:layout_constraintTop_toTopOf="@id/lbl_footer_bold" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.example.cajaac.ui.TransactionSectionView
+                android:id="@+id/transactionSectionIngresos"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/row2_right_col"
+                app:layout_constraintEnd_toStartOf="@id/guide_50"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/top_left_col" />
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/row2_right_col"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guide_50"
+                app:layout_constraintTop_toBottomOf="@id/top_left_col">
+                <com.example.cajaac.ui.TransactionSectionView
+                    android:id="@+id/transactionSectionEgresos"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/card_creditos"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:background="@drawable/border_rounded"
+                    android:paddingBottom="12dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/transactionSectionEgresos">
+                    <ImageView
+                        android:id="@+id/ic_creditos"
+                        android:layout_width="14dp"
+                        android:layout_height="12dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="12dp"
+                        android:src="@drawable/icon_svg_money_bill_wave"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/info" />
+                    <TextView
+                        android:id="@+id/title_creditos"
+                        style="@style/titleCards"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="Créditos"
+                        app:layout_constraintBottom_toBottomOf="@id/ic_creditos"
+                        app:layout_constraintStart_toEndOf="@id/ic_creditos"
+                        app:layout_constraintTop_toTopOf="@id/ic_creditos" />
+                    <View
+                        android:id="@+id/div_creditos"
                         android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="0.33"
+                        android:layout_height="1dp"
+                        android:layout_marginHorizontal="8dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/border_bottom"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/title_creditos" />
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/g_cred_25"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.25" />
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/g_cred_50"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.5" />
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/g_cred_75"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.75" />
+                    <TextView
+                        android:id="@+id/lbl_cred_gen"
+                        style="@style/fontListasMedium"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="12dp"
+                        android:text="Créditos generados"
+                        android:textColor="@color/text_25"
+                        app:layout_constraintEnd_toStartOf="@id/g_cred_25"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/div_creditos" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="@string/default_creditos_generados"
+                        android:textColor="@color/text_85"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="@id/lbl_cred_gen"
+                        app:layout_constraintStart_toStartOf="@id/lbl_cred_gen"
+                        app:layout_constraintTop_toBottomOf="@id/lbl_cred_gen" />
+                    <TextView
+                        android:id="@+id/lbl_total_cred"
+                        style="@style/fontListasMedium"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:text="Total de créditos"
+                        android:textColor="@color/text_25"
+                        app:layout_constraintEnd_toStartOf="@id/g_cred_50"
+                        app:layout_constraintStart_toEndOf="@id/g_cred_25"
+                        app:layout_constraintTop_toTopOf="@id/lbl_cred_gen" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="@string/default_total_creditos"
+                        android:textColor="@color/text_85"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="@id/lbl_total_cred"
+                        app:layout_constraintStart_toStartOf="@id/lbl_total_cred"
+                        app:layout_constraintTop_toBottomOf="@id/lbl_total_cred" />
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="0dp"
                         android:background="@drawable/border_left"
-                        android:orientation="vertical"
-                        android:paddingStart="10dp">
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="16dp"
-                            android:orientation="vertical">
-                            <!-- Encabezado: Resumen -->
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="@dimen/spaces"
-                                android:background="@drawable/border_bottom"
-                                android:gravity="center_vertical"
-                                android:paddingStart="8dp"
-                                android:paddingBottom="4dp">
-                                <ImageView
-                                    android:layout_width="12dp"
-                                    android:layout_height="24dp"
-                                    android:layout_marginEnd="@dimen/spaces"
-                                    android:src="@drawable/icon_svg_clock_rotate_left"
-                                    app:tint="@color/text_85" />
-                                <TextView
-                                    android:id="@+id/tvFechaResumen"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:fontFamily="@font/montserrat_bold"
-                                    android:text="Resumen hasta 27/12/2025, 09:48 AM"
-                                    android:textColor="@color/text_85"
-                                    android:textSize="14sp" />
-                            </LinearLayout>
-                            <!-- Filas -->
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="vertical">
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginBottom="@dimen/spaces"
-                                    android:gravity="center_vertical"
-                                    android:paddingHorizontal="8dp">
-                                    <ImageView
-                                        android:layout_width="14dp"
-                                        android:layout_height="12dp"
-                                        android:layout_marginEnd="8dp"
-                                        android:src="@drawable/icon_svg_money_bill_wave"
-                                        app:tint="@color/text_85" />
-                                    <TextView
-                                        style="@style/fontListas"
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1"
-                                        android:text="En efectivo"
-                                        android:textSize="14sp" />
-                                    <TextView
-                                        android:id="@+id/tvMontoEfectivo"
-                                        style="@style/fontListasMedium"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="S/ 1,062.70"
-                                        android:textSize="14sp" />
-                                </LinearLayout>
-                                <!-- Fila: En tarjetas -->
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginBottom="@dimen/spaces"
-                                    android:gravity="center_vertical"
-                                    android:paddingHorizontal="8dp">
-                                    <ImageView
-                                        android:layout_width="14dp"
-                                        android:layout_height="12dp"
-                                        android:layout_marginEnd="8dp"
-                                        android:src="@drawable/icon_svg_credit_card"
-                                        app:tint="@color/text_85" />
-                                    <TextView
-                                        style="@style/fontListas"
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1"
-                                        android:text="En tarjetas"
-                                        android:textSize="14sp" />
-                                    <TextView
-                                        android:id="@+id/tvMontoTarjetas"
-                                        style="@style/fontListasMedium"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="S/ 6,875.09"
-                                        android:textSize="14sp" />
-                                </LinearLayout>
-                                <!-- Fila: Total en caja (Resaltada) -->
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:background="@color/info_5"
-                                    android:gravity="center_vertical"
-                                    android:paddingHorizontal="8dp"
-                                    android:paddingVertical="4dp">
-                                    <ImageView
-                                        android:layout_width="14dp"
-                                        android:layout_height="12dp"
-                                        android:layout_marginEnd="8dp"
-                                        android:src="@drawable/icon_svg_check_circle"
-                                        app:tint="@color/text_85" />
-                                    <TextView
-                                        style="@style/fontListas"
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1"
-                                        android:fontFamily="@font/roboto_bold"
-                                        android:text="Total en caja"
-                                        android:textSize="14sp" />
-                                    <TextView
-                                        android:id="@+id/tvTotalCajaResumen"
-                                        style="@style/fontListas"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:fontFamily="@font/roboto_bold"
-                                        android:text="S/ 7,937.79"
-                                        android:textSize="14sp" />
-                                </LinearLayout>
-                            </LinearLayout>
-                        </LinearLayout>
-                        <!-- Pie de página: Info -->
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal"
-                            android:paddingHorizontal="8dp"
-                            android:paddingVertical="4dp">
-                            <ImageView
-                                android:layout_width="10dp"
-                                android:layout_height="10dp"
-                                android:layout_marginEnd="6dp"
-                                android:src="@drawable/icon_svg_info_circle"
-                                app:tint="@color/text_10" />
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/roboto_bold"
-                                android:text="Total en caja = "
-                                android:textColor="@color/text_10"
-                                android:textSize="12sp" />
-                            <TextView
-                                style="@style/fontListas"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="Apertura + ventas + ingresos - egresos"
-                                android:textColor="@color/text_10" />
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:orientation="horizontal">
-                    <com.example.cajaac.ui.TransactionSectionView
-                        android:id="@+id/transactionSectionIngresos"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/g_cred_50"
+                        app:layout_constraintTop_toBottomOf="@id/div_creditos" />
+                    <TextView
+                        android:id="@+id/lbl_vales"
+                        style="@style/fontListasMedium"
                         android:layout_width="0dp"
-                        android:layout_height="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
+                        android:text="Vales de pago"
+                        android:textColor="@color/text_25"
+                        app:layout_constraintEnd_toStartOf="@id/g_cred_75"
+                        app:layout_constraintStart_toEndOf="@id/g_cred_50"
+                        app:layout_constraintTop_toTopOf="@id/lbl_cred_gen" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="@string/default_vales_pago"
+                        android:textColor="@color/text_85"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="@id/lbl_vales"
+                        app:layout_constraintStart_toStartOf="@id/lbl_vales"
+                        app:layout_constraintTop_toBottomOf="@id/lbl_vales" />
+                    <TextView
+                        android:id="@+id/lbl_vales_monto"
+                        style="@style/fontListasMedium"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="16dp"
                         android:layout_marginEnd="10dp"
-                        android:layout_weight="1" />
-                    <LinearLayout
+                        android:text="Vales de pago"
+                        android:textColor="@color/text_25"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/g_cred_75"
+                        app:layout_constraintTop_toTopOf="@id/lbl_cred_gen" />
+                    <TextView
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-                        <com.example.cajaac.ui.TransactionSectionView
-                            android:id="@+id/transactionSectionEgresos"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginBottom="16dp" />
-                        <!-- 2. Sección Créditos (weight 1) -->
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_marginBottom="16dp"
-                            android:layout_weight="1"
-                            android:background="@drawable/border_rounded"
-                            android:orientation="vertical">
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginHorizontal="8dp"
-                                android:background="@drawable/border_bottom"
-                                android:gravity="center_vertical"
-                                android:orientation="horizontal"
-                                android:paddingTop="8dp"
-                                android:paddingBottom="4dp">
-                                <ImageView
-                                    android:layout_width="14dp"
-                                    android:layout_height="12dp"
-                                    android:layout_gravity="center"
-                                    android:layout_marginEnd="@dimen/spaces"
-                                    android:src="@drawable/icon_svg_money_bill_wave"
-                                    app:tint="@color/info" />
-                                <TextView
-                                    style="@style/titleCards"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="Créditos" />
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:orientation="horizontal"
-                                android:paddingHorizontal="10dp"
-                                android:paddingVertical="12dp"
-                                android:baselineAligned="false">
-                                <!-- Créditos generados (wight 1) -->
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1"
-                                    android:gravity="center_vertical"
-                                    android:orientation="vertical"
-                                    android:paddingEnd="20dp">
-                                    <TextView
-                                        style="@style/fontListasMedium"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginBottom="4dp"
-                                        android:text="Créditos generados"
-                                        android:textColor="@color/text_25" />
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:fontFamily="@font/montserrat_bold"
-                                        android:text="@string/default_creditos_generados"
-                                        android:textColor="@color/text_85"
-                                        android:textSize="16sp" />
-                                </LinearLayout>
-                                <!-- Total de créditos (wight 1) -->
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center_vertical"
-                                    android:layout_weight="1"
-                                    android:orientation="vertical"
-                                    android:paddingStart="16dp">
-                                    <TextView
-                                        style="@style/fontListasMedium"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginBottom="4dp"
-                                        android:text="Total de créditos"
-                                        android:textColor="@color/text_25" />
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:fontFamily="@font/montserrat_bold"
-                                        android:text="@string/default_total_creditos"
-                                        android:textColor="@color/text_85"
-                                        android:textSize="16sp" />
-                                </LinearLayout>
-                                <!-- Vales de pago (wight 1) -->
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center_vertical"
-                                    android:layout_weight="1"
-                                    android:background="@drawable/border_left"
-                                    android:orientation="vertical"
-                                    android:paddingStart="16dp">
-                                    <TextView
-                                        style="@style/fontListasMedium"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginBottom="4dp"
-                                        android:text="Vales de pago"
-                                        android:textColor="@color/text_25" />
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:fontFamily="@font/montserrat_bold"
-                                        android:text="@string/default_vales_pago"
-                                        android:textColor="@color/text_85"
-                                        android:textSize="16sp" />
-                                </LinearLayout>
-                                <!-- Monto vales de pago (wight 1) -->
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center_vertical"
-                                    android:layout_weight="1"
-                                    android:orientation="vertical"
-                                    android:paddingStart="16dp">
-                                    <TextView
-                                        style="@style/fontListasMedium"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginBottom="4dp"
-                                        android:text="Vales de pago"
-                                        android:textColor="@color/text_25" />
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:fontFamily="@font/montserrat_bold"
-                                        android:text="@string/default_monto_vales_pago"
-                                        android:textColor="@color/text_85"
-                                        android:textSize="16sp" />
-                                </LinearLayout>
-                            </LinearLayout>
-                        </LinearLayout>
-                        <!-- 3. Sección Atenciones e Impuestos (weight 1) -->
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="0dp"
-                            android:layout_weight="1"
-                            android:orientation="horizontal"
-                            android:baselineAligned="false">
-                            <!-- Card Atenciones -->
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_marginEnd="8dp"
-                                android:layout_weight="1"
-                                android:background="@drawable/border_rounded"
-                                android:orientation="vertical">
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginHorizontal="8dp"
-                                    android:background="@drawable/border_bottom"
-                                    android:gravity="center_vertical"
-                                    android:orientation="horizontal"
-                                    android:paddingTop="8dp"
-                                    android:paddingBottom="4dp">
-                                    <ImageView
-                                        android:layout_width="14dp"
-                                        android:layout_height="12dp"
-                                        android:layout_gravity="center"
-                                        android:layout_marginEnd="8dp"
-                                        android:src="@drawable/icon_svg_bell_concierge"
-                                        app:tint="@color/info" />
-                                    <TextView
-                                        style="@style/titleCards"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="Atenciones" />
-                                </LinearLayout>
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:padding="12dp"
-                                    android:baselineAligned="false">
-                                    <LinearLayout
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1"
-                                        android:orientation="vertical">
-                                        <TextView
-                                            style="@style/fontListasMedium"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginBottom="4dp"
-                                            android:text="N° mesas atendidas"
-                                            android:textColor="@color/text_25" />
-                                        <TextView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:fontFamily="@font/montserrat_bold"
-                                            android:text="@string/default_mesas_atendidas"
-                                            android:textColor="@color/text_85"
-                                            android:textSize="16sp" />
-                                    </LinearLayout>
-                                    <LinearLayout
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1"
-                                        android:orientation="vertical">
-                                        <TextView
-                                            style="@style/fontListasMedium"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginBottom="4dp"
-                                            android:text="N° personas atendidas"
-                                            android:textColor="@color/text_25" />
-                                        <TextView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:fontFamily="@font/montserrat_bold"
-                                            android:text="@string/default_personas_atendidas"
-                                            android:textColor="@color/text_85"
-                                            android:textSize="16sp" />
-                                    </LinearLayout>
-                                </LinearLayout>
-                            </LinearLayout>
-                            <!-- Card Impuestos -->
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_marginStart="8dp"
-                                android:layout_weight="1"
-                                android:background="@drawable/border_rounded"
-                                android:orientation="vertical">
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginHorizontal="8dp"
-                                    android:background="@drawable/border_bottom"
-                                    android:gravity="center_vertical"
-                                    android:orientation="horizontal"
-                                    android:paddingTop="8dp"
-                                    android:paddingBottom="4dp">
-                                    <ImageView
-                                        android:layout_width="14dp"
-                                        android:layout_height="12dp"
-                                        android:layout_gravity="center"
-                                        android:layout_marginEnd="8dp"
-                                        android:src="@drawable/icon_svg_ticket"
-                                        app:tint="@color/info" />
-                                    <TextView
-                                        style="@style/titleCards"
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:text="Impuestos" />
-                                </LinearLayout>
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal"
-                                    android:padding="12dp"
-                                    android:baselineAligned="false">
-                                    <LinearLayout
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1"
-                                        android:orientation="vertical">
-                                        <TextView
-                                            style="@style/fontListasMedium"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginBottom="4dp"
-                                            android:text="Impuestos"
-                                            android:textColor="@color/text_25" />
-                                        <TextView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:fontFamily="@font/montserrat_bold"
-                                            android:text="@string/default_impuestos"
-                                            android:textColor="@color/text_85"
-                                            android:textSize="16sp" />
-                                    </LinearLayout>
-                                    <LinearLayout
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1"
-                                        android:orientation="vertical">
-                                        <TextView
-                                            style="@style/fontListasMedium"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginBottom="4dp"
-                                            android:text="ICBPER"
-                                            android:textColor="@color/text_25" />
-                                        <TextView
-                                            android:id="@+id/tvIcbper"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:fontFamily="@font/montserrat_bold"
-                                            android:text="@string/default_icbper"
-                                            android:textColor="@color/text_85"
-                                            android:textSize="16sp" />
-                                    </LinearLayout>
-                                </LinearLayout>
-                            </LinearLayout>
-                        </LinearLayout>
-                    </LinearLayout>
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="@string/default_monto_vales_pago"
+                        android:textColor="@color/text_85"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="@id/lbl_vales_monto"
+                        app:layout_constraintStart_toStartOf="@id/lbl_vales_monto"
+                        app:layout_constraintTop_toBottomOf="@id/lbl_vales_monto" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.Guideline
+                    android:id="@+id/g_half_cards"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:orientation="horizontal"
-                    android:weightSum="3">
-                    <!-- Card 1: Correlativos usados (2 columnas, sin total) -->
-                    <com.example.cajaac.ui.TransactionSectionView
-                        android:id="@+id/transactionSectionCorrelativos"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginEnd="20dp"
-                        android:layout_weight="1" />
-                    <!-- Card 2: Transacciones hechas (3 columnas, con total) -->
-                    <com.example.cajaac.ui.TransactionSectionView
-                        android:id="@+id/transactionSectionHechas"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="20dp"
-                        android:layout_weight="1" />
-                    <!-- Card 3: Transacciones anuladas (2 columnas, con total) -->
-                    <com.example.cajaac.ui.TransactionSectionView
-                        android:id="@+id/transactionSectionAnuladas"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
+                    android:orientation="vertical"
+                    app:layout_constraintGuide_percent="0.5" />
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/card_atenciones"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:orientation="vertical">
-                    <!-- Nueva tabla con múltiples totales (Ingresos - 4 columnas) -->
-                    <com.example.cajaac.ui.TransactionSectionView
-                        android:id="@+id/transactionSectionTable"
-                        android:layout_width="match_parent"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/border_rounded"
+                    android:paddingBottom="12dp"
+                    app:layout_constraintEnd_toStartOf="@id/g_half_cards"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/card_creditos">
+                    <ImageView
+                        android:id="@+id/ic_atenciones"
+                        android:layout_width="14dp"
+                        android:layout_height="12dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="12dp"
+                        android:src="@drawable/icon_svg_bell_concierge"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/info" />
+                    <TextView
+                        android:id="@+id/title_atenciones"
+                        style="@style/titleCards"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="20dp" />
-                    <!-- Nueva tabla de egresos (5 columnas) -->
-                    <com.example.cajaac.ui.TransactionSectionView
-                        android:id="@+id/transactionSectionEgresosTable"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:orientation="horizontal">
-                    <!-- Card expandible izquierda: Ingresos en efectivo/tarjetas por ventas -->
-                    <com.example.cajaac.ui.ExpandableCardView
-                        android:id="@+id/expandableCardVentas"
+                        android:layout_marginStart="8dp"
+                        android:text="Atenciones"
+                        app:layout_constraintBottom_toBottomOf="@id/ic_atenciones"
+                        app:layout_constraintStart_toEndOf="@id/ic_atenciones"
+                        app:layout_constraintTop_toTopOf="@id/ic_atenciones" />
+                    <View
+                        android:id="@+id/div_atenciones"
                         android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="20dp"
-                        android:layout_weight="1" />
-                    <!-- Card derecha: Ingresos por canales de delivery (4 columnas con header de tabla) -->
-                    <com.example.cajaac.ui.TransactionSectionView
-                        android:id="@+id/transactionSectionDelivery"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:orientation="horizontal">
-                    <!-- Card izquierda: Ingresos por propinas (2 columnas con header de tabla) -->
-                    <com.example.cajaac.ui.TransactionSectionView
-                        android:id="@+id/transactionSectionPropinas"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_marginEnd="20dp"
-                        android:layout_weight="1" />
-                    <!-- Card derecha: Ingresos por créditos cobrados (2 columnas con header de tabla) -->
-                    <com.example.cajaac.ui.TransactionSectionView
-                        android:id="@+id/transactionSectionCreditos"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1" />
-                </LinearLayout>
-                <!-- Pestañas -->
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp"
-                    android:orientation="horizontal"
-                    android:baselineAligned="false">
-                    <LinearLayout
-                        android:id="@+id/tabGrafico1"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/tab_indicator_background"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:padding="12dp">
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
-                            android:src="@drawable/icon_svg_crown"
-                            app:tint="@color/info" />
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/roboto"
-                            android:text="Top ventas"
-                            android:textColor="@color/info"
-                            android:textSize="14sp" />
-                    </LinearLayout>
-                    <LinearLayout
-                        android:id="@+id/tabGrafico2"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:background="@drawable/tab_indicator_background_unselected"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:gravity="center"
-                        android:orientation="horizontal"
-                        android:padding="12dp">
-                        <ImageView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
-                            android:src="@drawable/icon_svg_star"
-                            app:tint="@color/text_85" />
-                        <TextView
-                            style="@style/regular_85"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:text="Productos estrella"
-                            android:textSize="14sp" />
-                    </LinearLayout>
-                </LinearLayout>
-                <!-- FrameLayout para alternar entre gráficos -->
-                <FrameLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="16dp">
-                    <!-- Vista Gráficos: Top ventas (ambos gráficos juntos) -->
-                    <LinearLayout
-                        android:id="@+id/grafico1Container"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="horizontal"
-                        android:visibility="visible"
-                        android:baselineAligned="false">
-                        <!-- Card izquierda: Por categoría (gráfico de barras) -->
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_marginEnd="10dp"
-                            android:layout_weight="0.55"
-                            android:orientation="vertical">
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="4dp"
-                                android:fontFamily="@font/montserrat_bold"
-                                android:text="Por categoría"
-                                android:textColor="@color/text_85"
-                                android:textSize="16sp" />
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:background="@drawable/border_rounded_10"
-                                android:orientation="horizontal"
-                                android:paddingHorizontal="16dp"
-                                android:paddingVertical="20dp"
-                                android:baselineAligned="false">
-                                <!-- Gráfico de barras verticales -->
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginEnd="16dp"
-                                    android:layout_weight="1"
-                                    android:orientation="vertical">
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginBottom="12dp"
-                                        android:fontFamily="@font/roboto_bold"
-                                        android:text="% DE VENTAS"
-                                        android:textAlignment="center"
-                                        android:textColor="@color/text_85"
-                                        android:textSize="12sp" />
-                                    <!-- Custom View para gráfico de barras -->
-                                    <com.example.cajaac.ui.CustomBarChartView
-                                        android:id="@+id/barChartCategorias"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="220dp" />
-                                </LinearLayout>
-                                <!-- Lista de categorías -->
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1"
-                                    android:background="@drawable/border_left"
-                                    android:orientation="vertical"
-                                    android:paddingStart="16dp">
-                                    <TextView
-                                        style="@style/bold_65"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:fontFamily="@font/roboto_bold"
-                                        android:text="LISTA DE CATEGORÍAS"
-                                        android:textAlignment="center"
-                                        android:textColor="@color/text_85"
-                                        android:textSize="14sp" />
-                                    <LinearLayout
-                                        android:id="@+id/listaCategorias"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="match_parent"
-                                        android:gravity="center_vertical"
-                                        android:orientation="vertical" />
-                                </LinearLayout>
-                            </LinearLayout>
-                        </LinearLayout>
-                        <!-- Card derecha: Por productos (pie chart) -->
-                        <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_marginStart="10dp"
-                            android:layout_weight="0.45"
-                            android:orientation="vertical">
-                            <TextView
-                                style="@style/bold_65"
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_marginBottom="4dp"
-                                android:fontFamily="@font/montserrat_bold"
-                                android:text="Por productos"
-                                android:textColor="@color/text_85"
-                                android:textSize="16sp" />
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="match_parent"
-                                android:background="@drawable/border_rounded_10"
-                                android:orientation="vertical"
-                                android:paddingHorizontal="8dp"
-                                android:paddingVertical="20dp">
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="center"
-                                    android:layout_marginBottom="16dp"
-                                    android:fontFamily="@font/roboto_bold"
-                                    android:text="% DE PRODUCTOS"
-                                    android:textAlignment="center"
-                                    android:textColor="@color/text_85"
-                                    android:textSize="14sp" />
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="horizontal">
-                                    <!-- Pie Chart -->
-                                    <com.github.mikephil.charting.charts.PieChart
-                                        android:id="@+id/pieChartProductos"
-                                        android:layout_width="0dp"
-                                        android:layout_height="200dp"
-                                        android:layout_weight="1" />
-                                    <!-- Lista de productos -->
-                                    <LinearLayout
-                                        android:id="@+id/listaProductos"
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center_vertical"
-                                        android:layout_weight="1"
-                                        android:orientation="vertical"
-                                        android:paddingStart="16dp" />
-                                </LinearLayout>
-                            </LinearLayout>
-                        </LinearLayout>
-                    </LinearLayout>
-                    <!-- Vista Productos estrella (contenido pendiente) -->
-                    <LinearLayout
-                        android:id="@+id/grafico2Container"
-                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginHorizontal="8dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/border_bottom"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/title_atenciones" />
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/g_aten_50"
+                        android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
-                        android:visibility="gone">
-                        <!-- Título y Filtros -->
+                        app:layout_constraintGuide_percent="0.5" />
+                    <TextView
+                        android:id="@+id/lbl_mesas"
+                        style="@style/fontListasMedium"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
+                        android:text="N° mesas atendidas"
+                        android:textColor="@color/text_25"
+                        app:layout_constraintEnd_toStartOf="@id/g_aten_50"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/div_atenciones" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="@string/default_mesas_atendidas"
+                        android:textColor="@color/text_85"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="@id/lbl_mesas"
+                        app:layout_constraintStart_toStartOf="@id/lbl_mesas"
+                        app:layout_constraintTop_toBottomOf="@id/lbl_mesas" />
+                    <TextView
+                        android:id="@+id/lbl_personas"
+                        style="@style/fontListasMedium"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="12dp"
+                        android:text="N° personas atendidas"
+                        android:textColor="@color/text_25"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/g_aten_50"
+                        app:layout_constraintTop_toTopOf="@id/lbl_mesas" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="@string/default_personas_atendidas"
+                        android:textColor="@color/text_85"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="@id/lbl_personas"
+                        app:layout_constraintStart_toStartOf="@id/lbl_personas"
+                        app:layout_constraintTop_toBottomOf="@id/lbl_personas" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/card_impuestos"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_marginStart="8dp"
+                    android:background="@drawable/border_rounded"
+                    app:layout_constraintBottom_toBottomOf="@id/card_atenciones"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/g_half_cards"
+                    app:layout_constraintTop_toTopOf="@id/card_atenciones">
+                    <ImageView
+                        android:id="@+id/ic_impuestos"
+                        android:layout_width="14dp"
+                        android:layout_height="12dp"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginTop="12dp"
+                        android:src="@drawable/icon_svg_ticket"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:tint="@color/info" />
+                    <TextView
+                        android:id="@+id/title_impuestos"
+                        style="@style/titleCards"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:text="Impuestos"
+                        app:layout_constraintBottom_toBottomOf="@id/ic_impuestos"
+                        app:layout_constraintStart_toEndOf="@id/ic_impuestos"
+                        app:layout_constraintTop_toTopOf="@id/ic_impuestos" />
+                    <View
+                        android:id="@+id/div_impuestos"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_marginHorizontal="8dp"
+                        android:layout_marginTop="8dp"
+                        android:background="@drawable/border_bottom"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/title_impuestos" />
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/g_imp_50"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.5" />
+                    <TextView
+                        android:id="@+id/lbl_impuestos"
+                        style="@style/fontListasMedium"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="12dp"
+                        android:layout_marginTop="12dp"
+                        android:text="Impuestos"
+                        android:textColor="@color/text_25"
+                        app:layout_constraintEnd_toStartOf="@id/g_imp_50"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/div_impuestos" />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="@string/default_impuestos"
+                        android:textColor="@color/text_85"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="@id/lbl_impuestos"
+                        app:layout_constraintStart_toStartOf="@id/lbl_impuestos"
+                        app:layout_constraintTop_toBottomOf="@id/lbl_impuestos" />
+                    <TextView
+                        android:id="@+id/lbl_icbper"
+                        style="@style/fontListasMedium"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:layout_marginEnd="12dp"
+                        android:text="ICBPER"
+                        android:textColor="@color/text_25"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/g_imp_50"
+                        app:layout_constraintTop_toTopOf="@id/lbl_impuestos" />
+                    <TextView
+                        android:id="@+id/tvIcbper"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="@string/default_icbper"
+                        android:textColor="@color/text_85"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="@id/lbl_icbper"
+                        app:layout_constraintStart_toStartOf="@id/lbl_icbper"
+                        app:layout_constraintTop_toBottomOf="@id/lbl_icbper" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <com.example.cajaac.ui.TransactionSectionView
+                android:id="@+id/transactionSectionCorrelativos"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/transactionSectionHechas"
+                app:layout_constraintEnd_toStartOf="@id/guide_33"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/row2_right_col" />
+            <com.example.cajaac.ui.TransactionSectionView
+                android:id="@+id/transactionSectionHechas"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintEnd_toStartOf="@id/guide_66"
+                app:layout_constraintStart_toEndOf="@id/guide_33"
+                app:layout_constraintTop_toTopOf="@id/transactionSectionCorrelativos" />
+            <com.example.cajaac.ui.TransactionSectionView
+                android:id="@+id/transactionSectionAnuladas"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="10dp"
+                app:layout_constraintBottom_toBottomOf="@id/transactionSectionHechas"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guide_66"
+                app:layout_constraintTop_toTopOf="@id/transactionSectionCorrelativos" />
+            <com.example.cajaac.ui.TransactionSectionView
+                android:id="@+id/transactionSectionTable"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/transactionSectionHechas" />
+            <com.example.cajaac.ui.TransactionSectionView
+                android:id="@+id/transactionSectionEgresosTable"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/transactionSectionTable" />
+            <com.example.cajaac.ui.ExpandableCardView
+                android:id="@+id/expandableCardVentas"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintEnd_toStartOf="@id/guide_50"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/transactionSectionEgresosTable" />
+            <com.example.cajaac.ui.TransactionSectionView
+                android:id="@+id/transactionSectionDelivery"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guide_50"
+                app:layout_constraintTop_toTopOf="@id/expandableCardVentas" />
+            <com.example.cajaac.ui.TransactionSectionView
+                android:id="@+id/transactionSectionPropinas"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:layout_marginEnd="10dp"
+                app:layout_constraintEnd_toStartOf="@id/guide_50"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/expandableCardVentas" />
+            <com.example.cajaac.ui.TransactionSectionView
+                android:id="@+id/transactionSectionCreditos"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guide_50"
+                app:layout_constraintTop_toTopOf="@id/transactionSectionPropinas" />
+            <LinearLayout
+                android:id="@+id/tabGrafico1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/tab_indicator_background"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="12dp"
+                app:layout_constraintEnd_toStartOf="@id/guide_50"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/transactionSectionPropinas">
+                <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="8dp" android:src="@drawable/icon_svg_crown" app:tint="@color/info" />
+                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:fontFamily="@font/roboto" android:text="Top ventas" android:textColor="@color/info" android:textSize="14sp" />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/tabGrafico2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:background="@drawable/tab_indicator_background_unselected"
+                android:clickable="true"
+                android:focusable="true"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:padding="12dp"
+                app:layout_constraintBottom_toBottomOf="@id/tabGrafico1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/guide_50"
+                app:layout_constraintTop_toTopOf="@id/tabGrafico1">
+                <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="8dp" android:src="@drawable/icon_svg_star" app:tint="@color/text_85" />
+                <TextView style="@style/regular_85" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Productos estrella" android:textSize="14sp" />
+            </LinearLayout>
+            <FrameLayout
+                android:id="@+id/frame_graficos"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tabGrafico1">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/grafico1Container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="visible">
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guide_graf_55"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.55" />
+                    <TextView
+                        android:id="@+id/lbl_por_categoria"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="10dp"
+                        android:layout_marginBottom="4dp"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="Por categoría"
+                        android:textColor="@color/text_85"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toStartOf="@id/guide_graf_55"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/card_categorias"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="4dp"
+                        android:layout_marginEnd="10dp"
+                        android:background="@drawable/border_rounded_10"
+                        android:paddingHorizontal="16dp"
+                        android:paddingVertical="20dp"
+                        app:layout_constraintEnd_toStartOf="@id/guide_graf_55"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/lbl_por_categoria">
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/g_cat_50"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent="0.5" />
+                        <TextView
+                            android:id="@+id/lbl_pct_ventas"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="16dp"
+                            android:layout_marginBottom="12dp"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="% DE VENTAS"
+                            android:textAlignment="center"
+                            android:textColor="@color/text_85"
+                            android:textSize="12sp"
+                            app:layout_constraintEnd_toStartOf="@id/g_cat_50"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                        <com.example.cajaac.ui.CustomBarChartView
+                            android:id="@+id/barChartCategorias"
+                            android:layout_width="0dp"
+                            android:layout_height="220dp"
+                            android:layout_marginTop="12dp"
+                            android:layout_marginEnd="16dp"
+                            app:layout_constraintEnd_toStartOf="@id/g_cat_50"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/lbl_pct_ventas" />
+                        <View
+                            android:id="@+id/div_cat_vertical"
+                            android:layout_width="1dp"
+                            android:layout_height="0dp"
+                            android:background="@drawable/border_left"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/g_cat_50"
+                            app:layout_constraintTop_toTopOf="parent" />
+                        <TextView
+                            android:id="@+id/lbl_lista_cat"
+                            style="@style/bold_65"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="LISTA DE CATEGORÍAS"
+                            android:textAlignment="center"
+                            android:textColor="@color/text_85"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/div_cat_vertical"
+                            app:layout_constraintTop_toTopOf="parent" />
                         <LinearLayout
-                            android:layout_width="match_parent"
+                            android:id="@+id/listaCategorias"
+                            android:layout_width="0dp"
+                            android:layout_height="0dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="12dp"
+                            android:gravity="center_vertical"
+                            android:orientation="vertical"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/div_cat_vertical"
+                            app:layout_constraintTop_toBottomOf="@id/lbl_lista_cat" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <TextView
+                        android:id="@+id/lbl_por_productos"
+                        style="@style/bold_65"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginBottom="4dp"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:text="Por productos"
+                        android:textColor="@color/text_85"
+                        android:textSize="16sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/guide_graf_55"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/card_productos"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginStart="10dp"
+                        android:layout_marginTop="4dp"
+                        android:background="@drawable/border_rounded_10"
+                        android:paddingHorizontal="8dp"
+                        android:paddingVertical="20dp"
+                        app:layout_constraintBottom_toBottomOf="@id/card_categorias"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/guide_graf_55"
+                        app:layout_constraintTop_toBottomOf="@id/lbl_por_productos">
+                        <androidx.constraintlayout.widget.Guideline
+                            android:id="@+id/g_prod_50"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:orientation="vertical"
+                            app:layout_constraintGuide_percent="0.5" />
+                        <TextView
+                            android:id="@+id/lbl_pct_prod"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/roboto_bold"
+                            android:text="% DE PRODUCTOS"
+                            android:textAlignment="center"
+                            android:textColor="@color/text_85"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                        <com.github.mikephil.charting.charts.PieChart
+                            android:id="@+id/pieChartProductos"
+                            android:layout_width="0dp"
+                            android:layout_height="200dp"
+                            android:layout_marginTop="16dp"
+                            app:layout_constraintEnd_toStartOf="@id/g_prod_50"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/lbl_pct_prod" />
+                        <LinearLayout
+                            android:id="@+id/listaProductos"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="16dp"
+                            android:gravity="center_vertical"
+                            android:orientation="vertical"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/g_prod_50"
+                            app:layout_constraintTop_toBottomOf="@id/lbl_pct_prod" />
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/grafico2Container"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:visibility="gone">
+                    <androidx.constraintlayout.widget.Guideline
+                        android:id="@+id/guide_prod_25"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        app:layout_constraintGuide_percent="0.25" />
+                    <TextView
+                        android:id="@+id/lbl_top10"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="16dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="Top 10 productos estrella más vendidos en mi local durante los últimos 7 días"
+                        android:textColor="@color/text_85"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toStartOf="@+id/spinnerProductos"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                    <Spinner
+                        android:id="@+id/spinnerProductos"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginEnd="4dp"
+                        android:background="@null"
+                        android:minWidth="120dp"
+                        app:layout_constraintBottom_toBottomOf="@id/lbl_top10"
+                        app:layout_constraintEnd_toStartOf="@+id/spinnerPeriodo"
+                        app:layout_constraintTop_toTopOf="@id/lbl_top10" />
+                    <Spinner
+                        android:id="@+id/spinnerPeriodo"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:background="@null"
+                        android:minWidth="140dp"
+                        app:layout_constraintBottom_toBottomOf="@id/lbl_top10"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="@id/lbl_top10" />
+                    <androidx.constraintlayout.widget.ConstraintLayout
+                        android:id="@+id/card_producto_top"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="25dp"
+                        android:background="@drawable/border_rounded_10"
+                        app:layout_constraintEnd_toStartOf="@id/guide_prod_25"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/lbl_top10">
+                        <TextView
+                            android:id="@+id/lbl_ranking"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="20dp"
+                            android:background="@drawable/badge_info"
+                            android:fontFamily="@font/roboto_medium"
+                            android:paddingHorizontal="12dp"
+                            android:paddingVertical="4dp"
+                            android:text="Ranking semanal"
+                            android:textColor="@color/white"
+                            android:textSize="10sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintTop_toTopOf="parent" />
+                        <TextView
+                            android:id="@+id/lbl_number1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:text="#1"
+                            android:textColor="@color/info"
+                            android:textSize="44sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/lbl_ranking" />
+                        <ImageView
+                            android:layout_width="40dp"
+                            android:layout_height="40dp"
+                            android:layout_marginStart="5dp"
+                            android:src="@drawable/icon_svg_bigstar"
+                            app:layout_constraintBottom_toBottomOf="@id/lbl_number1"
+                            app:layout_constraintStart_toEndOf="@id/lbl_number1"
+                            app:layout_constraintTop_toTopOf="@id/lbl_number1"
+                            app:tint="@color/yellow_65" />
+                        <TextView
+                            android:id="@+id/lbl_prod_top"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginEnd="16dp"
+                            android:fontFamily="@font/roboto"
+                            android:text="PRODUCTO ESTRELLA TOP"
+                            android:textColor="@color/info"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/lbl_number1" />
+                        <TextView
+                            android:id="@+id/tvLetraInicial"
+                            android:layout_width="20dp"
+                            android:layout_height="20dp"
+                            android:layout_marginStart="16dp"
+                            android:layout_marginTop="8dp"
+                            android:background="@drawable/rectangular_badge_info"
+                            android:fontFamily="@font/roboto_medium"
+                            android:gravity="center"
+                            android:text="P"
+                            android:textColor="@color/info"
+                            android:textSize="12sp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/lbl_prod_top" />
+                        <TextView
+                            android:id="@+id/tvProductoEstrellaNombre"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="12dp"
+                            android:layout_marginEnd="16dp"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:text="Ceviche de conchas negras"
+                            android:textColor="@color/text_85"
+                            android:textSize="18sp"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toEndOf="@id/tvLetraInicial"
+                            app:layout_constraintTop_toTopOf="@id/tvLetraInicial" />
+                        <TextView
+                            android:id="@+id/tvProductoEstrellaCategoria"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="16dp"
-                            android:gravity="center_vertical"
-                            android:orientation="horizontal">
-                            <TextView
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:fontFamily="@font/roboto_medium"
-                                android:text="Top 10 productos estrella más vendidos en mi local durante los últimos 7 días"
-                                android:textColor="@color/text_85"
-                                android:textSize="14sp" />
-                            <!-- Dropdown Productos -->
-                            <Spinner
-                                android:id="@+id/spinnerProductos"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="4dp"
-                                android:background="@null"
-                                android:minWidth="120dp" />
-                            <!-- Dropdown Últimos 7 días -->
-                            <Spinner
-                                android:id="@+id/spinnerPeriodo"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:background="@null"
-                                android:minWidth="140dp" />
-                        </LinearLayout>
+                            android:fontFamily="@font/roboto"
+                            android:text="Fuente"
+                            android:textColor="@color/text_85"
+                            android:textSize="14sp"
+                            app:layout_constraintEnd_toEndOf="@id/tvProductoEstrellaNombre"
+                            app:layout_constraintStart_toStartOf="@id/tvProductoEstrellaNombre"
+                            app:layout_constraintTop_toBottomOf="@id/tvProductoEstrellaNombre" />
                         <LinearLayout
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="16dp"
+                            android:background="@drawable/background_info"
+                            android:orientation="horizontal"
+                            android:padding="10dp"
+                            app:layout_constraintBottom_toBottomOf="parent"
+                            app:layout_constraintEnd_toEndOf="parent"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/tvProductoEstrellaCategoria"
+                            android:baselineAligned="false">
+                            <LinearLayout android:layout_width="0dp" android:layout_height="wrap_content" android:layout_weight="1" android:orientation="horizontal">
+                                <TextView android:id="@+id/tvProductoEstrellaVentas" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="2dp" android:fontFamily="@font/montserrat_bold" android:text="10,000" android:textColor="@color/white" android:textSize="24sp" />
+                                <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:fontFamily="@font/montserrat" android:text="VENTAS" android:textColor="@color/white" android:textSize="14sp" />
+                            </LinearLayout>
+                            <LinearLayout android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_gravity="center_vertical" android:gravity="center_vertical" android:orientation="horizontal">
+                                <ImageView android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginEnd="4dp" android:src="@drawable/icon_svg_fillup" app:tint="@color/white" android:scaleType="fitCenter"/>
+                                <TextView android:id="@+id/tvProductoEstrellaPorcentaje" android:layout_width="wrap_content" android:layout_height="wrap_content" android:fontFamily="@font/roboto_medium" android:text="90,45%" android:textColor="@color/white" android:textSize="12sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </androidx.constraintlayout.widget.ConstraintLayout>
+                    <View
+                        android:id="@+id/divider_vertical_otros"
+                        android:layout_width="1dp"
+                        android:layout_height="0dp"
+                        android:background="@drawable/border_left"
+                        app:layout_constraintBottom_toBottomOf="@id/card_producto_top"
+                        app:layout_constraintStart_toEndOf="@id/guide_prod_25"
+                        app:layout_constraintTop_toTopOf="@id/card_producto_top" />
+                    <TextView
+                        android:id="@+id/lbl_otros_productos"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="20dp"
+                        android:layout_marginTop="16dp"
+                        android:layout_marginEnd="8dp"
+                        android:fontFamily="@font/roboto_medium"
+                        android:text="OTROS PRODUCTOS ESTRELLA TOP"
+                        android:textColor="@color/info"
+                        android:textSize="14sp"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/divider_vertical_otros"
+                        app:layout_constraintTop_toBottomOf="@id/lbl_top10" />
+                    <View
+                        android:id="@+id/divider_horizontal_otros"
+                        android:layout_width="0dp"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="5dp"
+                        android:background="@drawable/border_bottom"
+                        app:layout_constraintEnd_toEndOf="@id/lbl_otros_productos"
+                        app:layout_constraintStart_toStartOf="@id/lbl_otros_productos"
+                        app:layout_constraintTop_toBottomOf="@id/lbl_otros_productos" />
+                    <androidx.core.widget.NestedScrollView
+                        android:id="@+id/nestedScrollProductos"
+                        android:layout_width="0dp"
+                        android:layout_height="0dp"
+                        android:layout_marginTop="8dp"
+                        android:layout_marginBottom="16dp"
+                        android:overScrollMode="never"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="@id/lbl_otros_productos"
+                        app:layout_constraintStart_toStartOf="@id/lbl_otros_productos"
+                        app:layout_constraintTop_toBottomOf="@id/divider_horizontal_otros">
+                        <LinearLayout
+                            android:id="@+id/listaOtrosProductosEstrella"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="horizontal"
-                            android:baselineAligned="false">
-                            <!-- Card izquierda: Producto #1 Estrella -->
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="wrap_content"
-                                android:layout_marginEnd="25dp"
-                                android:layout_weight="0.25"
-                                android:background="@drawable/border_rounded_10"
-                                android:orientation="vertical">
-                                <!-- Etiqueta "Ranking semanal" -->
-                                <Space
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="20dp" />
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_gravity="end"
-                                    android:background="@drawable/badge_info"
-                                    android:fontFamily="@font/roboto_medium"
-                                    android:paddingHorizontal="12dp"
-                                    android:paddingVertical="4dp"
-                                    android:text="Ranking semanal"
-                                    android:textColor="@color/white"
-                                    android:textSize="10sp" />
-                                <!-- Contenido con padding -->
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="vertical"
-                                    android:paddingHorizontal="16dp"
-                                    android:paddingTop="8dp">
-                                    <!-- Número #1 con estrella -->
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginBottom="4dp"
-                                        android:gravity="start"
-                                        android:orientation="horizontal">
-                                        <TextView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_gravity="center_vertical"
-                                            android:fontFamily="@font/montserrat_bold"
-                                            android:text="#1"
-                                            android:textColor="@color/info"
-                                            android:textSize="44sp"/>
-                                        <ImageView
-                                            android:layout_width="40dp"
-                                            android:layout_height="40dp"
-                                            android:layout_gravity="center_vertical"
-                                            android:layout_marginStart="5dp"
-                                            android:src="@drawable/icon_svg_bigstar"
-                                            app:tint="@color/yellow_65" />
-                                    </LinearLayout>
-                                    <!-- Título "PRODUCTO ESTRELLA TOP" -->
-                                    <TextView
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginBottom="8dp"
-                                        android:fontFamily="@font/roboto"
-                                        android:text="PRODUCTO ESTRELLA TOP"
-                                        android:textAlignment="textStart"
-                                        android:textColor="@color/info"
-                                        android:textSize="14sp" />
-                                    <!-- Nombre del producto -->
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginBottom="16dp"
-                                        android:gravity="start"
-                                        android:orientation="horizontal"
-                                        android:baselineAligned="false">
-                                        <LinearLayout
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_gravity="center_vertical">
-                                            <TextView
-                                                android:id="@+id/tvLetraInicial"
-                                                android:layout_width="20dp"
-                                                android:layout_height="20dp"
-                                                android:layout_marginEnd="12dp"
-                                                android:background="@drawable/rectangular_badge_info"
-                                                android:fontFamily="@font/roboto_medium"
-                                                android:gravity="center"
-                                                android:text="P"
-                                                android:textColor="@color/info"
-                                                android:textSize="12sp" />
-                                        </LinearLayout>
-                                        <LinearLayout
-                                            android:layout_width="0dp"
-                                            android:layout_height="wrap_content"
-                                            android:layout_gravity="center_horizontal"
-                                            android:layout_weight="1"
-                                            android:orientation="vertical">
-                                            <TextView
-                                                android:id="@+id/tvProductoEstrellaNombre"
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:layout_gravity="center_vertical"
-                                                android:fontFamily="@font/montserrat_bold"
-                                                android:text="Ceviche de conchas negras"
-                                                android:textColor="@color/text_85"
-                                                android:textSize="18sp" />
-                                            <!-- Categoría -->
-                                            <TextView
-                                                android:id="@+id/tvProductoEstrellaCategoria"
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:fontFamily="@font/roboto"
-                                                android:text="Fuente"
-                                                android:textColor="@color/text_85"
-                                                android:textSize="14sp" />
-                                        </LinearLayout>
-                                    </LinearLayout>
-                                </LinearLayout>
-                                <!-- Estadísticas de ventas - Sin padding para llegar a los bordes -->
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:background="@drawable/background_info"
-                                    android:orientation="horizontal"
-                                    android:padding="10dp"
-                                    android:baselineAligned="false">
-                                    <!-- Número de ventas -->
-                                    <LinearLayout
-                                        android:layout_width="0dp"
-                                        android:layout_height="wrap_content"
-                                        android:layout_weight="1"
-                                        android:orientation="horizontal">
-                                        <TextView
-                                            android:id="@+id/tvProductoEstrellaVentas"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginEnd="2dp"
-                                            android:fontFamily="@font/montserrat_bold"
-                                            android:text="10,000"
-                                            android:textColor="@color/white"
-                                            android:textSize="24sp" />
-                                        <TextView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:fontFamily="@font/montserrat"
-                                            android:text="VENTAS"
-                                            android:textColor="@color/white"
-                                            android:textSize="14sp" />
-                                    </LinearLayout>
-                                    <!-- Porcentaje con flecha -->
-                                    <LinearLayout
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:layout_gravity="center_vertical"
-                                        android:gravity="center_vertical"
-                                        android:orientation="horizontal">
-                                        <ImageView
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:layout_marginEnd="4dp"
-                                            android:src="@drawable/icon_svg_fillup"
-                                            app:tint="@color/white"
-                                            android:scaleType="fitCenter"/>
-                                        <TextView
-                                            android:id="@+id/tvProductoEstrellaPorcentaje"
-                                            android:layout_width="wrap_content"
-                                            android:layout_height="wrap_content"
-                                            android:fontFamily="@font/roboto_medium"
-                                            android:text="90,45%"
-                                            android:textColor="@color/white"
-                                            android:textSize="12sp" />
-                                    </LinearLayout>
-                                </LinearLayout>
-                            </LinearLayout>
-                            <!-- Card derecha: Otros productos estrella -->
-                            <LinearLayout
-                                android:layout_width="0dp"
-                                android:layout_height="match_parent"
-                                android:layout_weight="0.75"
-                                android:background="@drawable/border_left"
-                                android:orientation="vertical"
-                                android:paddingStart="20dp">
-                                <LinearLayout
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="vertical"
-                                    android:padding="8dp">
-                                    <!-- Título "OTROS PRODUCTOS ESTRELLA TOP" -->
-                                    <LinearLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content"
-                                        android:layout_marginBottom="8dp"
-                                        android:background="@drawable/border_bottom"
-                                        android:paddingBottom="5dp">
-                                        <TextView
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:fontFamily="@font/roboto_medium"
-                                            android:text="OTROS PRODUCTOS ESTRELLA TOP"
-                                            android:textColor="@color/info"
-                                            android:textSize="14sp" />
-                                    </LinearLayout>
-                                    <!-- Wrapper para limitar altura máxima -->
-                                    <FrameLayout
-                                        android:layout_width="match_parent"
-                                        android:layout_height="wrap_content">
-                                        <androidx.core.widget.NestedScrollView
-                                            android:id="@+id/nestedScrollProductos"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="wrap_content"
-                                            android:maxHeight="400dp"
-                                            android:overScrollMode="never">
-                                            <!-- Lista de otros productos -->
-                                            <LinearLayout
-                                                android:id="@+id/listaOtrosProductosEstrella"
-                                                android:layout_width="match_parent"
-                                                android:layout_height="wrap_content"
-                                                android:orientation="vertical" />
-                                        </androidx.core.widget.NestedScrollView>
-                                    </FrameLayout>
-                                </LinearLayout>
-                            </LinearLayout>
-                        </LinearLayout>
-                    </LinearLayout>
-                </FrameLayout>
-            </LinearLayout>
-        </ScrollView>
-    </LinearLayout>
+                            android:orientation="vertical" />
+                    </androidx.core.widget.NestedScrollView>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </FrameLayout>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

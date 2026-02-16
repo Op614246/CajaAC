@@ -2,6 +2,7 @@ package com.example.cajaac.models;
 
 import android.view.View;
 import androidx.annotation.ColorRes;
+import androidx.annotation.DimenRes;
 import androidx.annotation.DrawableRes;
 import androidx.annotation.LayoutRes;
 import java.util.ArrayList;
@@ -9,6 +10,20 @@ import java.util.List;
 
 /**
  * Clase de configuración para el modal reutilizable
+ *
+ * Ejemplo de uso con padding directo en dp:
+ * <pre>
+ * ModalConfig config = new ModalConfig()
+ *     .setTitle("Título")
+ *     .setHorizontalPaddingDp(64); // 64dp fijo
+ * </pre>
+ *
+ * Ejemplo de uso con recurso de dimensión (adaptativo según tamaño de pantalla):
+ * <pre>
+ * ModalConfig config = new ModalConfig()
+ *     .setTitle("Título")
+ *     .setHorizontalPaddingRes(R.dimen.modal_padding_horizontal); // Se adapta automáticamente
+ * </pre>
  */
 public class ModalConfig {
     private String title;
@@ -24,6 +39,8 @@ public class ModalConfig {
     private int backgroundColor = -1;
     private boolean cancelable = true;
     private int horizontalPaddingDp = 32; // 32dp por defecto
+    @DimenRes
+    private int horizontalPaddingResId = 0; // Recurso de dimensión opcional
 
     public ModalConfig() {
         this.buttons = new ArrayList<>();
@@ -89,6 +106,18 @@ public class ModalConfig {
 
     public ModalConfig setHorizontalPaddingDp(int horizontalPaddingDp) {
         this.horizontalPaddingDp = horizontalPaddingDp;
+        this.horizontalPaddingResId = 0; // Limpiar el recurso si se usa valor directo
+        return this;
+    }
+
+    /**
+     * Establece el padding horizontal usando un recurso de dimensión
+     * @param horizontalPaddingResId Recurso de dimensión (ej: R.dimen.modal_padding_horizontal)
+     * @return Esta instancia para encadenamiento
+     */
+    public ModalConfig setHorizontalPaddingRes(@DimenRes int horizontalPaddingResId) {
+        this.horizontalPaddingResId = horizontalPaddingResId;
+        this.horizontalPaddingDp = 0; // Limpiar el valor directo si se usa recurso
         return this;
     }
 
@@ -131,6 +160,10 @@ public class ModalConfig {
 
     public int getHorizontalPaddingDp() {
         return horizontalPaddingDp;
+    }
+
+    public int getHorizontalPaddingResId() {
+        return horizontalPaddingResId;
     }
 }
 

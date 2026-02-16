@@ -1,192 +1,139 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/lbl_impresora"
+        style="@style/regular_85"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:baselineAligned="false"
-        android:orientation="horizontal">
+        android:text="Selecciona una impresora"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/cb_resumido"/>
 
-        <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/spinner_impresora_container"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="4dp"
+        android:background="@drawable/spinner_background"
+        android:paddingHorizontal="8dp"
+        app:layout_constraintHorizontal_weight="1.5"
+        app:layout_constraintEnd_toStartOf="@+id/cb_resumido"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/lbl_impresora">
+
+        <ImageView
+            android:id="@+id/img_print"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/icon_svg_print_blue"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/text_85" />
+
+        <Spinner
+            android:id="@+id/spinner_impresora"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="10dp"
-            android:layout_weight="1.5"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            app:layout_constraintEnd_toStartOf="@+id/img_chevron"
+            app:layout_constraintStart_toEndOf="@id/img_print" />
 
-            <TextView
-                style="@style/regular_85"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="4dp"
-                android:text="Selecciona una impresora" />
-
-            <LinearLayout
-                android:id="@+id/spinner_impresora_container"
-                android:layout_width="match_parent"
-                android:layout_height="48dp"
-                android:background="@drawable/spinner_background"
-                android:clickable="true"
-                android:focusable="true"
-                android:gravity="center_vertical"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:layout_marginEnd="8dp"
-                    android:src="@drawable/icon_svg_print_blue"
-                    android:contentDescription="Impresora"
-                    app:tint="@color/text_85"/>
-
-                <Spinner
-                    style="@style/regular_85"
-                    android:id="@+id/spinner_impresora"
-                    android:layout_width="0dp"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1"
-                    android:background="@android:color/transparent"
-                    android:entries="@array/impresoras"
-                    android:spinnerMode="dropdown" />
-
-                <ImageView
-                    android:layout_width="16dp"
-                    android:layout_height="16dp"
-                    android:layout_marginStart="8dp"
-                    android:src="@drawable/icon_svg_chevron_down"
-                    android:contentDescription="Desplegar"
-                    app:tint="@color/text_85" />
-
-            </LinearLayout>
-        </LinearLayout>
-        <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:layout_gravity="bottom"
-            android:background="@drawable/background_light_rounded_xxl"
-            android:paddingHorizontal="16dp"
-            android:paddingVertical="12dp">
-            <CheckBox
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginEnd="5dp" />
-
-            <TextView
-                style="@style/fontListasMedium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Imprimir en formato resumido"
-                android:textSize="14sp" />
-        </LinearLayout>
-    </LinearLayout>
+        <ImageView
+            android:id="@+id/img_chevron"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:src="@drawable/icon_svg_chevron_down"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:tint="@color/text_85" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
     <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
+        android:id="@+id/cb_resumido"
+        android:layout_width="0dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="10dp"
+        android:background="@drawable/background_light_rounded_xxl"
+        android:gravity="center_vertical"
         android:orientation="horizontal"
-        android:paddingHorizontal="10dp"
-        android:paddingVertical="8dp">
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="12dp"
+        app:layout_constraintBottom_toBottomOf="@id/spinner_impresora_container"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_weight="1"
+        app:layout_constraintStart_toEndOf="@id/spinner_impresora_container">
 
         <CheckBox
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginEnd="5dp" />
-
-        <TextView
             style="@style/fontListasMedium"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Excluir la notas de venta"
+            android:layout_marginEnd="5dp"
+            android:text="Imprimir en formato resumido"
             android:textSize="14sp" />
     </LinearLayout>
 
-    <LinearLayout
+    <CheckBox
+        android:id="@+id/cb_excluir_notas"
+        style="@style/fontListasMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:orientation="horizontal"
-        android:paddingHorizontal="10dp"
-        android:paddingVertical="8dp">
+        android:layout_marginTop="10dp"
+        android:text="Excluir la notas de venta"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/spinner_impresora_container" />
 
-        <CheckBox
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginEnd="5dp" />
-
-        <TextView
-            style="@style/fontListasMedium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Imprimir lista de ventas"
-            android:textSize="14sp" />
-    </LinearLayout>
-
-    <LinearLayout
+    <CheckBox
+        android:id="@+id/cb_lista_ventas"
+        style="@style/fontListasMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:orientation="horizontal"
-        android:paddingHorizontal="10dp"
-        android:paddingVertical="8dp">
+        android:layout_marginTop="10dp"
+        android:text="Imprimir lista de ventas"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cb_excluir_notas" />
 
-        <CheckBox
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginEnd="5dp" />
-
-        <TextView
-            style="@style/fontListasMedium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Imprimir consolidados de productos vendidos"
-            android:textSize="14sp" />
-    </LinearLayout>
-
-    <LinearLayout
+    <CheckBox
+        android:id="@+id/cb_consolidados"
+        style="@style/fontListasMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:orientation="horizontal"
-        android:paddingHorizontal="10dp"
-        android:paddingVertical="8dp">
+        android:layout_marginTop="10dp"
+        android:text="Imprimir consolidados de productos vendidos"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cb_lista_ventas" />
 
-        <CheckBox
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginEnd="5dp" />
-
-        <TextView
-            style="@style/fontListasMedium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Excluir ventas por usuario"
-            android:textSize="14sp" />
-    </LinearLayout>
-    <LinearLayout
+    <CheckBox
+        android:id="@+id/cb_ventas_usuario"
+        style="@style/fontListasMedium"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:orientation="horizontal"
-        android:paddingHorizontal="10dp"
-        android:paddingVertical="8dp">
+        android:layout_marginTop="10dp"
+        android:text="Excluir ventas por usuario"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cb_consolidados" />
 
-        <CheckBox
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginEnd="5dp" />
+    <CheckBox
+        android:id="@+id/cb_ventas_area"
+        style="@style/fontListasMedium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="Excluir ventas por área de producción"
+        android:textSize="14sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cb_ventas_usuario" />
 
-        <TextView
-            style="@style/fontListasMedium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Excluir ventas por área de producción"
-            android:textSize="14sp" />
-    </LinearLayout>
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

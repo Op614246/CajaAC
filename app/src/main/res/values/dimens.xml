@@ -19,5 +19,6 @@
     <dimen name="boton_padding_vertical_grande">6dp</dimen>
     <dimen name="boton_padding_horizontal_pequeno">10dp</dimen>
     <dimen name="boton_padding_vertical_pequeno">2dp</dimen>
+    <dimen name="modal_padding_horizontal">128dp</dimen>
 
 </resources>

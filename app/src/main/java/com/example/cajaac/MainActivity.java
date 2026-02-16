@@ -1,16 +1,14 @@
 package com.example.cajaac;
 
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.Looper;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import com.example.cajaac.adapters.CustomSpinnerAdapter;
 import com.example.cajaac.models.DatosCaja;
@@ -25,6 +23,8 @@ import com.example.cajaac.ui.TransactionSectionView;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,33 +45,64 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
+
+        // 1. ESTO ES LO ÚNICO QUE SE EJECUTA INMEDIATAMENTE
+        // El usuario verá el esqueleto principal al instante (0.1 segundos)
         setContentView(R.layout.activity_main);
+        getWindow().setStatusBarColor(android.graphics.Color.BLACK);
 
-        // Inicializar vistas de datos de caja
         initializeCajaViews();
-
-        // Configurar botón cerrar caja
         setupCerrarCajaButton();
-
         setupImprimirCierre();
 
-        // Inicializar todas las secciones
-        setupTransactionSections();
-        setupExpandableCards();
-        setupDeliverySections();
-        setupPropinasCreditosSections();
-        setupChartTabs();
-        initSpinners();
+        // 2. CREAMOS EL HANDLER PARA DIFERIR LA CARGA PESADA DE LA UI
+        Handler mainHandler = new Handler(Looper.getMainLooper());
 
-        // Ejemplo: Cargar datos de caja
-        cargarDatosCaja();
+        // Usamos post() para enviar esto a la cola.
+        // Android primero dibujará la vista, y justo después ejecutará este bloque.
+        mainHandler.post(() -> {
+            // Carga de las listas estáticas
+            setupTransactionSections();
+            setupExpandableCards();
+            setupDeliverySections();
+            setupPropinasCreditosSections();
+            initSpinners();
 
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
-            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
-            return insets;
+            // 3. LOS GRÁFICOS Y LOS INFLATES SON LO MÁS PESADO
+            // Le damos 100ms de respiro al procesador para que la animación
+            // de apertura de la app sea 100% fluida antes de empezar a inflar los 17 items.
+            mainHandler.postDelayed(() -> {
+                setupChartTabs();
+            }, 100);
         });
+
+        // 4. EL TRABAJO DE BASE DE DATOS / API DEBE IR EN UN HILO SECUNDARIO
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.execute(() -> {
+            // --- HILO SECUNDARIO (Background) ---
+            // Aquí puedes hacer Thread.sleep, consultas a BD, o llamadas Retrofit.
+            // Simulamos que traer los datos tarda un poco...
+            DatosCaja datos = obtenerDatosPesadosSimulados();
+
+            // --- VOLVEMOS AL HILO PRINCIPAL PARA PINTAR LOS TEXTOS ---
+            mainHandler.post(() -> {
+                actualizarDatosCaja(datos);
+            });
+        });
+    }
+
+    private DatosCaja obtenerDatosPesadosSimulados() {
+        return new DatosCaja(
+                "Caja N°02",
+                "S/ 7,937.79",
+                "Mónica González",
+                "S/10.00",
+                "Mañana",
+                "30/06/22 - 04:00 P.M.",
+                "Resumen hasta 27/12/2025, 09:48 AM",
+                "S/ 1,062.70",
+                "S/ 6,875.09"
+        );
     }
 
     /**
@@ -114,26 +145,26 @@ public class MainActivity extends AppCompatActivity {
 
         BaseModalFragment modal = BaseModalFragment.newInstance(config);
 
-                config.addButton(new ModalButton(
-                        "Cancelar",
-                        R.drawable.icon_svg_circle_xmark,
-                        R.color.text_85,
-                        R.color.text_85,
-                        () -> modal.dismiss()
-                ))
-                .addButton(new ModalButton(
-                        "Guardar borrador",
-                        R.drawable.icon_svg_save_disk,
-                        R.color.info,
-                        R.color.info,
-                        () -> modal.dismiss()
-                ))
-                .addButton(new ModalButton(
-                        "Guardar cuadre",
-                        R.drawable.icon_svg_save_disk_solid,
-                        ModalButton.ButtonType.INFO,
-                        () -> modal.dismiss()
-                ));
+        config.addButton(new ModalButton(
+                "Cancelar",
+                R.drawable.icon_svg_circle_xmark,
+                R.color.text_85,
+                R.color.text_85,
+                () -> modal.dismiss()
+        ))
+        .addButton(new ModalButton(
+                "Guardar borrador",
+                R.drawable.icon_svg_save_disk,
+                R.color.info,
+                R.color.info,
+                () -> modal.dismiss()
+        ))
+        .addButton(new ModalButton(
+                "Guardar cuadre",
+                R.drawable.icon_svg_save_disk_solid,
+                ModalButton.ButtonType.INFO,
+                () -> modal.dismiss()
+        ));
 
         // Crear y mostrar el modal
         modal.show(getSupportFragmentManager(), "cuadre_stock");
@@ -144,25 +175,25 @@ public class MainActivity extends AppCompatActivity {
                 .setTitleIconResId(R.drawable.icon_svg_print_blue)
                 .setContentLayoutResId(R.layout.content_imprimir_cierre)
                 .setHeightPercent(0.9f)
-                .setHorizontalPaddingDp(256) // Padding más pequeño para modal más ancho
+                .setHorizontalPaddingRes(R.dimen.modal_padding_horizontal) // Padding más pequeño para modal más ancho
                 .setShowCloseButton(true)
                 .setCancelable(true);
 
         BaseModalFragment modal = BaseModalFragment.newInstance(config);
 
-                config.addButton(new ModalButton(
-                        "Cancelar",
-                        R.drawable.icon_svg_circle_xmark,
-                        R.color.text_85,
-                        R.color.text_85,
-                        () -> modal.dismiss()
-                ))
-                .addButton(new ModalButton(
-                        "Imprimir",
-                        R.drawable.icon_svg_printer_solid,
-                        ModalButton.ButtonType.INFO,
-                        () -> modal.dismiss()
-                ));
+        config.addButton(new ModalButton(
+                "Cancelar",
+                R.drawable.icon_svg_circle_xmark,
+                R.color.text_85,
+                R.color.text_85,
+                () -> modal.dismiss()
+        ))
+        .addButton(new ModalButton(
+                "Imprimir",
+                R.drawable.icon_svg_printer_solid,
+                ModalButton.ButtonType.INFO,
+                () -> modal.dismiss()
+        ));
 
         modal.show(getSupportFragmentManager(), "imprimir_cierre");
     }
@@ -208,25 +239,6 @@ public class MainActivity extends AppCompatActivity {
      * Método de ejemplo para cargar datos de caja
      * Aquí conectarías con tu backend/API
      */
-    private void cargarDatosCaja() {
-        // Ejemplo de datos estáticos
-        DatosCaja datos = new DatosCaja(
-            "Caja N°02",
-            "S/ 7,937.79",
-            "Mónica González",
-            "S/10.00",
-            "Mañana",
-            "30/06/22 - 04:00 P.M.",
-            "Resumen hasta 27/12/2025, 09:48 AM",
-            "S/ 1,062.70",
-            "S/ 6,875.09"
-        );
-
-        actualizarDatosCaja(datos);
-
-        // TODO: Aquí harías la llamada real a tu API:
-        // fetchDatosFromBackend();
-    }
 
     // TODO: Método para obtener datos del backend
     /*
@@ -553,8 +565,8 @@ public class MainActivity extends AppCompatActivity {
     private void setupChartTabs() {
         android.view.ViewGroup tabGrafico1 = findViewById(R.id.tabGrafico1);
         android.view.ViewGroup tabGrafico2 = findViewById(R.id.tabGrafico2);
-        LinearLayout grafico1Container = findViewById(R.id.grafico1Container);
-        LinearLayout grafico2Container = findViewById(R.id.grafico2Container);
+        androidx.constraintlayout.widget.ConstraintLayout grafico1Container = findViewById(R.id.grafico1Container);
+        androidx.constraintlayout.widget.ConstraintLayout grafico2Container = findViewById(R.id.grafico2Container);
 
         // Click en pestaña 1 (Top ventas)
         tabGrafico1.setOnClickListener(v -> {

@@ -425,7 +425,7 @@ public class BaseModalFragment extends DialogFragment {
      * Configura la altura del modal
      */
     private void setupModalHeight(View view) {
-        LinearLayout modalContainer = view.findViewById(R.id.modal_container);
+        View modalContainer = view.findViewById(R.id.modal_container_bg);
         ConstraintLayout.LayoutParams params = (ConstraintLayout.LayoutParams) modalContainer.getLayoutParams();
         params.matchConstraintPercentHeight = config.getHeightPercent();
         modalContainer.setLayoutParams(params);
@@ -436,7 +436,15 @@ public class BaseModalFragment extends DialogFragment {
      */
     private void setupHorizontalPadding(View view) {
         View modalBackground = view.findViewById(R.id.modal_background);
-        int paddingPx = dpToPx(config.getHorizontalPaddingDp());
+        int paddingPx;
+
+        // Usar recurso de dimensión si está disponible, de lo contrario usar valor directo en dp
+        if (config.getHorizontalPaddingResId() != 0) {
+            paddingPx = (int) requireContext().getResources().getDimension(config.getHorizontalPaddingResId());
+        } else {
+            paddingPx = dpToPx(config.getHorizontalPaddingDp());
+        }
+
         modalBackground.setPadding(
                 paddingPx,
                 modalBackground.getPaddingTop(),

@@ -3,8 +3,8 @@
     <style name="Theme.CajaAC" parent="Theme.MaterialComponents.DayNight.NoActionBar">
         <!-- Primary brand color. -->
         <item name="colorOnSecondary">@color/black</item>
-        <!-- Status bar color. -->
-        <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
+        <!-- Status bar color - Negro/Gris oscuro -->
+        <item name="android:statusBarColor">@color/black</item>
 
         <item name="android:fontFamily">@font/montserrat</item>
         <!-- Customize your theme here. -->
@@ -15,7 +15,7 @@
         <item name="android:windowIsTranslucent">true</item>
         <item name="android:windowNoTitle">true</item>
         <item name="android:windowActionBar">false</item>
-        <item name="android:backgroundDimAmount">0.1</item>
+        <item name="android:backgroundDimAmount">0.5</item>
     </style>
 
     <style name="MiApp.Titulo" parent="android:Widget.TextView">
