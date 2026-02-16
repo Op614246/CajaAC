@@ -540,7 +540,7 @@
                         android:layout_width="0dp"
                         android:layout_height="1dp"
                         android:layout_marginHorizontal="8dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="4dp"
                         android:background="@drawable/border_bottom"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -699,7 +699,7 @@
                         android:layout_width="0dp"
                         android:layout_height="1dp"
                         android:layout_marginHorizontal="8dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="4dp"
                         android:background="@drawable/border_bottom"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -790,7 +790,7 @@
                         android:layout_width="0dp"
                         android:layout_height="1dp"
                         android:layout_marginHorizontal="8dp"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="4dp"
                         android:background="@drawable/border_bottom"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -1055,14 +1055,14 @@
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/div_cat_vertical"
                             app:layout_constraintTop_toTopOf="parent" />
-                        <LinearLayout
+                        <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/listaCategorias"
                             android:layout_width="0dp"
                             android:layout_height="0dp"
                             android:layout_marginStart="16dp"
                             android:layout_marginTop="12dp"
-                            android:gravity="center_vertical"
-                            android:orientation="vertical"
+                            android:nestedScrollingEnabled="false"
+                            android:overScrollMode="never"
                             app:layout_constraintBottom_toBottomOf="parent"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/div_cat_vertical"
@@ -1121,17 +1121,17 @@
                             app:layout_constraintEnd_toStartOf="@id/g_prod_50"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/lbl_pct_prod" />
-                        <LinearLayout
+                        <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/listaProductos"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="16dp"
-                            android:layout_marginTop="16dp"
-                            android:gravity="center_vertical"
-                            android:orientation="vertical"
+                            android:nestedScrollingEnabled="false"
+                            android:overScrollMode="never"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/g_prod_50"
-                            app:layout_constraintTop_toBottomOf="@id/lbl_pct_prod" />
+                            app:layout_constraintTop_toTopOf="@id/pieChartProductos"
+                            app:layout_constraintBottom_toBottomOf="@id/pieChartProductos"/>
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </androidx.constraintlayout.widget.ConstraintLayout>
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -1247,20 +1247,22 @@
                             android:textColor="@color/info"
                             android:textSize="12sp"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/lbl_prod_top" />
+                            app:layout_constraintTop_toTopOf="@id/tvProductoEstrellaNombre"
+                            app:layout_constraintBottom_toBottomOf="@id/tvProductoEstrellaCategoria"/>
                         <TextView
                             android:id="@+id/tvProductoEstrellaNombre"
                             android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="12dp"
                             android:layout_marginEnd="16dp"
+                            android:layout_marginTop="8dp"
                             android:fontFamily="@font/montserrat_bold"
                             android:text="Ceviche de conchas negras"
                             android:textColor="@color/text_85"
                             android:textSize="18sp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/tvLetraInicial"
-                            app:layout_constraintTop_toTopOf="@id/tvLetraInicial" />
+                            app:layout_constraintTop_toBottomOf="@id/lbl_prod_top" />
                         <TextView
                             android:id="@+id/tvProductoEstrellaCategoria"
                             android:layout_width="0dp"
@@ -1337,11 +1339,12 @@
                         app:layout_constraintEnd_toEndOf="@id/lbl_otros_productos"
                         app:layout_constraintStart_toStartOf="@id/lbl_otros_productos"
                         app:layout_constraintTop_toBottomOf="@id/divider_horizontal_otros">
-                        <LinearLayout
+                        <androidx.recyclerview.widget.RecyclerView
                             android:id="@+id/listaOtrosProductosEstrella"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:orientation="vertical" />
+                            android:nestedScrollingEnabled="false"
+                            android:overScrollMode="never" />
                     </androidx.core.widget.NestedScrollView>
                 </androidx.constraintlayout.widget.ConstraintLayout>
             </FrameLayout>

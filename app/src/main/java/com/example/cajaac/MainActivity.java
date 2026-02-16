@@ -4,16 +4,23 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.view.View;
-import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.cajaac.adapters.CategoryAdapter;
 import com.example.cajaac.adapters.CustomSpinnerAdapter;
+import com.example.cajaac.adapters.ProductAdapter;
+import com.example.cajaac.adapters.ProductoEstrellaAdapter;
+import com.example.cajaac.models.CategoryItem;
 import com.example.cajaac.models.DatosCaja;
 import com.example.cajaac.models.ModalButton;
 import com.example.cajaac.models.ModalConfig;
+import com.example.cajaac.models.ProductItem;
+import com.example.cajaac.models.ProductoEstrellaItem;
 import com.example.cajaac.models.TransactionItem;
 import com.example.cajaac.models.TransactionSection;
 import com.example.cajaac.models.TransactionTotal;
@@ -21,6 +28,7 @@ import com.example.cajaac.ui.BaseModalFragment;
 import com.example.cajaac.ui.ExpandableCardView;
 import com.example.cajaac.ui.TransactionSectionView;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -689,8 +697,11 @@ public class MainActivity extends AppCompatActivity {
 
     private void setupCategoriesBarChart() {
         com.example.cajaac.ui.CustomBarChartView barChart = findViewById(R.id.barChartCategorias);
-        LinearLayout listaCategorias = findViewById(R.id.listaCategorias);
-        listaCategorias.removeAllViews(); // Limpiar lista previa
+        RecyclerView recyclerViewCategorias = findViewById(R.id.listaCategorias);
+
+        // Configurar RecyclerView
+        recyclerViewCategorias.setLayoutManager(new LinearLayoutManager(this));
+        recyclerViewCategorias.setHasFixedSize(true);
 
         // Crear datos para las barras
         java.util.List<com.example.cajaac.ui.CustomBarChartView.BarItem> items = new java.util.ArrayList<>();
@@ -703,16 +714,24 @@ public class MainActivity extends AppCompatActivity {
         barChart.setBars(items);
 
         // Crear lista de categorías (colores coinciden con las barras)
-        addCategoryItem(listaCategorias, "Bebidas con alcohol", "S/989.09", R.color.info);
-        addCategoryItem(listaCategorias, "Bebidas sin alcohol", "S/497.25", R.color.primary);
-        addCategoryItem(listaCategorias, "Menú", "S/352.32", R.color.warning);
-        addCategoryItem(listaCategorias, "Platos a la carta", "S/170.87", R.color.secondary_1);
-        addCategoryItem(listaCategorias, "Postres", "S/90.25", R.color.secondary_3);
+        List<CategoryItem> categoryItems = new ArrayList<>();
+        categoryItems.add(new CategoryItem("Bebidas con alcohol", "S/989.09", R.color.info));
+        categoryItems.add(new CategoryItem("Bebidas sin alcohol", "S/497.25", R.color.primary));
+        categoryItems.add(new CategoryItem("Menú", "S/352.32", R.color.warning));
+        categoryItems.add(new CategoryItem("Platos a la carta", "S/170.87", R.color.secondary_1));
+        categoryItems.add(new CategoryItem("Postres", "S/90.25", R.color.secondary_3));
+
+        CategoryAdapter adapter = new CategoryAdapter(this, categoryItems);
+        recyclerViewCategorias.setAdapter(adapter);
     }
 
     private void setupProductsPieChart() {
         com.github.mikephil.charting.charts.PieChart pieChart = findViewById(R.id.pieChartProductos);
-        LinearLayout listaProductos = findViewById(R.id.listaProductos);
+        RecyclerView recyclerViewProductos = findViewById(R.id.listaProductos);
+
+        // Configurar RecyclerView
+        recyclerViewProductos.setLayoutManager(new LinearLayoutManager(this));
+        recyclerViewProductos.setHasFixedSize(true);
 
         // Configurar el gráfico - sin agujero en el centro (pie chart sólido)
         pieChart.setUsePercentValues(false);
@@ -748,37 +767,13 @@ public class MainActivity extends AppCompatActivity {
         pieChart.animateY(1000);
 
         // Crear lista de productos
-        addProductItem(listaProductos, "Pilsen", "S/90.39", R.color.info);
-        addProductItem(listaProductos, "Ensalada Cesar's", "S/40.39", R.color.yellow);
-        addProductItem(listaProductos, "Torta helada", "S/10.39", R.color.primary);
-    }
+        List<ProductItem> productItems = new ArrayList<>();
+        productItems.add(new ProductItem("Pilsen", "S/90.39", R.color.info));
+        productItems.add(new ProductItem("Ensalada Cesar's", "S/40.39", R.color.yellow));
+        productItems.add(new ProductItem("Torta helada", "S/10.39", R.color.primary));
 
-    private void addCategoryItem(LinearLayout container, String label, String value, int colorRes) {
-        View item = getLayoutInflater().inflate(R.layout.item_category_chart, container, false);
-
-        android.widget.ImageView colorIndicator = item.findViewById(R.id.colorIndicator);
-        TextView tvLabel = item.findViewById(R.id.tvCategoryLabel);
-        TextView tvValue = item.findViewById(R.id.tvCategoryValue);
-
-        colorIndicator.setColorFilter(getResources().getColor(colorRes, null));
-        tvLabel.setText(label);
-        tvValue.setText(value);
-
-        container.addView(item);
-    }
-
-    private void addProductItem(LinearLayout container, String label, String value, int colorRes) {
-        View item = getLayoutInflater().inflate(R.layout.item_product_chart, container, false);
-
-        android.widget.ImageView colorIndicator = item.findViewById(R.id.colorIndicator);
-        TextView tvLabel = item.findViewById(R.id.tvProductLabel);
-        TextView tvValue = item.findViewById(R.id.tvProductValue);
-
-        colorIndicator.setColorFilter(getResources().getColor(colorRes, null));
-        tvLabel.setText(label);
-        tvValue.setText(value);
-
-        container.addView(item);
+        ProductAdapter adapter = new ProductAdapter(this, productItems);
+        recyclerViewProductos.setAdapter(adapter);
     }
 
     private void setupProductosEstrella() {
@@ -787,7 +782,11 @@ public class MainActivity extends AppCompatActivity {
         TextView tvCategoria = findViewById(R.id.tvProductoEstrellaCategoria);
         TextView tvVentas = findViewById(R.id.tvProductoEstrellaVentas);
         TextView tvPorcentaje = findViewById(R.id.tvProductoEstrellaPorcentaje);
-        LinearLayout listaOtros = findViewById(R.id.listaOtrosProductosEstrella);
+        RecyclerView recyclerViewOtros = findViewById(R.id.listaOtrosProductosEstrella);
+
+        // Configurar RecyclerView
+        recyclerViewOtros.setLayoutManager(new LinearLayoutManager(this));
+        recyclerViewOtros.setHasFixedSize(true);
 
         // Configurar producto #1
         tvNombre.setText("Ceviche de conchas negras");
@@ -795,67 +794,20 @@ public class MainActivity extends AppCompatActivity {
         tvVentas.setText("10,000");
         tvPorcentaje.setText("90,45%");
 
-        // Limpiar y agregar lista de otros productos
-        listaOtros.removeAllViews();
+        // Crear lista de otros productos
+        List<ProductoEstrellaItem> otrosProductos = new ArrayList<>();
+        otrosProductos.add(new ProductoEstrellaItem("#2", "P", "Cerveza Pilsen", "650ml", "000 VENTAS", "52,45%", R.color.primary));
+        otrosProductos.add(new ProductoEstrellaItem("#3", "R", "Lomo saltado", "Plato", "000 VENTAS", "52,45%", R.color.primary));
+        otrosProductos.add(new ProductoEstrellaItem("#4", "P", "Ronda criolla familiar", "Fuente", "000 VENTAS", "52,45%", R.color.primary));
+        otrosProductos.add(new ProductoEstrellaItem("#5", "R", "Tallarines verdes con chuleta...", "Personal", "000 VENTAS", "52,45%", R.color.primary));
+        otrosProductos.add(new ProductoEstrellaItem("#6", "I", "Pollo", "Entero", "000 VENTAS", "52,45%", R.color.primary));
+        otrosProductos.add(new ProductoEstrellaItem("#7", "I", "Arroz", "Kg", "000 VENTAS", "52,45%", R.color.primary));
+        otrosProductos.add(new ProductoEstrellaItem("#8", "P", "Gaseosa Inca Kola", "1.5L", "000 VENTAS", "52,45%", R.color.primary));
+        otrosProductos.add(new ProductoEstrellaItem("#9", "R", "Ceviche mixto", "Fuente", "000 VENTAS", "52,45%", R.color.primary));
+        otrosProductos.add(new ProductoEstrellaItem("#10", "I", "Cebolla", "Kg", "000 VENTAS", "52,45%", R.color.primary));
 
-        addProductoEstrellaItem(listaOtros, "#2", "P", "Cerveza Pilsen", "650ml", "000 VENTAS", "52,45%", R.color.primary);
-        addProductoEstrellaItem(listaOtros, "#3", "R", "Lomo saltado", "Plato", "000 VENTAS", "52,45%", R.color.primary);
-        addProductoEstrellaItem(listaOtros, "#4", "P", "Ronda criolla familiar", "Fuente", "000 VENTAS", "52,45%", R.color.primary);
-        addProductoEstrellaItem(listaOtros, "#5", "R", "Tallarines verdes con chuleta...", "Personal", "000 VENTAS", "52,45%", R.color.primary);
-        addProductoEstrellaItem(listaOtros, "#6", "I", "Pollo", "Entero", "000 VENTAS", "52,45%", R.color.primary);
-        addProductoEstrellaItem(listaOtros, "#7", "I", "Arroz", "Kg", "000 VENTAS", "52,45%", R.color.primary);
-        addProductoEstrellaItem(listaOtros, "#8", "P", "Gaseosa Inca Kola", "1.5L", "000 VENTAS", "52,45%", R.color.primary);
-        addProductoEstrellaItem(listaOtros, "#9", "R", "Ceviche mixto", "Fuente", "000 VENTAS", "52,45%", R.color.primary);
-        addProductoEstrellaItem(listaOtros, "#10", "I", "Cebolla", "Kg", "000 VENTAS", "52,45%", R.color.primary);
-    }
-
-    private void addProductoEstrellaItem(LinearLayout container, String ranking, String letra,
-                                          String nombre, String categoria, String ventas,
-                                          String porcentaje, int colorPorcentaje) {
-        View item = getLayoutInflater().inflate(R.layout.item_producto_estrella, container, false);
-
-        TextView tvRanking = item.findViewById(R.id.tvRanking);
-        TextView tvLetraInicial = item.findViewById(R.id.tvLetraInicial);
-        TextView tvNombre = item.findViewById(R.id.tvNombreProducto);
-        TextView tvCategoria = item.findViewById(R.id.tvCategoriaProducto);
-        TextView tvVentas = item.findViewById(R.id.tvVentasProducto);
-        TextView tvPorcentaje = item.findViewById(R.id.tvPorcentajeProducto);
-
-        tvRanking.setText(ranking);
-        tvLetraInicial.setText(letra);
-        tvNombre.setText(nombre);
-        tvCategoria.setText(categoria);
-        tvVentas.setText(ventas);
-        tvPorcentaje.setText(porcentaje);
-        tvPorcentaje.setTextColor(getResources().getColor(colorPorcentaje, null));
-
-        // Configurar badge según el tipo (I, P, R)
-        int badgeBackground;
-        int badgeTextColor;
-
-        switch (letra) {
-            case "I": // Insumo
-                badgeBackground = R.drawable.rectangular_badge_primary;
-                badgeTextColor = R.color.primary;
-                break;
-            case "P": // Producto
-                badgeBackground = R.drawable.rectangular_badge_info;
-                badgeTextColor = R.color.info;
-                break;
-            case "R": // Receta
-                badgeBackground = R.drawable.rectangular_badge_secondary;
-                badgeTextColor = R.color.secondary;
-                break;
-            default: // Por defecto usar info
-                badgeBackground = R.drawable.rectangular_badge_info;
-                badgeTextColor = R.color.info;
-                break;
-        }
-
-        tvLetraInicial.setBackgroundResource(badgeBackground);
-        tvLetraInicial.setTextColor(getResources().getColor(badgeTextColor, null));
-
-        container.addView(item);
+        ProductoEstrellaAdapter adapter = new ProductoEstrellaAdapter(this, otrosProductos);
+        recyclerViewOtros.setAdapter(adapter);
     }
 }
 
