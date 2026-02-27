@@ -63,8 +63,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginHorizontal="16dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -612,7 +611,7 @@
                         android:background="@drawable/border_left"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toEndOf="@id/g_cred_50"
-                        app:layout_constraintTop_toBottomOf="@id/div_creditos" />
+                        app:layout_constraintTop_toTopOf="@id/lbl_vales" />
                     <TextView
                         android:id="@+id/lbl_vales"
                         style="@style/fontListasMedium"
@@ -628,7 +627,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/montserrat_bold"
-                        android:text="@string/default_vales_pago"
+                        android:text="@string/default_creditos_generados"
                         android:textColor="@color/text_85"
                         android:textSize="16sp"
                         app:layout_constraintEnd_toEndOf="@id/lbl_vales"
@@ -1187,40 +1186,11 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/lbl_top10">
                         <TextView
-                            android:id="@+id/lbl_ranking"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="20dp"
-                            android:background="@drawable/badge_info"
-                            android:fontFamily="@font/roboto_medium"
-                            android:paddingHorizontal="12dp"
-                            android:paddingVertical="4dp"
-                            android:text="Ranking semanal"
-                            android:textColor="@color/white"
-                            android:textSize="10sp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                            android:id="@+id/lbl_ranking" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginTop="20dp" android:background="@drawable/badge_info" android:fontFamily="@font/roboto_medium" android:paddingHorizontal="12dp" android:paddingVertical="4dp" android:text="Ranking semanal" android:textColor="@color/white" android:textSize="10sp" app:layout_constraintEnd_toEndOf="parent" app:layout_constraintTop_toTopOf="parent" />
                         <TextView
-                            android:id="@+id/lbl_number1"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginStart="16dp"
-                            android:layout_marginTop="8dp"
-                            android:fontFamily="@font/montserrat_bold"
-                            android:text="#1"
-                            android:textColor="@color/info"
-                            android:textSize="44sp"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/lbl_ranking" />
+                            android:id="@+id/lbl_number1" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_marginStart="16dp" android:layout_marginTop="8dp" android:fontFamily="@font/montserrat_bold" android:text="#1" android:textColor="@color/info" android:textSize="44sp" app:layout_constraintStart_toStartOf="parent" app:layout_constraintTop_toBottomOf="@id/lbl_ranking" />
                         <ImageView
-                            android:layout_width="40dp"
-                            android:layout_height="40dp"
-                            android:layout_marginStart="5dp"
-                            android:src="@drawable/icon_svg_bigstar"
-                            app:layout_constraintBottom_toBottomOf="@id/lbl_number1"
-                            app:layout_constraintStart_toEndOf="@id/lbl_number1"
-                            app:layout_constraintTop_toTopOf="@id/lbl_number1"
-                            app:tint="@color/yellow_65" />
+                            android:layout_width="40dp" android:layout_height="40dp" android:layout_marginStart="5dp" android:src="@drawable/icon_svg_bigstar" app:layout_constraintBottom_toBottomOf="@id/lbl_number1" app:layout_constraintStart_toEndOf="@id/lbl_number1" app:layout_constraintTop_toTopOf="@id/lbl_number1" app:tint="@color/yellow_65" />
                         <TextView
                             android:id="@+id/lbl_prod_top"
                             android:layout_width="0dp"
