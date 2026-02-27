@@ -37,6 +37,9 @@ import java.util.concurrent.Executors;
 public class MainActivity extends AppCompatActivity {
 
     private Spinner spinnerProductos, spinnerPeriodo;
+    private android.view.ViewStub stubGrafico2;
+    private View grafico2Container;
+    private boolean isGrafico2Inflated = false;
 
     // Referencias a los TextViews de datos de caja
     private TextView tvNumeroCaja;
@@ -74,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
             setupExpandableCards();
             setupDeliverySections();
             setupPropinasCreditosSections();
-            initSpinners();
 
             // 3. LOS GRÁFICOS Y LOS INFLATES SON LO MÁS PESADO
             // Le damos 100ms de respiro al procesador para que la animación
@@ -574,7 +576,7 @@ public class MainActivity extends AppCompatActivity {
         android.view.ViewGroup tabGrafico1 = findViewById(R.id.tabGrafico1);
         android.view.ViewGroup tabGrafico2 = findViewById(R.id.tabGrafico2);
         androidx.constraintlayout.widget.ConstraintLayout grafico1Container = findViewById(R.id.grafico1Container);
-        androidx.constraintlayout.widget.ConstraintLayout grafico2Container = findViewById(R.id.grafico2Container);
+        stubGrafico2 = findViewById(R.id.stub_grafico2);
 
         // Click en pestaña 1 (Top ventas)
         tabGrafico1.setOnClickListener(v -> {
@@ -582,7 +584,9 @@ public class MainActivity extends AppCompatActivity {
             updateTabStyle(tabGrafico2, false);
 
             grafico1Container.setVisibility(View.VISIBLE);
-            grafico2Container.setVisibility(View.GONE);
+            if (grafico2Container != null) {
+                grafico2Container.setVisibility(View.GONE);
+            }
         });
 
         // Clic en pestaña 2 (Productos estrella)
@@ -591,10 +595,19 @@ public class MainActivity extends AppCompatActivity {
             updateTabStyle(tabGrafico1, false);
 
             grafico1Container.setVisibility(View.GONE);
-            grafico2Container.setVisibility(View.VISIBLE);
+
+            if (!isGrafico2Inflated) {
+                // Inflar el ViewStub solo la primera vez (lazy inflate)
+                grafico2Container = stubGrafico2.inflate();
+                isGrafico2Inflated = true;
+                // Inicializar las vistas que pertenecen a grafico2
+                setupGrafico2Views();
+            } else {
+                grafico2Container.setVisibility(View.VISIBLE);
+            }
         });
 
-        // Configurar gráficos
+        // Configurar solo los gráficos del container 1 (que está visible)
         setupCharts();
     }
 
@@ -620,8 +633,17 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setupCharts() {
+        // Solo inicializar los gráficos del container 1 (visible por defecto)
         setupCategoriesBarChart();
         setupProductsPieChart();
+    }
+
+    /**
+     * Inicializa todas las vistas que pertenecen al grafico2Container.
+     * Se llama SOLO después de que el ViewStub ha sido inflado (lazy).
+     */
+    private void setupGrafico2Views() {
+        initSpinners();
         setupProductosEstrella();
         setupNestedScrollBehavior();
     }
