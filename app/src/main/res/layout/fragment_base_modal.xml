@@ -89,12 +89,10 @@
         app:layout_constraintEnd_toEndOf="@id/modal_container_bg"
         app:layout_constraintStart_toStartOf="@id/modal_container_bg" />
 
-    <LinearLayout
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/modal_buttons_container"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:gravity="center_vertical"
-        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="@id/modal_container_bg"
         app:layout_constraintEnd_toEndOf="@id/modal_container_bg"
         app:layout_constraintStart_toStartOf="@id/modal_container_bg" />

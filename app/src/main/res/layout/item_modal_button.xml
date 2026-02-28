@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/btn_modal_root"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:gravity="center_vertical">
+
+    <!-- Contenedor del botón -->
+    <LinearLayout
+        android:id="@+id/btn_modal_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="12dp"
+        android:clickable="true"
+        android:focusable="true">
+
+        <ImageView
+            android:id="@+id/btn_modal_icon"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginBottom="4dp"
+            tools:src="@drawable/icon_svg_cash_register" />
+
+        <TextView
+            android:id="@+id/btn_modal_text"
+            style="@style/fontListasMedium"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            tools:text="Botón" />
+
+    </LinearLayout>
+
+    <!-- Separador vertical (se oculta en el último elemento) -->
+    <View
+        android:id="@+id/btn_modal_separator"
+        android:layout_width="1dp"
+        android:layout_height="40dp"
+        android:background="@color/text_5" />
+
+</LinearLayout>
+
+

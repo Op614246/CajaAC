@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,9 +14,11 @@ import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.DialogFragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.cajaac.R;
-import com.example.cajaac.models.ModalButton;
+import com.example.cajaac.adapters.ModalButtonAdapter;
 import com.example.cajaac.models.ModalConfig;
 
 /**
@@ -172,11 +173,10 @@ public class BaseModalFragment extends DialogFragment {
     }
 
     /**
-     * Configura los botones del modal dinámicamente
+     * Configura los botones del modal usando un RecyclerView con ModalButtonAdapter
      */
     private void setupButtons(View view) {
-        LinearLayout buttonsContainer = view.findViewById(R.id.modal_buttons_container);
-        buttonsContainer.removeAllViews();
+        RecyclerView buttonsContainer = view.findViewById(R.id.modal_buttons_container);
 
         if (config.getButtons() == null || config.getButtons().isEmpty()) {
             buttonsContainer.setVisibility(View.GONE);
@@ -184,241 +184,17 @@ public class BaseModalFragment extends DialogFragment {
         }
 
         buttonsContainer.setVisibility(View.VISIBLE);
-        int buttonCount = config.getButtons().size();
+        buttonsContainer.setLayoutManager(
+                new LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false));
 
-        for (int i = 0; i < buttonCount; i++) {
-            ModalButton buttonConfig = config.getButtons().get(i);
+        ModalButtonAdapter adapter = new ModalButtonAdapter();
+        buttonsContainer.setAdapter(adapter);
 
-            // Determinar la posición del botón
-            ButtonPosition position;
-            if (buttonCount == 1) {
-                position = ButtonPosition.SINGLE;
-            } else if (i == 0) {
-                position = ButtonPosition.LEFT;
-            } else if (i == buttonCount - 1) {
-                position = ButtonPosition.RIGHT;
-            } else {
-                position = ButtonPosition.MIDDLE;
-            }
-
-            // Crear el botón con su posición
-            LinearLayout button = createButton(buttonConfig, position);
-            buttonsContainer.addView(button);
-
-            // Agregar separador si no es el último botón
-            if (i < buttonCount - 1) {
-                View separator = createSeparator();
-                buttonsContainer.addView(separator);
-            }
-        }
-    }
-
-    /**
-     * Enum para la posición del botón
-     */
-    private enum ButtonPosition {
-        SINGLE,  // Botón único
-        LEFT,    // Primer botón (izquierda)
-        MIDDLE,  // Botón del medio
-        RIGHT    // Último botón (derecha)
-    }
-
-    /**
-     * Crea un botón basado en la configuración
-     */
-    private LinearLayout createButton(ModalButton buttonConfig, ButtonPosition position) {
-        LinearLayout button = new LinearLayout(requireContext());
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                0,
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                1.0f
-        );
-        button.setLayoutParams(layoutParams);
-        button.setOrientation(LinearLayout.VERTICAL);
-        button.setGravity(android.view.Gravity.CENTER);
-        button.setPadding(
-                dpToPx(12),
-                dpToPx(12),
-                dpToPx(12),
-                dpToPx(12)
-        );
-        button.setClickable(true);
-        button.setFocusable(true);
-
-        // Aplicar fondo según el tipo o configuración personalizada
-        applyButtonBackground(button, buttonConfig, position);
-
-        // Crear ícono
-        ImageView icon = new ImageView(requireContext());
-        LinearLayout.LayoutParams iconParams = new LinearLayout.LayoutParams(
-                dpToPx(24),
-                dpToPx(24)
-        );
-        iconParams.bottomMargin = dpToPx(4);
-        icon.setLayoutParams(iconParams);
-        if (buttonConfig.getIconResId() != 0) {
-            icon.setImageResource(buttonConfig.getIconResId());
-        }
-
-        // Aplicar tint al ícono
-        applyIconTint(icon, buttonConfig);
-
-        // Crear texto
-        TextView text = new TextView(requireContext());
-        text.setLayoutParams(new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-        ));
-        text.setText(buttonConfig.getText());
-        text.setTextAppearance(R.style.fontListasMedium);
-
-        // Aplicar color al texto
-        applyTextColor(text, buttonConfig);
-
-        // Agregar vistas al botón
-        button.addView(icon);
-        button.addView(text);
-
-        // Configurar click listener
-        if (buttonConfig.getOnClickListener() != null) {
-            button.setOnClickListener(v -> buttonConfig.getOnClickListener().onClick());
-        }
-
-        return button;
-    }
-
-    /**
-     * Aplica el fondo al botón según su tipo o configuración y posición
-     */
-    private void applyButtonBackground(LinearLayout button, ModalButton buttonConfig, ButtonPosition position) {
-        if (buttonConfig.getBackgroundResId() != -1 && buttonConfig.getBackgroundResId() != 0) {
-            button.setBackgroundResource(buttonConfig.getBackgroundResId());
-        } else {
-            int backgroundResId = getBackgroundForTypeAndPosition(buttonConfig.getButtonType(), position);
-            if (backgroundResId != 0) {
-                button.setBackgroundResource(backgroundResId);
-            }
-        }
-    }
-
-    /**
-     * Obtiene el recurso de fondo correcto según el tipo de botón y su posición
-     */
-    private int getBackgroundForTypeAndPosition(ModalButton.ButtonType type, ButtonPosition position) {
-        String suffix;
-        switch (position) {
-            case LEFT:
-                suffix = "_left";
-                break;
-            case MIDDLE:
-                suffix = "_middle";
-                break;
-            case RIGHT:
-                suffix = "_right";
-                break;
-            case SINGLE:
-                suffix = "_single";
-                break;
-            default:
-                suffix = "_right";
-                break;
-        }
-
-        switch (type) {
-            case PRIMARY:
-                return getDrawableIdByName("background_button_primary" + suffix);
-            case INFO:
-                return getDrawableIdByName("background_button_info" + suffix);
-            case WARNING:
-                return getDrawableIdByName("background_button_warning" + suffix);
-            case DANGER:
-                return getDrawableIdByName("background_button_danger" + suffix);
-            case SUCCESS:
-                return getDrawableIdByName("background_button_success" + suffix);
-            case SECONDARY:
-                return getDrawableIdByName("background_button_secondary" + suffix);
-            case NORMAL:
-            default:
-                return 0; // Sin fondo
-        }
-    }
-
-    /**
-     * Obtiene el ID de un drawable por su nombre
-     */
-    private int getDrawableIdByName(String name) {
-        try {
-            return getResources().getIdentifier(name, "drawable", requireContext().getPackageName());
-        } catch (Exception e) {
-            return 0;
-        }
-    }
-
-    /**
-     * Aplica el color al ícono
-     */
-    private void applyIconTint(ImageView icon, ModalButton buttonConfig) {
-        if (buttonConfig.getIconTintResId() != -1 && buttonConfig.getIconTintResId() != 0) {
-            icon.setColorFilter(ContextCompat.getColor(requireContext(), buttonConfig.getIconTintResId()));
-        } else {
-            // Aplicar color según el tipo de botón
-            switch (buttonConfig.getButtonType()) {
-                case PRIMARY:
-                case INFO:
-                case WARNING:
-                case DANGER:
-                case SUCCESS:
-                case SECONDARY:
-                    icon.setColorFilter(ContextCompat.getColor(requireContext(), R.color.white));
-                    break;
-                case NORMAL:
-                default:
-                    // Mantener color original o aplicar text_85
-                    if (buttonConfig.getIconTintResId() == -1) {
-                        icon.setColorFilter(ContextCompat.getColor(requireContext(), R.color.text_85));
-                    }
-                    break;
-            }
-        }
-    }
-
-    /**
-     * Aplica el color al texto
-     */
-    private void applyTextColor(TextView text, ModalButton buttonConfig) {
-        if (buttonConfig.getTextColorResId() != -1 && buttonConfig.getTextColorResId() != 0) {
-            text.setTextColor(ContextCompat.getColor(requireContext(), buttonConfig.getTextColorResId()));
-        } else {
-            // Aplicar color según el tipo de botón
-            switch (buttonConfig.getButtonType()) {
-                case PRIMARY:
-                case INFO:
-                case WARNING:
-                case DANGER:
-                case SUCCESS:
-                case SECONDARY:
-                    text.setTextColor(ContextCompat.getColor(requireContext(), R.color.white));
-                    break;
-                case NORMAL:
-                default:
-                    text.setTextColor(ContextCompat.getColor(requireContext(), R.color.text_85));
-                    break;
-            }
-        }
-    }
-
-    /**
-     * Crea un separador vertical entre botones
-     */
-    private View createSeparator() {
-        View separator = new View(requireContext());
-        LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
-                dpToPx(1),
-                dpToPx(40)
-        );
-        separator.setLayoutParams(params);
-        separator.setBackgroundColor(ContextCompat.getColor(requireContext(), R.color.text_5));
-        return separator;
+        // Esperar a que el RecyclerView tenga su ancho medido para distribuir botones equitativamente
+        buttonsContainer.post(() -> {
+            adapter.setRecyclerViewWidth(buttonsContainer.getWidth());
+            adapter.submitList(config.getButtons());
+        });
     }
 
     /**
